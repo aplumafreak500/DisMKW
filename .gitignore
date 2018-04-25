@@ -1,0 +1,17 @@
+# Output files
+*.o
+*.elf
+*.dol
+*.rel
+*.map
+*.yaz0
+*.bmg
+*.lz
+
+# Tools
+tools/*
+*.exe
+
+# Various other detritus that doesn't need to be tracked
+Thumbs.db
+*.dump
