@@ -22,8 +22,11 @@ DOL_LDSCRIPT := ldscript_dol.txt
 #REL_ELF      := $(REL:.rel=.elf)
 #REL_MAP      := $(REL).map
 #REL_LDSCRIPT := ldscript_rel.txt
-DOL_SOURCES  := \
-	maindol.s
+DOL_SOURCES  := text0.s \
+	text1.s \
+	data.s \
+	dolheader.s \
+	
 DOL_OFILES   := $(addsuffix .o, $(basename $(DOL_SOURCES)))
 
 # Special configurations
