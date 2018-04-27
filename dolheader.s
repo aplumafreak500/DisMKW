@@ -1,5 +1,5 @@
-	.global DolHeader
 	.text
+	.global DolHeader
 DolHeader:
 	.4byte Text0Start
 	.4byte Text1Start
@@ -25,7 +25,7 @@ DolHeader:
 	.4byte 0x80380880
 	.4byte 0x80382c20
 	.space 12
-	.4byte 0x2460
+	.4byte Text0Size
 	.4byte 0x23da80
 	.space 20
 	.4byte 0x5c0

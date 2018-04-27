@@ -8,7 +8,7 @@ LD       := $(DEVKITPPC)/bin/powerpc-eabi-ld
 OBJCOPY  := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
 
 #CC1FLAGS := -Wimplicit -Wparentheses -O2 -fhex-asm
-CPPFLAGS := -Itools/agbcc/include -iquote include -nostdinc -undef
+CPPFLAGS := -iquote include -nostdinc -undef
 ASFLAGS  := 
 
 
@@ -28,11 +28,6 @@ DOL_SOURCES  := text0.s \
 	dolheader.s \
 	
 DOL_OFILES   := $(addsuffix .o, $(basename $(DOL_SOURCES)))
-
-# Special configurations
-src/newlib-libc/string/memcpy.o: CC1 := $(CC1_OLD)
-src/newlib-libc/string/memcpy.o: CPPFLAGS += -Isrc/newlib-libc/include
-src/newlib-libc/string/memcpy.o: CC1FLAGS := -O2
 
 #### Main Targets ####
 

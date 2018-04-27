@@ -395,47 +395,57 @@ Text0Start:
 	li %r3, 0x1f00
 	rfi
 	cmplw %r4, %r3
-	blt 0x28
+	blt sub_1f60
 	addi %r4, %r4, -1
 	addi %r6, %r3, -1
 	addi %r5, %r5, 1
-	b 0xc
+	b _1f54
+_1f4c:
 	lbzu %r0, 1(%r4)
 	stbu %r0, 1(%r6)
+_1f54:
 	addic. %r5, %r5, -1
-	bne -0xc
+	bne _1f4c
 	blr
+sub_1f60:
 	add %r4, %r4, %r5
 	add %r6, %r3, %r5
 	addi %r5, %r5, 1
-	b 0xc
+	b _1f78
+_1f70:
 	lbzu %r0, -1(%r4)
 	stbu %r0, -1(%r6)
+_1f78:
 	addic. %r5, %r5, -1
-	bne -0xc
+	bne _1f70
 	blr
+sub_1f84:
 	cmplwi %r5, 0x20
 	clrlwi %r7, %r4, 0x18
 	addi %r6, %r3, -1
-	blt 0x90
+	blt _2020
 	nor %r0, %r6, %r6
 	clrlwi. %r0, %r0, 0x1e
-	beq 0x14
+	beq _1fb0
 	subf %r5, %r0, %r5
+_1fa4:
 	addic. %r0, %r0, -1
 	stbu %r7, 1(%r6)
-	bne -0x8
+	bne _1fa4
+_1fb0:
 	cmpwi %r7, 0
-	beq 0x1c
+	beq _1fd0
 	slwi %r4, %r7, 8
 	slwi %r3, %r7, 0x18
 	slwi %r0, %r7, 0x10
 	or %r4, %r7, %r4
 	or %r0, %r3, %r0
 	or %r7, %r4, %r0
+_1fd0:
 	rlwinm. %r0, %r5, 0x1b, 5, 0x1f
 	addi %r3, %r6, -3
-	beq 0x2c
+	beq _2004
+_1fdc:
 	stw %r7, 4(%r3)
 	addic. %r0, %r0, -1
 	stw %r7, 8(%r3)
@@ -445,54 +455,65 @@ Text0Start:
 	stw %r7, 0x18(%r3)
 	stw %r7, 0x1c(%r3)
 	stwu %r7, 0x20(%r3)
-	bne -0x24
+	bne _1fdc
+_2004:
 	rlwinm. %r0, %r5, 0x1e, 0x1d, 0x1f
-	beq 0x10
+	beq _2018
+_200c:
 	addic. %r0, %r0, -1
 	stwu %r7, 4(%r3)
-	bne -0x8
+	bne _200c
+_2018:
 	addi %r6, %r3, 3
 	clrlwi %r5, %r5, 0x1e
+_2020:
 	cmpwi %r5, 0
 	beqlr
+sub_2028:
 	addic. %r5, %r5, -1
 	stbu %r7, 1(%r6)
-	bne -0x8
+	bne sub_2028
 	blr
+sub_2038:
 	stwu %r1, -0x10(%r1)
 	mflr %r0
 	stw %r0, 0x14(%r1)
 	stw %r31, 0xc(%r1)
 	mr %r31, %r3
-	bl -0xc8
+	bl sub_1f84
 	mr %r3, %r31
 	lwz %r31, 0xc(%r1)
 	lwz %r0, 0x14(%r1)
 	mtlr %r0
 	addi %r1, %r1, 0x10
 	blr
+sub_2068:
 	lis %r3, -0x8000
 	lhz %r0, 0x30e4(%r3)
 	andi. %r0, %r0, 0xeef
 	cmpwi %r0, 0xeef
 	bnelr
+sub_207c:
 	li %r3, 0
 	li %r4, 0
 	li %r5, 0
-	b 0x1a2958
+	b 0x1a2958 # todo: figure out what this is
 	blr
+sub_2090:
 	li %r0, 1
 	stb %r0, -0x62b0(%r13)
 	blr
+sub_209c:
 	lbz %r3, -0x62b0(%r13)
 	blr
-	bl 0x16c
-	bl 0x2a0
+sub_20a4: # This is the DOL's entry point
+	bl _2210
+	bl sub_2348
 	li %r0, -1
 	stwu %r1, -8(%r1)
 	stw %r0, 4(%r1)
 	stw %r0, 0(%r1)
-	bl 0x1e4
+	bl sub_22a0
 	li %r0, 0
 	lis %r6, -0x8000
 	addi %r6, %r6, 0x44
@@ -501,32 +522,36 @@ Text0Start:
 	addi %r6, %r6, 0xf4
 	lwz %r6, 0(%r6)
 	cmplwi %r6, 0
-	beq 0xc
+	beq _20ec
 	lwz %r7, 0xc(%r6)
-	b 0x24
+	b _210c
+_20ec:
 	lis %r5, -0x8000
 	addi %r5, %r5, 0x34
 	lwz %r5, 0(%r5)
 	cmplwi %r5, 0
-	beq 0x4c
+	beq sub_2148
 	lis %r7, -0x8000
 	addi %r7, %r7, 0x30e8
 	lwz %r7, 0(%r7)
+_210c:
 	li %r5, 0
 	cmplwi %r7, 2
-	beq 0x24
+	beq _2138
 	cmplwi %r7, 3
 	li %r5, 1
-	beq 0x18
+	beq _2138
 	cmplwi %r7, 4
-	bne 0x20
+	bne sub_2148
 	li %r5, 2
-	bl -0xa0
-	b 0x14
+	bl sub_2090
+	b sub_2148
+_2138:
 	lis %r6, -0x7ffe
 	addi %r6, %r6, -0x4814
 	mtlr %r6
 	blrl
+sub_2148:
 	lis %r6, -0x8000
 	addi %r6, %r6, 0xf4
 	lwz %r5, 0(%r6)
@@ -577,6 +602,7 @@ Text0Start:
 	mr %r4, %r15
 	bl 0x5408
 	b 0x1a82e0
+_2210:
 	li %r0, 0
 	li %r3, 0
 	li %r4, 0
@@ -613,6 +639,7 @@ Text0Start:
 	lis %r13, -0x7fc8
 	ori %r13, %r13, 0x8880
 	blr
+sub_22a0:
 	stwu %r1, -0x20(%r1)
 	mflr %r0
 	stw %r0, 0x24(%r1)
@@ -655,6 +682,7 @@ Text0Start:
 	mtlr %r0
 	addi %r1, %r1, 0x20
 	blr
+sub_2348:
 	mfmsr %r0
 	ori %r0, %r0, 0x2000
 	mtmsr %r0
