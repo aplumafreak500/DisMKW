@@ -15,13 +15,13 @@ ASFLAGS  :=
 #### Files ####
 
 DOL          := main.dol
-#REL          := StaticR.rel
+REL          := StaticR.rel
 DOL_ELF      := $(DOL:.dol=.elf)
 DOL_MAP      := $(DOL).map
 DOL_LDSCRIPT := ldscript_dol.txt
-#REL_ELF      := $(REL:.rel=.elf)
-#REL_MAP      := $(REL).map
-#REL_LDSCRIPT := ldscript_rel.txt
+REL_ELF      := $(REL:.rel=.elf)
+REL_MAP      := $(REL).map
+REL_LDSCRIPT := ldscript_rel.txt
 DOL_SOURCES  := text0.s \
 	text1.s \
 	data.s \
@@ -29,14 +29,18 @@ DOL_SOURCES  := text0.s \
 	
 DOL_OFILES   := $(addsuffix .o, $(basename $(DOL_SOURCES)))
 
+REL_SOURCES  := StaticR.s \
+	
+REL_OFILES   := $(addsuffix .o, $(basename $(REL_SOURCES)))
+
 #### Main Targets ####
 
-compare: $(DOL)
+compare: $(DOL) $(REL)
 	sha1sum -c main.dol.sha1
-#	sha1sum -c StaticR.rel.sha1
+	sha1sum -c StaticR.rel.sha1
 
 clean:
-	$(RM) $(DOL) $(DOL_ELF) $(DOL_MAP) $(DOL_OFILES)
+	$(RM) $(DOL) $(DOL_ELF) $(DOL_MAP) $(DOL_OFILES) $(REL) $(REL_ELF) $(REL_MAP) $(REL_OFILES)
 
 
 #### Recipes ####
@@ -44,11 +48,21 @@ clean:
 # Get rid of the idiotic built-in rules
 .SUFFIXES:
 
+.PHONY: all clean
+
+all: $(DOL)
+
 $(DOL_ELF): $(DOL_OFILES) $(DOL_LDSCRIPT)
 	$(LD) -T $(DOL_LDSCRIPT) -Map $(DOL_MAP) $(DOL_OFILES) -o $@
 
 $(DOL): $(DOL_ELF)
 	$(OBJCOPY) -O binary $< $@
+	
+#$(REL_ELF): $(REL_OFILES) $(REL_LDSCRIPT)
+#	$(LD) -T $(REL_LDSCRIPT) -Map $(REL_MAP) $(REL_OFILES) -o $@
+
+#$(REL): $(REL_ELF)
+#	$(OBJCOPY) -O binary $< $@
 
 %.o: %.c
 	$(CPP) $(CPPFLAGS) $< $*.s #| $(CC1) $(CC1FLAGS) -o $*.s

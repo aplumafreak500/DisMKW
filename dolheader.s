@@ -26,16 +26,16 @@ DolHeader:
 	.4byte 0x80382c20
 	.space 12
 	.4byte Text0Size
-	.4byte 0x23da80
+	.4byte Text1Size
 	.space 20
-	.4byte 0x5c0
-	.4byte 0x8a0
-	.4byte 0xc0
-	.4byte 0x20
-	.4byte 0x13420
-	.4byte 0x47aa0
-	.4byte 0x13c0
-	.4byte 0x21a0
+	.4byte Data0Size
+	.4byte Data1Size
+	.4byte Data2Size
+	.4byte Data3Size
+	.4byte Data4Size
+	.4byte Data5Size
+	.4byte Data6Size
+	.4byte Data7Size
 	.space 12
 	.4byte 0x8029fd00
 	.4byte 0xe50fc
