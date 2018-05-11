@@ -3,6 +3,7 @@
 	.set Text1Size, Text1End - Text1Start
 	.global Text1Start
 Text1Start:
+sub_0:
 	stwu %r1, -0x20(%r1)
 	mflr %r0
 	stw %r0, 0x24(%r1)
@@ -11,57 +12,64 @@ Text1Start:
 	stw %r29, 0x14(%r1)
 	stw %r28, 0x10(%r1)
 	mr %r28, %r3
-	bl 0x8023a98c
+	bl 0x2336ac
 	lis %r3, -0x7fda
 	addi %r30, %r28, 0x3c
 	addi %r3, %r3, -0x7d48
 	stw %r3, 0(%r28)
 	addi %r31, %r28, 0xc3c
+_38:
 	mr %r3, %r30
-	bl 0x80226a4c
+	bl 0x21f750
 	addi %r30, %r30, 0x400
 	cmplw %r30, %r31
-	blt 0x800072f8
+	blt _38
 	lwz %r30, 0x14(%r28)
 	li %r0, 0
 	stw %r0, 0x30(%r28)
 	cmpwi %r30, 0
 	stw %r0, 0x34(%r28)
 	stw %r0, 0x38(%r28)
-	beq 0x80007348
+	beq _88
 	lwz %r12, 0(%r30)
 	mr %r3, %r30
 	lwz %r12, 0xc(%r12)
 	mtctr %r12
 	bctrl
 	cmpwi %r3, 1
-	bne 0x80007348
-	b 0x8000734c
+	bne _88
+	b _8c
+_88:
 	li %r30, 0
+_8c:
 	lwz %r31, 0x18(%r28)
 	cmpwi %r31, 0
-	beq 0x80007378
+	beq _e8
 	lwz %r12, 0(%r31)
 	mr %r3, %r31
 	lwz %r12, 0xc(%r12)
 	mtctr %r12
 	bctrl
 	cmpwi %r3, 1
-	bne 0x80007378
-	b 0x8000737c
+	bne _b8
+	b _bc
+_b8:
 	li %r31, 0
+_bc:
 	lwz %r29, 0x1c(%r28)
 	cmpwi %r29, 0
-	beq 0x800073a8
+	beq _e8
 	lwz %r12, 0(%r29)
 	mr %r3, %r29
 	lwz %r12, 0xc(%r12)
 	mtctr %r12
 	bctrl
 	cmpwi %r3, 1
-	bne 0x800073a8
-	b 0x800073ac
+	bne _e8
+	b _ec
+_e8:
 	li %r29, 0
+_ec:
 	lis %r4, -0x7fda
 	li %r0, 0
 	addi %r4, %r4, -0x7d70
@@ -79,6 +87,7 @@ Text1Start:
 	mtlr %r0
 	addi %r1, %r1, 0x20
 	blr
+sub_130:
 	stwu %r1, -0x10(%r1)
 	mflr %r0
 	cmpwi %r3, 0
@@ -87,13 +96,13 @@ Text1Start:
 	mr %r31, %r4
 	stw %r30, 8(%r1)
 	mr %r30, %r3
-	beq 0x8000742c
+	beq 0x742c
 	li %r4, 0
 	bl 0x8023aa00
 	cmpwi %r31, 0
-	ble 0x8000742c
+	ble 0x742c
 	mr %r3, %r30
-	bl 0x80229a90
+	bl 0x229a90
 	mr %r3, %r30
 	lwz %r31, 0xc(%r1)
 	lwz %r30, 8(%r1)
@@ -109,12 +118,12 @@ Text1Start:
 	mr %r31, %r4
 	stw %r30, 8(%r1)
 	mr %r30, %r3
-	beq 0x80007488
-	beq 0x80007478
+	beq 0x7488
+	beq 0x7478
 	li %r4, 0
 	bl 0x8023aa00
 	cmpwi %r31, 0
-	ble 0x80007488
+	ble 0x7488
 	mr %r3, %r30
 	bl 0x80229a90
 	mr %r3, %r30
@@ -173,7 +182,7 @@ Text1Start:
 	bl 0x80218b04
 	lwz %r26, 0xc70(%r30)
 	clrlwi. %r0, %r26, 0x1b
-	beq 0x80007580
+	beq 0x7580
 	addi %r3, %r24, -0x7c98
 	addi %r5, %r23, -0x7cc0
 	li %r4, 0x3c
@@ -184,7 +193,7 @@ Text1Start:
 	bl 0x8004d590
 	lwz %r0, 0xc74(%r30)
 	cmpwi %r0, 0
-	bne 0x800075d4
+	bne 0x75d4
 	lwz %r3, 0x34(%r30)
 	mr %r4, %r22
 	lwz %r12, 0(%r3)
@@ -199,7 +208,7 @@ Text1Start:
 	bctrl
 	addi %r21, %r21, 1
 	cmpwi %r21, 0x64
-	blt 0x8000750c
+	blt 0x750c
 	lis %r23, -0x7fda
 	addi %r21, %r30, 0xc80
 	addi %r23, %r23, -0x7d80
@@ -213,7 +222,7 @@ Text1Start:
 	mr %r4, %r22
 	lwz %r0, 0x58(%r3)
 	cmpwi %r0, 0
-	bne 0x80007610
+	bne 0x7610
 	addi %r4, %r22, 1
 	slwi %r0, %r4, 2
 	addi %r3, %r30, 0xc74
@@ -231,7 +240,7 @@ Text1Start:
 	bl 0x80052890
 	lwz %r0, 0xc(%r1)
 	cmpwi %r0, 0
-	bne 0x80007670
+	bne 0x7670
 	addi %r3, %r24, -0x7cd0
 	addi %r5, %r25, -0x7cf0
 	li %r4, 0x26
@@ -242,7 +251,7 @@ Text1Start:
 	lwz %r3, 0xc(%r1)
 	cmpwi %r3, 0
 	lhz %r26, 0x1e(%r3)
-	bne 0x8000769c
+	bne 0x769c
 	addi %r3, %r24, -0x7cd0
 	addi %r5, %r25, -0x7cf0
 	li %r4, 0x26
@@ -253,7 +262,7 @@ Text1Start:
 	lwz %r3, 0xc(%r1)
 	cmpwi %r3, 0
 	lhz %r27, 0x1c(%r3)
-	bne 0x800076c8
+	bne 0x76c8
 	addi %r3, %r28, -0x7d00
 	addi %r5, %r29, -0x7d20
 	li %r4, 0x26
@@ -265,9 +274,9 @@ Text1Start:
 	mr %r3, %r21
 	lwz %r0, 0x10(%r4)
 	cmpwi %r0, 0
-	beq 0x800076e4
+	beq 0x76e4
 	add %r4, %r4, %r0
-	b 0x800076e8
+	b 0x76e8
 	li %r4, 0
 	lwz %r7, 8(%r1)
 	mr %r5, %r27
@@ -280,7 +289,7 @@ Text1Start:
 	addi %r21, %r21, 0x20
 	cmpwi %r31, 2
 	addi %r22, %r22, 2
-	blt 0x800075f8
+	blt 0x75f8
 	lwz %r6, 0x34(%r30)
 	li %r3, 5
 	li %r4, 0x14
@@ -302,7 +311,7 @@ Text1Start:
 	lwz %r3, -0x6c00(%r13)
 	lwz %r0, 0x70(%r3)
 	cmpwi %r0, 1
-	bne 0x80007774
+	bne 0x7774
 	stb %r4, 0xc7d(%r30)
 	li %r0, 0xff
 	sth %r0, 0xcce(%r30)
@@ -312,7 +321,7 @@ Text1Start:
 	bl 0x801e5784
 	cmpwi %r3, 0
 	mr %r4, %r3
-	beq 0x800077a8
+	beq 0x77a8
 	lis %r3, -0x7fdc
 	addi %r3, %r3, 0x4f60
 	crclr 6
@@ -334,42 +343,42 @@ Text1Start:
 	mr %r30, %r3
 	stw %r29, 0x884(%r1)
 	li %r29, 0
-	b 0x80007864
+	b 0x7864
 	mr %r3, %r29
 	addi %r4, %r1, 8
 	bl 0x801c08f0
 	cmpwi %r3, 0
-	bne 0x80007860
+	bne 0x7860
 	lwz %r0, 8(%r1)
 	cmplwi %r0, 0xfd
-	beq 0x80007860
+	beq 0x7860
 	mr %r3, %r29
 	addi %r4, %r1, 0x40
 	li %r5, 0x10
 	bl 0x801972e0
 	cmpwi %r3, 0
-	ble 0x80007860
+	ble 0x7860
 	lbz %r0, 0x9d(%r1)
 	extsb. %r0, %r0
-	bne 0x80007860
+	bne 0x7860
 	lwz %r0, 0x44(%r1)
 	rlwinm. %r0, %r0, 0, 0x11, 0xf
-	beq 0x80007844
+	beq 0x7844
 	li %r31, 1
 	lbz %r0, 0x9c(%r1)
 	cmplwi %r0, 2
-	bne 0x80007860
+	bne 0x7860
 	lwz %r0, 0xa4(%r1)
 	rlwinm. %r0, %r0, 0, 0x15, 0x13
-	beq 0x80007860
+	beq 0x7860
 	li %r31, 1
 	addi %r29, %r29, 1
 	cmpwi %r29, 4
-	bge 0x80007874
+	bge 0x7874
 	cmpwi %r31, 0
-	beq 0x800077f0
+	beq 0x77f0
 	cmpwi %r31, 0
-	bne 0x800079b0
+	bne 0x79b0
 	addi %r3, %r1, 0x10
 	bl 0x801af3ac
 	lis %r6, -0x7fdc
@@ -386,17 +395,17 @@ Text1Start:
 	lbz %r0, 0xa(%r4)
 	extsb %r0, %r0
 	cmpwi %r0, -1
-	beq 0x800078cc
+	beq 0x78cc
 	cmpwi %r0, 0
-	beq 0x800078e8
-	b 0x80007910
+	beq 0x78e8
+	b 0x7910
 	rlwinm %r0, %r8, 1, 0x17, 0x1e
 	rlwinm %r7, %r8, 2, 0x16, 0x1d
 	add %r4, %r30, %r0
 	lwzx %r0, %r6, %r7
 	sth %r5, 0xcce(%r4)
 	or %r3, %r3, %r0
-	b 0x8000791c
+	b 0x791c
 	rlwinm %r0, %r8, 1, 0x17, 0x1e
 	lhz %r4, 0(%r4)
 	add %r7, %r30, %r0
@@ -404,9 +413,9 @@ Text1Start:
 	andc %r0, %r4, %r0
 	sth %r4, 0xcce(%r7)
 	clrlwi. %r0, %r0, 0x10
-	beq 0x8000791c
+	beq 0x791c
 	li %r31, 1
-	b 0x8000791c
+	b 0x791c
 	rlwinm %r0, %r8, 1, 0x17, 0x1e
 	add %r4, %r30, %r0
 	sth %r5, 0xcce(%r4)
@@ -418,17 +427,17 @@ Text1Start:
 	lbz %r0, 0xa(%r4)
 	extsb %r0, %r0
 	cmpwi %r0, -1
-	beq 0x8000794c
+	beq 0x794c
 	cmpwi %r0, 0
-	beq 0x80007968
-	b 0x80007990
+	beq 0x7968
+	b 0x7990
 	rlwinm %r0, %r8, 1, 0x17, 0x1e
 	rlwinm %r7, %r8, 2, 0x16, 0x1d
 	add %r4, %r30, %r0
 	lwzx %r0, %r6, %r7
 	sth %r5, 0xcce(%r4)
 	or %r3, %r3, %r0
-	b 0x8000799c
+	b 0x799c
 	rlwinm %r0, %r8, 1, 0x17, 0x1e
 	lhz %r4, 0(%r4)
 	add %r7, %r30, %r0
@@ -436,16 +445,16 @@ Text1Start:
 	andc %r0, %r4, %r0
 	sth %r4, 0xcce(%r7)
 	clrlwi. %r0, %r0, 0x10
-	beq 0x8000799c
+	beq 0x799c
 	li %r31, 1
-	b 0x8000799c
+	b 0x799c
 	rlwinm %r0, %r8, 1, 0x17, 0x1e
 	add %r4, %r30, %r0
 	sth %r5, 0xcce(%r4)
 	addi %r8, %r8, 1
-	bdnz 0x800078a0
+	bdnz 0x78a0
 	cmpwi %r3, 0
-	beq 0x800079b0
+	beq 0x79b0
 	bl 0x801af03c
 	mr %r3, %r31
 	lwz %r31, 0x88c(%r1)
@@ -474,7 +483,7 @@ Text1Start:
 	mtctr %r12
 	bctrl
 	cmpwi %r3, 1
-	bne 0x80007a6c
+	bne 0x7a6c
 	lwz %r3, 0xcc4(%r31)
 	lis %r0, 0x4330
 	stw %r3, 0xc(%r1)
@@ -487,7 +496,7 @@ Text1Start:
 	lfs %f0, -0x8000(%r2)
 	fmuls %f1, %f1, %f2
 	invalid
-	ble 0x80007a6c
+	ble 0x7a6c
 	lwz %r3, 0xcc8(%r31)
 	li %r0, 0
 	stw %r0, 0xcc4(%r31)
@@ -497,18 +506,18 @@ Text1Start:
 	lwz %r3, -0x6c00(%r13)
 	lbz %r0, 0xb4(%r3)
 	cmpwi %r0, 0
-	beq 0x80007a84
+	beq 0x7a84
 	bl 0x8000b0b4
-	b 0x80007bac
+	b 0x7bac
 	lbz %r0, 0xb5(%r3)
 	cmpwi %r0, 0
-	beq 0x80007a98
+	beq 0x7a98
 	bl 0x8000b11c
-	b 0x80007bac
+	b 0x7bac
 	lwz %r3, 0xc78(%r31)
 	bl 0x80241ddc
 	cmpwi %r3, 0
-	bne 0x80007bac
+	bne 0x7bac
 	lwz %r3, -0x6c38(%r13)
 	lwz %r3, 0x54(%r3)
 	lwz %r3, 0x24(%r3)
@@ -517,16 +526,16 @@ Text1Start:
 	mtctr %r12
 	bctrl
 	cmpwi %r3, 1
-	bne 0x80007b60
+	bne 0x7b60
 	lwz %r3, -0x6c38(%r13)
 	lwz %r3, 0x54(%r3)
 	lwz %r0, 0x14(%r3)
 	cmpwi %r0, -1
-	bne 0x80007b60
+	bne 0x7b60
 	lwz %r3, 0xc78(%r31)
 	bl 0x80241ddc
 	cmpwi %r3, 0
-	bne 0x80007b60
+	bne 0x7b60
 	lwz %r3, 0xcc0(%r31)
 	lis %r0, 0x4330
 	stw %r3, 0xc(%r1)
@@ -539,13 +548,13 @@ Text1Start:
 	lfs %f0, -0x7ffc(%r2)
 	fmuls %f1, %f1, %f2
 	invalid
-	bgt 0x80007b3c
+	bgt 0x7b3c
 	lbz %r0, 0xccc(%r31)
 	cmpwi %r0, 0
-	bne 0x80007b3c
+	bne 0x7b3c
 	lwz %r0, 0x70(%r3)
 	cmpwi %r0, 0
-	beq 0x80007b60
+	beq 0x7b60
 	bl 0x80008e44
 	lwz %r3, 0x60(%r3)
 	lwz %r12, 0(%r3)
@@ -557,7 +566,7 @@ Text1Start:
 	bl 0x8000a3b8
 	lbz %r0, 0xccc(%r31)
 	cmpwi %r0, 0
-	bne 0x80007bac
+	bne 0x7bac
 	lwz %r3, 0xcc0(%r31)
 	lis %r0, 0x4330
 	stw %r3, 0xc(%r1)
@@ -570,9 +579,9 @@ Text1Start:
 	lfs %f0, -0x7ff8(%r2)
 	fmuls %f1, %f1, %f2
 	invalid
-	ble 0x80007bac
+	ble 0x7bac
 	mr %r3, %r31
-	bl 0x800077c8
+	bl 0x77c8
 	stb %r3, 0xccc(%r31)
 	lwz %r0, 0x24(%r1)
 	lwz %r31, 0x1c(%r1)
@@ -666,7 +675,7 @@ Text1Start:
 	bl 0x8016d304
 	lbz %r0, 0xc7d(%r31)
 	cmpwi %r0, 0
-	beq 0x80007e38
+	beq 0x7e38
 	li %r3, 0
 	li %r4, 0xd
 	li %r5, 1
@@ -736,7 +745,7 @@ Text1Start:
 	stfs %f30, -0x8000(%r4)
 	stb %r3, -0x8000(%r4)
 	stb %r0, -0x8000(%r4)
-	b 0x80007f08
+	b 0x7f08
 	li %r3, 1
 	bl 0x80172208
 	li %r3, 0
@@ -838,11 +847,11 @@ Text1Start:
 	mr %r31, %r4
 	stw %r30, 8(%r1)
 	mr %r30, %r3
-	beq 0x80007fe8
+	beq 0x7fe8
 	li %r4, -1
 	bl 0x800b27d0
 	cmpwi %r31, 0
-	ble 0x80007fe8
+	ble 0x7fe8
 	mr %r3, %r30
 	bl 0x80229a90
 	mr %r3, %r30
@@ -1635,7 +1644,7 @@ Text1Start:
 	addi %r3, %r31, 0x54
 	stb %r0, 0x50(%r31)
 	stb %r4, 0x51(%r31)
-	bl 0x80007f7c
+	bl 0x7f7c
 	lwz %r3, 8(%r31)
 	bl 0x801aa4ec
 	addi %r3, %r31, 0x54
@@ -1658,7 +1667,7 @@ Text1Start:
 	beq 0x80008cbc
 	li %r4, -1
 	addi %r3, %r3, 0x54
-	bl 0x80007fac
+	bl 0x7fac
 	mr %r3, %r30
 	li %r4, 0
 	bl 0x80242560
