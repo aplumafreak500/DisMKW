@@ -13,7 +13,7 @@ DolHeader:
 	.4byte Data6Start
 	.4byte Data7Start
 	.space 12
-	.4byte 0x80004000
+	.4byte 0x80004000 # load addresses
 	.4byte 0x800072c0
 	.space 20
 	.4byte 0x80006460
@@ -37,8 +37,8 @@ DolHeader:
 	.4byte Data6Size
 	.4byte Data7Size
 	.space 12
-	.4byte 0x8029fd00
-	.4byte 0xe50fc
-	.4byte 0x800060a4
+	.4byte 0x8029fd00 # .bss offset
+	.4byte 0xe50fc    # .bss size
+	.4byte 0x800060a4 # entrypoint pointer
 	.space 28
 

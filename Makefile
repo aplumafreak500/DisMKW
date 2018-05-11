@@ -36,7 +36,15 @@ DOL_SOURCES  := dolheader.s \
 	
 DOL_OFILES   := $(addsuffix .o, $(basename $(DOL_SOURCES)))
 
-REL_SOURCES  := StaticR.s \
+REL_SOURCES  := StaticRHeader.s \
+	Static1.s \
+	Static2.s \
+	Static3.s \
+	Static4.s \
+	Static5.s \
+	StaticImp.s \
+	StaticReloc.s \
+	StaticRelocMainDol.s \
 	
 REL_OFILES   := $(addsuffix .o, $(basename $(REL_SOURCES)))
 
