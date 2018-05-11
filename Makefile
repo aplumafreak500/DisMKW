@@ -29,7 +29,10 @@ DOL_SOURCES  := dolheader.s \
 	data1.s \
 	data2.s \
 	data3.s \
-	data.s \
+	data4.s \
+	data5.s \
+	data6.s \
+	data7.s \
 	
 DOL_OFILES   := $(addsuffix .o, $(basename $(DOL_SOURCES)))
 
