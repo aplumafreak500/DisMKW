@@ -15,10 +15,10 @@ SECTIONS
 	ALIGN(4)
 	{
 		data0.o(.data);
-		data.o(.data);
+		data1.o(.data);
 		data2.o(.data);
 		data3.o(.data);
-		data.o(.data_d4);
+		data.o(.data);
 	}
 	.bss :
 	ALIGN(4)
