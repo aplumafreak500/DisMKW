@@ -22,10 +22,11 @@ DOL_LDSCRIPT := ldscript_dol.txt
 REL_ELF      := $(REL:.rel=.elf)
 REL_MAP      := $(REL).map
 REL_LDSCRIPT := ldscript_rel.txt
-DOL_SOURCES  := text0.s \
+DOL_SOURCES  := dolheader.s \
+	text0.s \
 	text1.s \
+	data0.s \
 	data.s \
-	dolheader.s \
 	
 DOL_OFILES   := $(addsuffix .o, $(basename $(DOL_SOURCES)))
 
@@ -58,11 +59,11 @@ $(DOL_ELF): $(DOL_OFILES) $(DOL_LDSCRIPT)
 $(DOL): $(DOL_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
-#$(REL_ELF): $(REL_OFILES) $(REL_LDSCRIPT)
-#	$(LD) -T $(REL_LDSCRIPT) -Map $(REL_MAP) $(REL_OFILES) -o $@
+$(REL_ELF): $(REL_OFILES) $(REL_LDSCRIPT)
+	$(LD) -T $(REL_LDSCRIPT) -Map $(REL_MAP) $(REL_OFILES) -o $@
 
-#$(REL): $(REL_ELF)
-#	$(OBJCOPY) -O binary $< $@
+$(REL): $(REL_ELF)
+	$(OBJCOPY) -O binary $< $@
 
 %.o: %.c
 	$(CPP) $(CPPFLAGS) $< $*.s #| $(CC1) $(CC1FLAGS) -o $*.s
