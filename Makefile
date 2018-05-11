@@ -26,6 +26,8 @@ DOL_SOURCES  := dolheader.s \
 	text0.s \
 	text1.s \
 	data0.s \
+	data2.s \
+	data3.s \
 	data.s \
 	
 DOL_OFILES   := $(addsuffix .o, $(basename $(DOL_SOURCES)))

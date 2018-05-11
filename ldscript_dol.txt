@@ -16,6 +16,9 @@ SECTIONS
 	{
 		data0.o(.data);
 		data.o(.data);
+		data2.o(.data);
+		data3.o(.data);
+		data.o(.data_d4);
 	}
 	.bss :
 	ALIGN(4)
