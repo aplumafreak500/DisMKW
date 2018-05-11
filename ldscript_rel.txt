@@ -1,0 +1,25 @@
+OUTPUT_ARCH(powerpc)
+SECTIONS
+{
+	.text :
+	ALIGN(4)
+	{
+		StaticR.o(.text);
+	} = 0
+
+	.data :
+	ALIGN(4)
+	{
+	}
+	.bss :
+	ALIGN(4)
+	{
+	} = 0
+
+    /* Discard everything not specifically mentioned above. */
+    /DISCARD/ :
+    {
+        *(*);
+    }
+}
+
