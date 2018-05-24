@@ -5,8 +5,9 @@
 Text0Start:
 	.asciz "Metrowerks Target Resident Kernel for PowerPC"
 	.space 210
-	b 0x17a00
+	b t1_156a0
 	.space 252
+	# From here down is really odd data. It doesn't seem like actual ASM, but who knows? Maybe it is used somewhere.
 	mtspr 0x111, %r2
 	mfspr %r2, 0x1a
 	icbi 0, %r2
@@ -167,7 +168,7 @@ Text0Start:
 	li %r3, 0xe00
 	rfi
 	.space 204
-	b 0x54
+	b _f54
 	.space 28
 	mtspr 0x111, %r2
 	mtspr 0x112, %r3
@@ -182,6 +183,7 @@ Text0Start:
 	mtspr 0x1a, %r3
 	li %r3, 0xf20
 	rfi
+_f54:
 	mtspr 0x111, %r2
 	mtspr 0x112, %r3
 	mtspr 0x113, %r4
@@ -259,13 +261,14 @@ Text0Start:
 	mtspr 0x112, %r2
 	mfmsr %r2
 	andis. %r2, %r2, 2
-	beq 0x1c
+	beq _1030
 	mfmsr %r2
 	xoris %r2, %r2, 2
 	sync 0
 	mtmsr %r2
 	sync 0
 	mtspr 0x111, %r2
+_1030:
 	mfspr %r2, 0x112
 	mtcrf 0xff, %r2
 	mfspr %r2, 0x111
@@ -394,6 +397,7 @@ Text0Start:
 	mtspr 0x1a, %r3
 	li %r3, 0x1f00
 	rfi
+sub_1f34: # End of "odd" data and start of actual ASM
 	cmplw %r4, %r3
 	blt sub_1f60
 	addi %r4, %r4, -1
@@ -497,7 +501,7 @@ sub_207c:
 	li %r3, 0
 	li %r4, 0
 	li %r5, 0
-	b 0x1a2958 # todo: figure out what this is
+	b t1_1a2580
 	blr
 sub_2090:
 	li %r0, 1
@@ -563,14 +567,15 @@ sub_2148:
 	add %r6, %r5, %r6
 	lwz %r14, 0(%r6)
 	cmplwi %r14, 0
-	beq 0x44
+	beq _21b8
 	addi %r15, %r6, 4
 	mtctr %r14
+_2180:
 	addi %r6, %r6, 4
 	lwz %r7, 0(%r6)
 	add %r7, %r7, %r5
 	stw %r7, 0(%r6)
-	bdnz -0x10
+	bdnz _2180
 	lis %r5, -0x8000
 	addi %r5, %r5, 0x34
 	rlwinm %r7, %r15, 0, 0, 0x1a
@@ -579,24 +584,29 @@ sub_2148:
 	addi %r5, %r5, 0x3110
 	rlwinm %r7, %r15, 0, 0, 0x1a
 	stw %r7, 0(%r5)
-	b 0xc
+	b _21c0
+_21b8:
 	li %r14, 0
 	li %r15, 0
-	bl 0x1570b4
+_21c0:
+	bl t1_156e14
 	bl 0x199a04
 	lis %r4, -0x8000
 	addi %r4, %r4, 0x30e6
 	lhz %r3, 0(%r4)
 	andi. %r5, %r3, 0x8000
-	beq 0x10
+	beq _21e8
 	andi. %r3, %r3, 0x7fff
 	cmplwi %r3, 1
-	bne 0x8
-	bl -0x180
-	bl -0x150
+	bne _21ec
+_21e8:
+	bl sub_2068
+_21ec:
+	bl sub_209c
 	cmplwi %r3, 1
-	bne 0x8
+	bne _21fc
 	bl 0x1568c
+_21fc:
 	bl 0x1a8288
 	mr %r3, %r14
 	mr %r4, %r15
@@ -648,33 +658,39 @@ sub_22a0:
 	stw %r29, 0x14(%r1)
 	lis %r29, -0x8000
 	addi %r29, %r29, 0x63a0
+_22c0:
 	lwz %r30, 8(%r29)
 	cmpwi %r30, 0
-	beq 0x38
+	beq _2300
 	lwz %r4, 0(%r29)
 	lwz %r31, 4(%r29)
-	beq 0x24
+	beq _22f8
 	cmplw %r31, %r4
-	beq 0x1c
+	beq _22f8
 	mr %r3, %r31
 	mr %r5, %r30
-	bl -0x3b4
+	bl sub_1f34
 	mr %r3, %r31
 	mr %r4, %r30
-	bl 0x78
+	bl sub_236c
+_22f8:
 	addi %r29, %r29, 0xc
-	b -0x3c
+	b _22c0
+_2300:
 	lis %r29, -0x8000
 	addi %r29, %r29, 0x6424
+_2308:
 	lwz %r5, 4(%r29)
 	cmpwi %r5, 0
-	beq 0x1c
+	beq _232c
 	lwz %r3, 0(%r29)
-	beq 0xc
+	beq _2324
 	li %r4, 0
-	bl -0x2e8
+	bl sub_2038
+_2324:
 	addi %r29, %r29, 8
-	b -0x20
+	b _2308
+_232c:
 	lwz %r0, 0x24(%r1)
 	lwz %r31, 0x1c(%r1)
 	lwz %r30, 0x18(%r1)
@@ -692,6 +708,7 @@ sub_2348:
 	bl 0x19b6e4
 	mtlr %r31
 	blr
+sub_236c:
 	lis %r5, -1
 	ori %r5, %r5, 0xfff1
 	and %r5, %r5, %r3
@@ -705,6 +722,7 @@ sub_2348:
 	bge -0x14
 	isync
 	blr
+gUnknown_23a0:
 	# WTF are these?
 	.4byte 0x80004000
 	.4byte 0x80004000
