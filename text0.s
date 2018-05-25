@@ -728,46 +728,46 @@ sub_236c:
 	isync
 	blr
 gUnknown_23a0:
-	# WTF are these?
+	# Some kind of reloc table?
+	.4byte 0x80004000 # T0
 	.4byte 0x80004000
-	.4byte 0x80004000
-	.4byte 0x2444
-	.4byte 0x80006460
+	.4byte 0x2444     # Size
+	.4byte 0x80006460 # D0
 	.4byte 0x80006460
 	.4byte 0x5c0
-	.4byte 0x80006a20
+	.4byte 0x80006a20 # D1
 	.4byte 0x80006a20
 	.4byte 0x890
-	.4byte 0x800072c0
+	.4byte 0x800072c0 # T1
 	.4byte 0x800072c0
 	.4byte 0x23da74
-	.4byte 0x80244d40
+	.4byte 0x80244d40 # D2
 	.4byte 0x80244d40
 	.4byte 0xb0
-	.4byte 0x80244e00
+	.4byte 0x80244e00 # D3
 	.4byte 0x80244e00
 	.4byte 0xc
-	.4byte 0x80244e40
+	.4byte 0x80244e40 # D4
 	.4byte 0x80244e40
 	.4byte 0x1340c
-	.4byte 0x80258260
+	.4byte 0x80258260 # D5
 	.4byte 0x80258260
 	.4byte 0x47aa0
-	.4byte 0x80380880
+	.4byte 0x80380880 # D6
 	.4byte 0x80380880
 	.4byte 0x13c0
-	.4byte 0x80382c20
+	.4byte 0x80382c20 # D7
 	.4byte 0x80382c20
 	.4byte 0x21a0
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x8029fd00
+	.4byte 0x8029fd00 # .bss
 	.4byte 0xe0b70
-	.4byte 0x80381c40
+	.4byte 0x80381c40 # .bss 2
 	.4byte 0xfcc
-	.4byte 0x80384dc0
-	.4byte 0x3c
+	.4byte 0x80384dc0 # .bss 3
+	.4byte 0x3c # 0xe1b72 total size, rest of .bss is probably StaticR.rel .bss
 	.space 36
 	.global Text0End
 Text0End:
