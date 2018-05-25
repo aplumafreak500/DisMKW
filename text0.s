@@ -203,13 +203,14 @@ _f54:
 	mtspr 0x112, %r2
 	mfmsr %r2
 	andis. %r2, %r2, 2
-	beq 0x1c
+	beq _1030
 	mfmsr %r2
 	xoris %r2, %r2, 2
 	sync 0
 	mtmsr %r2
 	sync 0
 	mtspr 0x111, %r2
+_1030:
 	mfspr %r2, 0x112
 	mtcrf 0xff, %r2
 	mfspr %r2, 0x111
@@ -232,13 +233,14 @@ _f54:
 	mtspr 0x112, %r2
 	mfmsr %r2
 	andis. %r2, %r2, 2
-	beq 0x1c
+	beq _1130
 	mfmsr %r2
 	xoris %r2, %r2, 2
 	sync 0
 	mtmsr %r2
 	sync 0
 	mtspr 0x111, %r2
+_1130:
 	mfspr %r2, 0x112
 	mtcrf 0xff, %r2
 	mfspr %r2, 0x111
@@ -261,14 +263,14 @@ _f54:
 	mtspr 0x112, %r2
 	mfmsr %r2
 	andis. %r2, %r2, 2
-	beq _1030
+	beq _1230
 	mfmsr %r2
 	xoris %r2, %r2, 2
 	sync 0
 	mtmsr %r2
 	sync 0
 	mtspr 0x111, %r2
-_1030:
+_1230:
 	mfspr %r2, 0x112
 	mtcrf 0xff, %r2
 	mfspr %r2, 0x111
@@ -510,7 +512,9 @@ sub_2090:
 sub_209c:
 	lbz %r3, -0x62b0(%r13)
 	blr
-sub_20a4: # This is the DOL's entry point
+
+	.global dol_entrypoint
+dol_entrypoint:
 	bl _2210
 	bl sub_2348
 	li %r0, -1
@@ -560,10 +564,10 @@ sub_2148:
 	addi %r6, %r6, 0xf4
 	lwz %r5, 0(%r6)
 	cmplwi %r5, 0
-	.4byte 0x41a20060 # beq 0x60
+	.4byte 0x41a20060 # beq _21b8
 	lwz %r6, 8(%r5)
 	cmplwi %r6, 0
-	.4byte 0x41a20054 #beq 0x54
+	.4byte 0x41a20054 # beq _21d0
 	add %r6, %r5, %r6
 	lwz %r14, 0(%r6)
 	cmplwi %r14, 0
@@ -590,9 +594,10 @@ _21b8:
 	li %r15, 0
 _21c0:
 	bl t1_156e14
-	bl 0x199a04
+	bl t1_199768
 	lis %r4, -0x8000
 	addi %r4, %r4, 0x30e6
+_21d0:
 	lhz %r3, 0(%r4)
 	andi. %r5, %r3, 0x8000
 	beq _21e8
@@ -605,13 +610,13 @@ _21ec:
 	bl sub_209c
 	cmplwi %r3, 1
 	bne _21fc
-	bl 0x1568c
+	bl t1_15424
 _21fc:
-	bl 0x1a8288
+	bl t1_1a8024
 	mr %r3, %r14
 	mr %r4, %r15
-	bl 0x5408
-	b 0x1a82e0
+	bl t1_51b4
+	b t1_1a807c
 _2210:
 	li %r0, 0
 	li %r3, 0

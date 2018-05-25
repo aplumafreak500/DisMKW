@@ -278,16 +278,31 @@ _3dc:
 _400:
 	.incbin "basemain.dol", 0x2960, 0x8
 _408:
-	.incbin "basemain.dol", 0x2968, 0x15298
+	.incbin "basemain.dol", 0x2968, 0x4da8
+	.global t1_51b4
+t1_51b4:
+	.incbin "basemain.dol", 0x7710, 0x10274
+	.global t1_15424
+t1_15424:
+	.incbin "basemain.dol", 0x17984, 0x27c
 	.global t1_156a0
 t1_156a0:
 	.incbin "basemain.dol", 0x17c00, 0x141774
 	.global t1_156e14
 t1_156e14:
-	.incbin "basemain.dol", 0x159374, 0x4b76c
+	.incbin "basemain.dol", 0x159374, 0x42954
+	.global t1_199768
+t1_199768:
+	.incbin "basemain.dol", 0x19bcc8, 0x8e18
 	.global t1_1a2580
 t1_1a2580:
-	.incbin "basemain.dol", 0x1a4ae0, 0x7d20c
+	.incbin "basemain.dol", 0x1a4ae0, 0x5aa4
+	.global t1_1a8024
+t1_1a8024:
+	.incbin "basemain.dol", 0x1aa584, 0x68
+	.global t1_1a807c
+t1_1a807c:
+	.incbin "basemain.dol", 0x1aa5ec, 0x77700
 _21f78c:
 	.incbin "basemain.dol", 0x221cec, 0x3044
 _2227d0:
