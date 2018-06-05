@@ -301,7 +301,7 @@ t1_1a2580:
 t1_1a8024:
 	.incbin "basemain.dol", 0x1aa584, 0x68
 	.global t1_1a807c
-t1_1a807c:
+t1_1a807c: # VBI hooks in here
 	.incbin "basemain.dol", 0x1aa5ec, 0x77700
 _21f78c:
 	.incbin "basemain.dol", 0x221cec, 0x3044

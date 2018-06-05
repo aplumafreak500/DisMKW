@@ -4,12 +4,12 @@
 	.global Data2Start
 Data2Start:
 	# some sort of table
-	.4byte 0x80020684
-	.4byte 0x8000998c
-	.4byte 0x80027a10
-	.4byte 0x80035890
-	.4byte 0x800364e0
-	.4byte 0x80038010
+	.4byte 0x80020684 # t1_193c4
+	.4byte 0x8000998c # t1_26cc
+	.4byte 0x80027a10 # t1_20750
+	.4byte 0x80035890 # t1_2e5d0
+	.4byte 0x800364e0 # t1_2f220
+	.4byte 0x80038010 # t1_30d50
 	.4byte 0x8003e180
 	.4byte 0x80064820
 	.4byte 0x80079860
