@@ -1,15 +1,17 @@
-/* So far, it seems we'll have to trick the linker into thinking we're compiling at base offset 0x80000000, because of the multi-section DOL. We're gonna have to do the same thing with StaticR.rel. */
-
 OUTPUT_ARCH(powerpc)
 SECTIONS
 {
-	.text :
+	DolHeader :
 	ALIGN(4)
 	{
 		dolheader.o(.text);
+	}
+	.text :
+	ALIGN(4)
+	{
 		text0.o(.text);
 		text1.o(.text);
-	} = 0
+	} 
 
 	.data :
 	ALIGN(4)
@@ -26,7 +28,7 @@ SECTIONS
 	.bss :
 	ALIGN(4)
 	{
-	} = 0
+	}
 
     /* Discard everything not specifically mentioned above. */
     /DISCARD/ :
