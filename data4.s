@@ -4,7 +4,7 @@
 	.global Data4Start
 Data4Start:
 	.global StrapStrings
-StrapStrings: # 0x802450e0
+StrapStrings: # 0x80244d40
 	.asciz "/Boot/Strap/us/English.szs\0"
 	.asciz "/Boot/Strap/us/English.szs\0"
 	.asciz "/Boot/Strap/us/English.szs\0"
@@ -13,16 +13,16 @@ StrapStrings: # 0x802450e0
 	.asciz "/Boot/Strap/us/English.szs\0"
 	.asciz "/Boot/Strap/us/English.szs\0"
 	.global StrapImageStrings
-StrapImageStrings: # 0x80245018
+StrapImageStrings: # 0x80244e08
 	.asciz "strapA_16_9_832x456"
 	.asciz "strapA_608x456\0"
 	.asciz "strapB_16_9_832x456"
 	.asciz "strapB_608x456\0"
 	.global gUnknown_110
-gUnknown_110:
+gUnknown_110: # 0x80244e50
 	.4byte 0x80000000, 0x40000000, 0x20000000, 0x10000000
 	.global NWC24TrySuspendSchedulerStr
-NWC24TrySuspendScheduler: # 0x80244fc0
+NWC24TrySuspendScheduler: # 0x80244e60
 	.ascii "[Boot] NWC24TrySuspendScheduler: errcode=%d\n"
 	.4byte 0
 	.global RFLRes01Str
@@ -45,7 +45,7 @@ RKChResStr:
 	.4byte 0, 0
 	
 	.global ContentsStrTable
-ContentsStrTable: # 0x80245008
+ContentsStrTable: # 0x80244f08
 	.4byte 0x80244f90, 4 # RFLRes01Str
 	.4byte 0x80244fa8, 5 # HomeButtonStr
 	.4byte 0x80244fc4, 6 # HomeButtonSeStr
