@@ -1,16 +1,17 @@
 #### Tools ####
 
 #YAZ0    := tools/wszst/wszst compress --yaz0
-#CC1     := 
+CC1      := $(DEVKITPPC)/bin/powerpc-eabi-cpp
 CPP      := $(DEVKITPPC)/bin/powerpc-eabi-cpp
 AS       := $(DEVKITPPC)/bin/powerpc-eabi-as
 LD       := $(DEVKITPPC)/bin/powerpc-eabi-ld
 OBJCOPY  := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
 
-#CC1FLAGS := -Wimplicit -Wparentheses -O2 -fhex-asm
-CPPFLAGS := -iquote include -nostdinc -undef
+CC1FLAGS := -O2 -Wall
+CPPFLAGS := -iquote include -nostdinc -undef -I ./
 ASFLAGS  := 
 
+BUILD_DIR := build
 
 #### Files ####
 
@@ -18,47 +19,30 @@ DOL          := main.dol
 REL          := StaticR.rel
 DOL_ELF      := $(DOL:.dol=.elf)
 DOL_MAP      := $(DOL).map
-DOL_LDSCRIPT := ldscript_dol.txt
+DOL_LDSCRIPT := $(BUILD_DIR)/maindol/ld_script.ld
 REL_ELF      := $(REL:.rel=.elf)
 REL_MAP      := $(REL).map
-REL_LDSCRIPT := ldscript_rel.txt
-DOL_SOURCES  := dolheader.s \
-	text0.s \
-	text1.s \
-	data0.s \
-	data1.s \
-	data2.s \
-	data3.s \
-	data4.s \
-	data5.s \
-	data6.s \
-	data7.s \
-	
-DOL_OFILES   := $(addsuffix .o, $(basename $(DOL_SOURCES)))
+REL_LDSCRIPT := $(BUILD_DIR)/staticr/ld_script.ld
+DOL_CSOURCES  := $(wildcard maindol/*.c)
+DOL_ASMSOURCES  := $(wildcard maindol/*.s)
+DOL_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(DOL_CSOURCES:%.c=%.o))
+DOL_ASMOBJECTS   := $(addprefix $(BUILD_DIR)/, $(DOL_ASMSOURCES:%.s=%.o))
+REL_CSOURCES  := $(wildcard staticr/*.c)
+REL_ASMSOURCES  := $(wildcard staticr/*.s)
+REL_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(REL_CSOURCES:%.c=%.o))
+REL_ASMOBJECTS   := $(addprefix $(BUILD_DIR)/, $(REL_ASMSOURCES:%.s=%.o))
 
-REL_SOURCES  := StaticRHeader.s \
-	Static1.s \
-	Static2.s \
-	Static3.s \
-	Static4.s \
-	Static5.s \
-	StaticImp.s \
-	StaticReloc.s \
-	StaticRelocMainDol.s \
-	
-REL_OFILES   := $(addsuffix .o, $(basename $(REL_SOURCES)))
+C_OBJECTS  := $(DOL_COBJECTS) $(REL_COBJECTS)
+ASM_OBJECTS  := $(DOL_ASMOBJECTS) $(REL_ASMOBJECTS)
+DOL_OFILES  := $(DOL_COBJECTS) $(DOL_ASMOBJECTS)
+REL_OFILES  := $(REL_COBJECTS) $(REL_ASMOBJECTS)
+ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
+
+SUBDIRS      := $(sort $(dir $(ALL_OBJECTS)))
+
+$(shell mkdir -p $(SUBDIRS))
 
 #### Main Targets ####
-
-compare: $(DOL) $(REL)
-	sha1sum -c main.dol.sha1
-	sha1sum -c StaticR.rel.sha1
-
-clean:
-	$(RM) $(DOL) $(DOL_ELF) $(DOL_MAP) $(DOL_OFILES) $(REL) $(REL_ELF) $(REL_MAP) $(REL_OFILES)
-
-
-#### Recipes ####
 
 # Get rid of the idiotic built-in rules
 .SUFFIXES:
@@ -67,22 +51,39 @@ clean:
 
 all: $(DOL)
 
-$(DOL_ELF): $(DOL_OFILES) $(DOL_LDSCRIPT)
-	$(LD) -T $(DOL_LDSCRIPT) -Map $(DOL_MAP) $(DOL_OFILES) -o $@
+compare: $(DOL) $(REL)
+	sha1sum -c main.dol.sha1
+	sha1sum -c StaticR.rel.sha1
+
+clean:
+	$(RM) $(DOL) $(DOL_ELF) $(DOL_MAP) $(REL) $(REL_ELF) $(REL_MAP) $(ALL_OBJECTS)
+	
+#### Recipes ####
+
+$(DOL_LDSCRIPT): ldscript_dol.txt
+	cp ldscript_dol.txt $(BUILD_DIR)/maindol/ld_script.ld
+
+$(REL_LDSCRIPT): ldscript_rel.txt
+	cp ldscript_rel.txt $(BUILD_DIR)/staticr/ld_script.ld
+
+$(DOL_ELF): $(DOL_LDSCRIPT) $(DOL_OFILES)
+	cd $(BUILD_DIR)/maindol && $(LD) -T ld_script.ld -Map ../../$(DOL_MAP) -o ../../$@
 
 $(DOL): $(DOL_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
-$(REL_ELF): $(REL_OFILES) $(REL_LDSCRIPT)
-	$(LD) -T $(REL_LDSCRIPT) -Map $(REL_MAP) $(REL_OFILES) -o $@
+$(REL_ELF): $(REL_LDSCRIPT) $(REL_OFILES)
+	cd $(BUILD_DIR)/staticr && $(LD) -T ld_script.ld -Map ../../$(REL_MAP) -o ../../$@
 
 $(REL): $(REL_ELF)
 	$(OBJCOPY) -O binary $< $@
 
-%.o: %.c
-	$(CPP) $(CPPFLAGS) $< $*.s #| $(CC1) $(CC1FLAGS) -o $*.s
-	$(AS) $(ASFLAGS) $*.s -o $*.o
+$(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
+	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
+	$(CC1) $(CFLAGS) $(BUILD_DIR)/$*.i -o $(BUILD_DIR)/$*.s
+	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
+	$(AS) $(ASFLAGS) -o $@ $(BUILD_DIR)/$*.s
 
-%.o: %.s
+$(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
 
