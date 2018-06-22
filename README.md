@@ -30,9 +30,9 @@ Obtain the NTSC-U **main.dol** and **StaticR.rel** from a USA (NTSC-U) copy of M
 
 For Mac OS X, run this command in **Terminal**.
 
-`sh
+```sh
 xcode-select --install
-`
+```
 
 For Windows, download [**Cygwin**](http://cygwin.com/install.html): **setup-x86_64.exe** for 64-bit Windows, **setup-x86.exe** for 32-bit.
 
@@ -46,7 +46,7 @@ Run the Cygwin setup and leave the default settings. At "Select Packages", set t
 
 Next, run these commands to set up your enviornment. (Replace **/opt/devkitPro** with where you installed devkitPro to.)
 
-`sh
+```sh
 export DEVKITPRO=/opt/devkitPro
 echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
 export DEVKITARM=$DEVKITPRO/devkitPPC
@@ -55,12 +55,12 @@ echo "export DEVKITPPC=$DEVKITPPC" >> ~/.bashrc
 git clone https://github.com/aplumafreak500/DisMKW
 
 cd DisMKW
-`
+```
 
 To build **main.dol** and **StaticR.rel**:
-`sh
+```sh
 make
-`
+```
 
 ## Disassembly Progress
 
