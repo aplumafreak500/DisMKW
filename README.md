@@ -9,8 +9,7 @@ This is a work in progress and far from production-ready.
 - [x] Partition 1 main.dol
 - [ ] Partition 2 main.dol
 - [ ] Partition 0 apploader.img
-- [ ] Partition 1 apploader.img
-- [ ] Partition 2 apploader.img
+- [x] Partition 1/2 apploader.img (exact same)
 - [ ] Mario Kart Channel dol
 - [ ] Mario Kart Channel misc. executables
 - [x] StaticR.rel
@@ -64,9 +63,9 @@ make
 
 ## Disassembly Progress
 
-(Also known as: What currently requires **basemain.dol** or **baseStaticR.rel**)
+(Also known as: What currently requires incbin calls)
 
-- [ ] main.dol
+- [ ] Partiton 1 main.dol
 	- [x] T0
 	- [ ] T1
 		* Currently disassembled up to T1 0x400
@@ -89,4 +88,15 @@ make
 	- [x] Imp
 	- [ ] Reloc
 	- [ ] Reloc (main.dol)
-	
+- [ ] Partiton 0 Apploader.img
+	 - [ ] .text
+	 - [ ] .data
+- [ ] Partition 1/2 Apploader.img
+	 - [ ] .text
+	 - [ ] .data
+- [ ] Partition 0 main.dol
+	 - [ ] .text
+	 - [ ] .data
+- [ ] Partition 2 main.dol
+	 - [ ] .text
+	 - [ ] .data

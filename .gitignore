@@ -1,10 +1,13 @@
 # Output files
 Build/*.i
 Build/*.s
+Build/*.ld
 *.o
 *.elf
 *.dol
 *.rel
+*.img
+*.wad
 *.map
 *.yaz0
 *.bmg
