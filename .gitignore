@@ -1,4 +1,6 @@
 # Output files
+Build/*.i
+Build/*.s
 *.o
 *.elf
 *.dol
