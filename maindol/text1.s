@@ -286,10 +286,10 @@ t1_51b4:
 t1_15424:
 	.incbin "basemain.dol", 0x17984, 0x27c
 	.global t1_156a0
-t1_156a0:
+t1_156a0: # mod_mod0_entry_addr: 0x44d4c
 	.incbin "basemain.dol", 0x17c00, 0x141774
 	.global t1_156e14
-t1_156e14:
+t1_156e14: # gx_draw: 0x167750
 	.incbin "basemain.dol", 0x159374, 0x42954
 	.global t1_199768
 t1_199768:
@@ -303,9 +303,9 @@ t1_1a8024:
 	.global t1_1a807c
 t1_1a807c: # VBI hooks in here
 	.incbin "basemain.dol", 0x1aa5ec, 0x77700
-_21f78c:
+_21f78c: # malloc: 0x2221d0
 	.incbin "basemain.dol", 0x221cec, 0x3044
-_2227d0:
+_2227d0: # branch_to_mod2_addr: 0x233bec
 	.incbin "basemain.dol", 0x224d30, 0x10efc
 _2336cc:
 	.incbin "basemain.dol", 0x235c2c, 0x74

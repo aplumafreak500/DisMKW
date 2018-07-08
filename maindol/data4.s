@@ -13,7 +13,7 @@ StrapStrings: # 0x80244d40
 	.asciz "/Boot/Strap/us/English.szs\0"
 	.asciz "/Boot/Strap/us/English.szs\0"
 	.global StrapImageStrings
-StrapImageStrings: # 0x80244e08
+StrapImageStrings: # 0x80244e08 (mod_mod0_texture_addr)
 	.asciz "strapA_16_9_832x456"
 	.asciz "strapA_608x456\0"
 	.asciz "strapB_16_9_832x456"
