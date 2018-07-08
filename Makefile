@@ -7,7 +7,7 @@ AS       := $(DEVKITPPC)/bin/powerpc-eabi-as
 LD       := $(DEVKITPPC)/bin/powerpc-eabi-ld
 OBJCOPY  := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
 
-CC1FLAGS := -O2 -S
+CC1FLAGS := -O2 -S -Wall
 CPPFLAGS := -iquote include -I include -nostdinc -undef
 ASFLAGS  := -I include
 
