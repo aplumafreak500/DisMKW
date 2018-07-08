@@ -1,15 +1,15 @@
 #### Tools ####
 
 #YAZ0    := tools/wszst/wszst compress --yaz0
-CC1      := $(DEVKITPPC)/bin/powerpc-eabi-cpp
+CC1      := $(DEVKITPPC)/bin/powerpc-eabi-gcc
 CPP      := $(DEVKITPPC)/bin/powerpc-eabi-cpp
 AS       := $(DEVKITPPC)/bin/powerpc-eabi-as
 LD       := $(DEVKITPPC)/bin/powerpc-eabi-ld
 OBJCOPY  := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
 
-CC1FLAGS := -O2 -Wall
-CPPFLAGS := -iquote include -nostdinc -undef -I ./
-ASFLAGS  := 
+CC1FLAGS := -O2 -S
+CPPFLAGS := -iquote include -I include -nostdinc -undef
+ASFLAGS  := -I include
 
 BUILD_DIR := build
 
@@ -80,7 +80,7 @@ $(REL): $(REL_ELF)
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
-	$(CC1) $(CFLAGS) $(BUILD_DIR)/$*.i -o $(BUILD_DIR)/$*.s
+	$(CC1) $(CC1FLAGS) $(BUILD_DIR)/$*.i -o $(BUILD_DIR)/$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(BUILD_DIR)/$*.s
 
