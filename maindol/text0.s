@@ -676,7 +676,7 @@ _22c0:
 	beq _22f8
 	mr %r3, %r31
 	mr %r5, %r30
-	bl sub_1f34
+	bl memcpy
 	mr %r3, %r31
 	mr %r4, %r30
 	bl sub_236c
