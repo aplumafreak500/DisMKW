@@ -399,7 +399,8 @@ _1230:
 	mtspr 0x1a, %r3
 	li %r3, 0x1f00
 	rfi
-sub_1f34: # End of "odd" data and start of actual ASM
+	.global memcpy
+memcpy: # End of "odd" data and start of actual ASM
 	cmplw %r4, %r3
 	blt sub_1f60
 	addi %r4, %r4, -1
@@ -515,7 +516,7 @@ sub_209c:
 
 	.global dol_entrypoint
 dol_entrypoint:
-	bl _2210
+	bl InitRegs
 	bl sub_2348
 	li %r0, -1
 	stwu %r1, -8(%r1)
@@ -524,10 +525,10 @@ dol_entrypoint:
 	bl sub_22a0
 	li %r0, 0
 	lis %r6, -0x8000
-	addi %r6, %r6, 0x44
+	addi %r6, %r6, 0x44 # 0x80000044
 	stw %r0, 0(%r6)
 	lis %r6, -0x8000
-	addi %r6, %r6, 0xf4
+	addi %r6, %r6, 0xf4 # 0x800000f4
 	lwz %r6, 0(%r6)
 	cmplwi %r6, 0
 	beq _20ec
@@ -535,12 +536,12 @@ dol_entrypoint:
 	b _210c
 _20ec:
 	lis %r5, -0x8000
-	addi %r5, %r5, 0x34
+	addi %r5, %r5, 0x34 # 0x80000034
 	lwz %r5, 0(%r5)
 	cmplwi %r5, 0
 	beq sub_2148
 	lis %r7, -0x8000
-	addi %r7, %r7, 0x30e8
+	addi %r7, %r7, 0x30e8 # 0x800030e8
 	lwz %r7, 0(%r7)
 _210c:
 	li %r5, 0
@@ -561,7 +562,7 @@ _2138:
 	blrl
 sub_2148:
 	lis %r6, -0x8000
-	addi %r6, %r6, 0xf4
+	addi %r6, %r6, 0xf4 # 0x800000f4
 	lwz %r5, 0(%r6)
 	cmplwi %r5, 0
 	.4byte 0x41a20060 # beq _21b8
@@ -617,7 +618,8 @@ _21fc:
 	mr %r4, %r15
 	bl t1_51b4
 	b t1_1a807c
-_2210:
+	.global InitRegs
+InitRegs:
 	li %r0, 0
 	li %r3, 0
 	li %r4, 0
@@ -662,7 +664,7 @@ sub_22a0:
 	stw %r30, 0x18(%r1)
 	stw %r29, 0x14(%r1)
 	lis %r29, -0x8000
-	addi %r29, %r29, 0x63a0
+	addi %r29, %r29, 0x63a0 # 0x800063a0 (gUnknown_23a0)
 _22c0:
 	lwz %r30, 8(%r29)
 	cmpwi %r30, 0
@@ -683,7 +685,7 @@ _22f8:
 	b _22c0
 _2300:
 	lis %r29, -0x8000
-	addi %r29, %r29, 0x6424
+	addi %r29, %r29, 0x6424 # 0x80006424 (gUnknown_23a0 bss table)
 _2308:
 	lwz %r5, 4(%r29)
 	cmpwi %r5, 0
