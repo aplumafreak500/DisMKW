@@ -108,7 +108,7 @@ $(APL2): $(APL2_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
 $(APL2_ELF): $(APL2_LDSCRIPT) $(APL2_OFILES)
-	cd $(BUILD_DIR)/apploader-update && $(LD) -T ld_script.ld -Map ../../$(APL0_MAP) -o ../../$@
+	cd $(BUILD_DIR)/apploader-update && $(LD) -T ld_script.ld -Map ../../$(APL2_MAP) -o ../../$@
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
