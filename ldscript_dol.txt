@@ -1,7 +1,20 @@
 OUTPUT_ARCH(powerpc)
 SECTIONS
 {
-	. = 0x80004000;
+	. = 0x80003f00;
+	. += 0x48; /* Section offsets */
+	dol_header0 :
+	ALIGN(4)
+	{
+		dolheader.o(.text1);
+	}
+	. += 0x48; /* Section sizes */
+	dol_header1 :
+	ALIGN(4)
+	{
+		dolheader.o(.text3);
+	}
+	. += 0x0; /* Needed to match */
 	.text0 :
 	ALIGN(4)
 	{
@@ -23,18 +36,30 @@ SECTIONS
 	{
 		data2.o(.data);
 		data3.o(.data);
+	}
+	. += 0x20; /* gap */
+	.data2 :
+	ALIGN(4)
+	{
 		data4.o(.data);
 		data5.o(.data);
 	}
 	.bss :
 	ALIGN(4)
 	{
-		. = 0xe50fc;
+		BSSOffset = .;
+		/* . = 0xe50fc; */
+		. = 0xe0b80; /* D6 and D7 overlap .bss, maybe default heap? */
 	}
-	.data2 :
+	.data3 :
 	ALIGN(4)
 	{
 		data6.o(.data);
+	}
+	. += 0xfe0; /* large gap */
+	.data4 :
+	ALIGN(4)
+	{
 		data7.o(.data);
 	}
 

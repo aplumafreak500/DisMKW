@@ -1,10 +1,14 @@
 OUTPUT_ARCH(powerpc)
 SECTIONS
 {
-	DolHeader :
+	dol_header :
 	ALIGN(4)
 	{
 		build/maindol/dolheader.o(.text);
+		build/maindol/dolheader.o(.text0);
+		main_pre.elf(dol_header0);
+		build/maindol/dolheader.o(.text2);
+		main_pre.elf(dol_header1);
 	}
 	.text :
 	ALIGN(4)
@@ -19,6 +23,8 @@ SECTIONS
 		main_pre.elf(.data0);
 		main_pre.elf(.data1);
 		main_pre.elf(.data2);
+		main_pre.elf(.data3);
+		main_pre.elf(.data4);
 	}
 	.bss :
 	ALIGN(4)
