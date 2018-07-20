@@ -5,11 +5,11 @@ This is a work in progress and far from production-ready.
 
 ## What you can build (NTSC-U version only)
 
-- [ ] Partition 0 main.dol
+- [x] Partition 0 main.dol
 - [x] Partition 1 main.dol
 - [ ] Partition 2 main.dol
-- [ ] Partition 0 apploader.img
-- [x] Partition 1/2 apploader.img (exact same)
+- [x] Partition 0 apploader.img (missing header)
+- [x] Partition 1/2 apploader.img (exact same) (missing header)
 - [ ] Mario Kart Channel dol
 - [ ] Mario Kart Channel misc. executables
 - [x] StaticR.rel
@@ -94,9 +94,7 @@ make
 - [ ] Partition 1/2 Apploader.img
 	 - [ ] .text
 	 - [ ] .data
-- [ ] Partition 0 main.dol
-	 - [ ] .text
-	 - [ ] .data
+- [x] Partition 0 main.dol
 - [ ] Partition 2 main.dol
 	 - [ ] .text
 	 - [ ] .data

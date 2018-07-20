@@ -1,0 +1,32 @@
+OUTPUT_ARCH(powerpc)
+SECTIONS
+{
+	. = 0x80003f00;
+	DolHeader :
+	ALIGN(4)
+	{
+		dolheader.o(.text);
+	}
+	.text :
+	ALIGN(4)
+	{
+		text.o(.text);
+	} 
+
+	.data :
+	ALIGN(4)
+	{
+		data.o(.data);
+	}
+	.bss :
+	ALIGN(4)
+	{
+	}
+
+    /* Discard everything not specifically mentioned above. */
+    /DISCARD/ :
+    {
+        *(*);
+    }
+}
+

@@ -1,4 +1,3 @@
-604b396b9dcdb0aa6382c419fc83296c4d3bbf11  apploader.img
-44d7063b7f34c1f30a62e51059a7e31b2f615ddd  apploader-update.img
+b136d5f35909e682b1a15352f429edb412f0b247  main-update.dol
 1b367209919fcc225c74a155dc46f29c5d64b9a2  main.dol
 072ba44382fdca9bf5c0ec9d1e9b922cafd99260  StaticR.rel
