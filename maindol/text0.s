@@ -1,11 +1,9 @@
 	.text
-	.global Text0Size
-	.set Text0Size, Text0End - Text0Start
 	.global Text0Start
 Text0Start:
 	.asciz "Metrowerks Target Resident Kernel for PowerPC"
 	.space 210
-	b t1_156a0
+	b t1_14840
 	.space 252
 	# From here down is really odd data. It doesn't seem like actual ASM, but who knows? Maybe it is used somewhere.
 	mtspr 0x111, %r2
@@ -414,6 +412,7 @@ _1f54:
 	addic. %r5, %r5, -1
 	bne _1f4c
 	blr
+	.global sub_1f60
 sub_1f60:
 	add %r4, %r4, %r5
 	add %r6, %r3, %r5
@@ -426,6 +425,7 @@ _1f78:
 	addic. %r5, %r5, -1
 	bne _1f70
 	blr
+	.global sub_1f84
 sub_1f84:
 	cmplwi %r5, 0x20
 	clrlwi %r7, %r4, 0x18
@@ -476,12 +476,14 @@ _2018:
 _2020:
 	cmpwi %r5, 0
 	beqlr
+	.global sub_2028
 sub_2028:
 	addic. %r5, %r5, -1
 	stbu %r7, 1(%r6)
 	bne sub_2028
 	blr
-sub_2038:
+	.global memset
+memset:
 	stwu %r1, -0x10(%r1)
 	mflr %r0
 	stw %r0, 0x14(%r1)
@@ -494,22 +496,26 @@ sub_2038:
 	mtlr %r0
 	addi %r1, %r1, 0x10
 	blr
+	.global sub_2068
 sub_2068:
 	lis %r3, -0x8000
 	lhz %r0, 0x30e4(%r3)
 	andi. %r0, %r0, 0xeef
 	cmpwi %r0, 0xeef
 	bnelr
+	.global sub_207c
 sub_207c:
 	li %r3, 0
 	li %r4, 0
 	li %r5, 0
-	b t1_1a2580
+	b t1_1a1720
 	blr
+	.global sub_2090
 sub_2090:
 	li %r0, 1
 	stb %r0, -0x62b0(%r13)
 	blr
+	.global sub_209c
 sub_209c:
 	lbz %r3, -0x62b0(%r13)
 	blr
@@ -525,10 +531,10 @@ dol_entrypoint:
 	bl sub_22a0
 	li %r0, 0
 	lis %r6, -0x8000
-	addi %r6, %r6, 0x44 # 0x80000044
+	addi %r6, %r6, 0x44
 	stw %r0, 0(%r6)
 	lis %r6, -0x8000
-	addi %r6, %r6, 0xf4 # 0x800000f4
+	addi %r6, %r6, 0xf4
 	lwz %r6, 0(%r6)
 	cmplwi %r6, 0
 	beq _20ec
@@ -536,12 +542,12 @@ dol_entrypoint:
 	b _210c
 _20ec:
 	lis %r5, -0x8000
-	addi %r5, %r5, 0x34 # 0x80000034
+	addi %r5, %r5, 0x34
 	lwz %r5, 0(%r5)
 	cmplwi %r5, 0
-	beq sub_2148
+	beq _2148
 	lis %r7, -0x8000
-	addi %r7, %r7, 0x30e8 # 0x800030e8
+	addi %r7, %r7, 0x30e8
 	lwz %r7, 0(%r7)
 _210c:
 	li %r5, 0
@@ -551,18 +557,18 @@ _210c:
 	li %r5, 1
 	beq _2138
 	cmplwi %r7, 4
-	bne sub_2148
+	bne _2148
 	li %r5, 2
 	bl sub_2090
-	b sub_2148
+	b _2148
 _2138:
 	lis %r6, -0x7ffe
 	addi %r6, %r6, -0x4814
 	mtlr %r6
 	blrl
-sub_2148:
+_2148:
 	lis %r6, -0x8000
-	addi %r6, %r6, 0xf4 # 0x800000f4
+	addi %r6, %r6, 0xf4
 	lwz %r5, 0(%r6)
 	cmplwi %r5, 0
 	.4byte 0x41a20060 # beq _21b8
@@ -693,7 +699,7 @@ _2308:
 	lwz %r3, 0(%r29)
 	beq _2324
 	li %r4, 0
-	bl sub_2038
+	bl memset
 _2324:
 	addi %r29, %r29, 8
 	b _2308
@@ -729,47 +735,53 @@ sub_236c:
 	bge -0x14
 	isync
 	blr
+	.data
+	.global gUnknown_23a0
 gUnknown_23a0:
 	# Some kind of reloc table?
-	.4byte 0x80004000 # T0
-	.4byte 0x80004000
-	.4byte 0x2444     # Size
-	.4byte 0x80006460 # D0
-	.4byte 0x80006460
-	.4byte 0x5c0
-	.4byte 0x80006a20 # D1
-	.4byte 0x80006a20
-	.4byte 0x890
-	.4byte 0x800072c0 # T1
-	.4byte 0x800072c0
-	.4byte 0x23da74
-	.4byte 0x80244d40 # D2
-	.4byte 0x80244d40
-	.4byte 0xb0
-	.4byte 0x80244e00 # D3
-	.4byte 0x80244e00
-	.4byte 0xc
-	.4byte 0x80244e40 # D4
-	.4byte 0x80244e40
-	.4byte 0x1340c
-	.4byte 0x80258260 # D5
-	.4byte 0x80258260
-	.4byte 0x47aa0
-	.4byte 0x80380880 # D6
-	.4byte 0x80380880
-	.4byte 0x13c0
-	.4byte 0x80382c20 # D7
-	.4byte 0x80382c20
-	.4byte 0x21a0
+	.4byte Text0Start
+	.4byte Text0Start
+	.4byte Text0Size-0x1c
+	.4byte Data0Start
+	.4byte Data0Start
+	.4byte Data0Size
+	.4byte Data1Start
+	.4byte Data1Start
+	.4byte Data1Size-0x10
+	.4byte Text1Start
+	.4byte Text1Start
+	.4byte Text1Size-0xc
+	.4byte Data2Start
+	.4byte Data2Start
+	.4byte Data2Size-0x10
+	.4byte Data3Start
+	.4byte Data3Start
+	.4byte Data3Size-0x14
+	.4byte Data4Start
+	.4byte Data4Start
+	.4byte Data4Size-0x14
+	.4byte Data5Start
+	.4byte Data5Start
+	.4byte Data5Size
+	.4byte Data6Start
+	.4byte Data6Start
+	.4byte Data6Size
+	.4byte Data7Start
+	.4byte Data7Start
+	.4byte Data7Size
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x8029fd00 # .bss
-	.4byte 0xe0b70
-	.4byte 0x80381c40 # .bss 2
-	.4byte 0xfcc
-	.4byte 0x80384dc0 # .bss 3
-	.4byte 0x3c # 0xe1b72 total size, rest of .bss is probably StaticR.rel .bss
-	.space 36
+	.global gUnknown_2424
+gUnknown_2424:
+	.4byte bss0Start
+	.4byte bss0Size
+	.4byte bss1Start
+	.4byte bss1Size
+	.4byte bss2Start
+	.4byte bss2Size
+	.4byte 0
+	.4byte 0
+	.space 28
 	.global Text0End
 Text0End:

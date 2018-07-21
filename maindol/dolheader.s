@@ -41,8 +41,8 @@ DolHeader:
 	.4byte Data7Size
 	.space 12
 	.section .text3
-	.4byte BSSOffset
-	.4byte 0xe50fc    # .bss size
+	.4byte bss0Start
+	.4byte bssTotalSize
 	.4byte dol_entrypoint
 	.space 28
 

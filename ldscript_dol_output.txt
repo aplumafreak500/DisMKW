@@ -29,8 +29,10 @@ SECTIONS
 	.bss :
 	ALIGN(4)
 	{
-		main_pre.elf(.bss);
-	}
+		main_pre.elf(.bss0);
+		main_pre.elf(.bss1);
+		main_pre.elf(.bss2);
+	}=0
 
     /* Discard everything not specifically mentioned above. */
     /DISCARD/ :
