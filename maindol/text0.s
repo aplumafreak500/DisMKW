@@ -600,8 +600,8 @@ _21b8:
 	li %r14, 0
 	li %r15, 0
 _21c0:
-	bl t1_156e14
-	bl t1_199768
+	bl t1_155fb4
+	bl t1_198908
 	lis %r4, -0x8000
 	addi %r4, %r4, 0x30e6
 _21d0:
@@ -617,13 +617,13 @@ _21ec:
 	bl sub_209c
 	cmplwi %r3, 1
 	bne _21fc
-	bl t1_15424
+	bl t1_145c4
 _21fc:
-	bl t1_1a8024
+	bl t1_1a71c4
 	mr %r3, %r14
 	mr %r4, %r15
-	bl t1_51b4
-	b t1_1a807c
+	bl t1_4350
+	b t1_1a722c
 	.global InitRegs
 InitRegs:
 	li %r0, 0

@@ -278,31 +278,31 @@ _3dc:
 _400:
 	.incbin "basemain.dol", 0x2960, 0x8
 _408:
-	.incbin "basemain.dol", 0x2968, 0x4da8
-	.global t1_51b4
-t1_51b4:
-	.incbin "basemain.dol", 0x7710, 0xf690
+	.incbin "basemain.dol", 0x2968, 0x3f48
+	.global t1_4350
+t1_4350:
+	.incbin "basemain.dol", 0x68b0, 0x10274
+	.global t1_145c4
+t1_145c4:
+	.incbin "basemain.dol", 0x16b24, 0x27c
 	.global t1_14840
 t1_14840: # mod_mod0_entry_addr: 0x44d4c
-	.incbin "basemain.dol", 0x16da0, 0xbe4
-	.global t1_15424
-t1_15424:
-	.incbin "basemain.dol", 0x17984, 0x1419f0
-	.global t1_156e14
-t1_156e14: # gx_draw: 0x167750
-	.incbin "basemain.dol", 0x159374, 0x42954
-	.global t1_199768
-t1_199768:
-	.incbin "basemain.dol", 0x19bcc8, 0x7fb8
+	.incbin "basemain.dol", 0x16da0, 0x141774
+	.global t1_155fb4
+t1_155fb4: # gx_draw: 0x167750
+	.incbin "basemain.dol", 0x158514, 0x42954
+	.global t1_198908
+t1_198908:
+	.incbin "basemain.dol", 0x19ae68, 0x8e18
 	.global t1_1a1720
 t1_1a1720:
-	.incbin "basemain.dol", 0x1a3c80, 0x6904
-	.global t1_1a8024
-t1_1a8024:
-	.incbin "basemain.dol", 0x1aa584, 0x68
-	.global t1_1a807c
-t1_1a807c: # VBI hooks in here
-	.incbin "basemain.dol", 0x1aa5ec, 0x77700
+	.incbin "basemain.dol", 0x1a3c80, 0x5aa4
+	.global t1_1a71c4
+t1_1a71c4:
+	.incbin "basemain.dol", 0x1a9724, 0x68
+	.global t1_1a722c
+t1_1a722c: # VBI hooks in here
+	.incbin "basemain.dol", 0x1a978c, 0x78560
 _21f78c: # malloc: 0x2221d0
 	.incbin "basemain.dol", 0x221cec, 0x3044
 _2227d0: # branch_to_mod2_addr: 0x233bec
