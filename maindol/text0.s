@@ -2,7 +2,9 @@
 	.global Text0Start
 Text0Start:
 	.asciz "Metrowerks Target Resident Kernel for PowerPC"
-	.space 210
+	.space 18
+	# MOD0 does something here
+	.space 192
 	b t1_14840
 	.space 252
 	# From here down is really odd data. It doesn't seem like actual ASM, but who knows? Maybe it is used somewhere.
@@ -20,8 +22,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x200
 	rfi
@@ -34,8 +36,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x300
 	rfi
@@ -48,8 +50,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x400
 	rfi
@@ -62,8 +64,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x500
 	rfi
@@ -76,8 +78,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x600
 	rfi
@@ -90,8 +92,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x700
 	rfi
@@ -104,8 +106,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x800
 	rfi
@@ -118,8 +120,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x900
 	rfi
@@ -132,8 +134,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0xc00
 	rfi
@@ -146,8 +148,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0xd00
 	rfi
@@ -160,8 +162,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0xe00
 	rfi
@@ -176,8 +178,8 @@ Text0Start:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0xf20
 	rfi
@@ -190,8 +192,8 @@ _f54:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0xf00
 	rfi
@@ -220,8 +222,8 @@ _1030:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1000
 	rfi
@@ -250,8 +252,8 @@ _1130:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1100
 	rfi
@@ -280,8 +282,8 @@ _1230:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1200
 	rfi
@@ -294,8 +296,8 @@ _1230:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1300
 	rfi
@@ -308,8 +310,8 @@ _1230:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1400
 	rfi
@@ -322,8 +324,8 @@ _1230:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1600
 	rfi
@@ -336,8 +338,8 @@ _1230:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1700
 	rfi
@@ -350,8 +352,8 @@ _1230:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1c00
 	rfi
@@ -364,8 +366,8 @@ _1230:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1d00
 	rfi
@@ -378,8 +380,8 @@ _1230:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1e00
 	rfi
@@ -392,8 +394,8 @@ _1230:
 	mfmsr %r3
 	ori %r3, %r3, 0x30
 	mtspr 0x1b, %r3
-	lis %r3, -0x7fff
-	ori %r3, %r3, 0xf28c
+	lis %r3, t1_17fcc@h
+	ori %r3, %r3, t1_17fcc@l
 	mtspr 0x1a, %r3
 	li %r3, 0x1f00
 	rfi

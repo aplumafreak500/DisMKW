@@ -287,7 +287,10 @@ t1_145c4:
 	.incbin "basemain.dol", 0x16b24, 0x27c
 	.global t1_14840
 t1_14840: # mod_mod0_entry_addr: 0x44d4c
-	.incbin "basemain.dol", 0x16da0, 0x141774
+	.incbin "basemain.dol", 0x16da0, 0x378c
+	.global t1_17fcc
+t1_17fcc:
+	.incbin "basemain.dol", 0x1a52c, 0x13dfe8
 	.global t1_155fb4
 t1_155fb4: # gx_draw: 0x167750
 	.incbin "basemain.dol", 0x158514, 0x42954
