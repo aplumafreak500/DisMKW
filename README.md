@@ -17,9 +17,12 @@ This is a work in progress and far from production-ready.
 ### Common patches to main.dol and StaticR.rel that are included:
 
 - [ ] Wiimmfi
-- [ ] Gecko hooktype
+- [x] Gecko hooktype
+	* Note: The GCT data is stored in D9 instead of T3.
 - [ ] XeR's CTWW patch
-- [ ] CTGP-Code (more info: http://github.com/Chadderz121/wii-ct-code)
+- [x] CTGP-Code (more info: http://github.com/Chadderz121/wii-ct-code)
+	* Note: Only the MOD0 parts are included. MOD1 and MOD2 are to be built seperately.
+	* Note: In the future, modifications to main.dol and StaticR.rel will be included inline, removing the need for CTGP-Code.
 
 ## How to use
 

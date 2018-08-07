@@ -301,8 +301,14 @@ t1_1a1720:
 t1_1a71c4:
 	.incbin "basemain.dol", 0x1a9724, 0x68
 	.global t1_1a722c
-t1_1a722c: # VBI hooks in here
-	.incbin "basemain.dol", 0x1a978c, 0x78560
+t1_1a722c:
+	.incbin "basemain.dol", 0x1a978c, 0xc594
+	.ifdef USE_GECKO
+	.4byte 0x4be46e28 # will disassemble later
+	.else
+	blr
+	.endif
+	.incbin "basemain.dol", 0x1b5d24, 0x6bfc8
 _21f78c: # malloc: 0x2221d0
 	.incbin "basemain.dol", 0x221cec, 0x3044
 _2227d0: # branch_to_mod2_addr: 0x233bec

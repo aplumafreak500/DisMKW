@@ -6,7 +6,6 @@ SECTIONS
 	{
 		text.o(.text);
 	} 
-
 	.data :
 	ALIGN(4)
 	{

@@ -11,6 +11,19 @@ CC1FLAGS := -O2 -S -Wall
 CPPFLAGS := -iquote include -I include -nostdinc -undef
 ASFLAGS  := -I include
 
+ifeq ($(USE_GECKO), 1)
+	ASFLAGS += --defsym USE_GECKO=1
+	CPPFLAGS += -DUSE_GECKO=1
+endif
+ifeq ($(CTGP_CODE), 1)
+	ASFLAGS += --defsym CTGP_CODE=1
+	CPPFLAGS += -DCTGP_CODE=1
+endif
+ifeq ($(CODEHANDLERONLY), 1)
+	ASFLAGS += --defsym CODEHANDLERONLY=1
+	CPPFLAGS += -DCODEHANDLERONLY=1
+endif
+
 BUILD_DIR := build
 
 #### Files ####

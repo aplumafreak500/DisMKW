@@ -4,6 +4,18 @@ Text0Size = Text0End - Text0Start;
 
 SECTIONS
 {
+	/* Gecko */
+	. = 0x80001800;
+	.text3 :
+	ALIGN(4)
+	{
+		text3.o(.text);
+	}
+	.data6 :
+	ALIGN(4)
+	{
+		data9.o(.data);
+	}
 	. = 0x80003f00;
 	. += 0x48; /* Section offsets */
 	dol_header0 :
@@ -48,13 +60,31 @@ SECTIONS
 		data4.o(.data);
 		data5.o(.data);
 	}
+	. = 0x8029fd00;
+	bss0Start = .;
 	.bss0 :
 	ALIGN(4)
 	{
-		bss0Start = .;
-		. = 0xe0b70;
-		bss0End = .;
 	}=0
+	/* CTGP-Code is loaded here */
+	. = 0x802a5000;
+	.text2 :
+	ALIGN(4)
+	{
+		text2.o(.text);
+	}
+	. = 0x802a8000;
+	.data5 :
+	ALIGN(4)
+	{
+		data8.o(.data);
+	}
+	.bss1 :
+	ALIGN(4)
+	{
+	} = 0
+	. = 0x80380870;
+	bss0End = .;
 	bss0Size = bss0End - bss0Start;
 	. += 0x10; /* gap */
 	/* D6 and D7 overlap .bss, maybe default heap? */
@@ -63,13 +93,13 @@ SECTIONS
 	{
 		data6.o(.data);
 	}
+	bss1Start = .;
 	.bss1 :
 	ALIGN(4)
 	{
-		bss1Start = .;
-		. = 0xfcc;
-		bss1End = .;
 	}=0
+	. = 0x80382c0c;
+	bss1End = .;
 	bss1Size = bss1End - bss1Start;
 	. += 0x14; /* gap */
 	.data4 :
@@ -77,13 +107,13 @@ SECTIONS
 	{
 		data7.o(.data);
 	}
+	bss2Start = .;
 	.bss2 :
 	ALIGN(4)
 	{
-		bss2Start = .;
 		. = 0x3c;
-		bss2End = .;
 	}=0
+	bss2End = .;
 	bss2Size = bss2End - bss2Start;
 	DolMemEnd = .;
 	bssTotalSize = DolMemEnd - bss0Start; /* main.dol header */

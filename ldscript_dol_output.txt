@@ -25,8 +25,17 @@ SECTIONS
 		main_pre.elf(.data2);
 		main_pre.elf(.data3);
 		main_pre.elf(.data4);
+
 	}
-	.bss :
+	Extensions :
+	ALIGN(4)
+	{
+		main_pre.elf(.text2);
+		main_pre.elf(.data5);
+		main_pre.elf(.text3); /* Why does it pad here? */
+		main_pre.elf(.data6);
+	}
+	.bss (NOLOAD):
 	ALIGN(4)
 	{
 		main_pre.elf(.bss0);
