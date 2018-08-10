@@ -4,8 +4,12 @@ Text0Size = Text0End - Text0Start;
 
 SECTIONS
 {
+	. = 0x80000000;
+	DolphinGlobalsLow :
+	ALIGN(4) {
+		DolphinGlobals.o(.bss);
+	}
 	/* Gecko */
-	. = 0x80001800;
 	.text3 :
 	ALIGN(4) {
 		text3.o(.text);
@@ -14,7 +18,11 @@ SECTIONS
 	ALIGN(4) {
 		data9.o(.data);
 	}
-	. = 0x80003f00;
+	. = 0x80003000;
+	DolphinGlobalsHigh :
+	ALIGN(4) {
+		DolphinGlobals2.o(.bss);
+	}
 	. += 0x48; /* Section offsets */
 	dol_header0 :
 	ALIGN(4) {
