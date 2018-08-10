@@ -87,7 +87,6 @@ DolHeader:
 	.space 12
 	.endif
 	.endif
-	.section .text2
 	.4byte Text0Size
 	.4byte Text1Size
 	.ifdef CTGP_CODE
@@ -130,7 +129,6 @@ DolHeader:
 	.space 12
 	.endif
 	.endif
-	.section .text3
 	.4byte bss0Start
 	.4byte bssTotalSize
 	.ifdef CTGP_CODE

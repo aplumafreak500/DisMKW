@@ -1,20 +1,31 @@
 OUTPUT_ARCH(powerpc)
-SECTIONS
-{
-	.text :
-	ALIGN(4)
-	{
-		text.o(.text);
+Section0Size = Text0Size + Data0Size;
+Section1Size = Text1Size + Data1Size;
+SECTIONS {
+	. = 0x81200000;
+	Header :
+	ALIGN(4) {
+		header.o(.text);
+	}
+	.text.Section0 :
+	ALIGN(4) {
+		text0.o(.text);
 	} 
-	.data :
-	ALIGN(4)
-	{
-		data.o(.data);
+	.data.Section0 :
+	ALIGN(4) {
+		data0.o(.data);
 	}
-	.bss :
-	ALIGN(4)
-	{
+	.text.Section1 :
+	ALIGN(4) {
+		text1.o(.text);
+	} 
+	.data.Section1 :
+	ALIGN(4) {
+		data1.o(.data);
 	}
+	.bss : /* Does apploader.img really use a .bss portion? */
+	ALIGN(4) {
+	}=0
 
     /* Discard everything not specifically mentioned above. */
     /DISCARD/ :

@@ -7,8 +7,6 @@ SECTIONS
 		build/maindol/dolheader.o(.text);
 		build/maindol/dolheader.o(.text0);
 		main_pre.elf(dol_header0);
-		build/maindol/dolheader.o(.text2);
-		main_pre.elf(dol_header1);
 	}
 	.text :
 	ALIGN(4)
@@ -41,6 +39,7 @@ SECTIONS
 		main_pre.elf(.bss0);
 		main_pre.elf(.bss1);
 		main_pre.elf(.bss2);
+		main_pre.elf(.bss3);
 	}=0
 
     /* Discard everything not specifically mentioned above. */

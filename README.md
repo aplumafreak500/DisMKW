@@ -8,8 +8,9 @@ This is a work in progress and far from production-ready.
 - [x] Partition 0 main.dol
 - [x] Partition 1 main.dol
 - [ ] Partition 2 main.dol
-- [x] Partition 0 apploader.img (missing header)
-- [x] Partition 1/2 apploader.img (exact same) (missing header)
+- [ ] Partition 0 apploader.img
+- [x] Partition 1 apploader.img
+- [ ] Partition 2 apploader.img (need to re-verify if it's the same as Partition 1's apploader.img)
 - [ ] Mario Kart Channel dol
 - [ ] Mario Kart Channel misc. executables
 - [x] StaticR.rel
@@ -92,11 +93,20 @@ make
 	- [ ] Reloc
 	- [ ] Reloc (main.dol)
 - [ ] Partiton 0 Apploader.img
-	 - [ ] .text
-	 - [ ] .data
-- [ ] Partition 1/2 Apploader.img
-	 - [ ] .text
-	 - [ ] .data
+	 - [ ] T0
+	 - [ ] T1
+	 - [ ] D0
+	 - [ ] D1
+- [ ] Partition 1 Apploader.img
+	 - [ ] T0
+	 - [ ] T1
+	 - [ ] D0
+	 - [ ] D1
+- [ ] Partition 2 Apploader.img
+	 - [ ] T0
+	 - [ ] T1
+	 - [ ] D0
+	 - [ ] D1
 - [x] Partition 0 main.dol
 - [ ] Partition 2 main.dol
 	 - [ ] .text

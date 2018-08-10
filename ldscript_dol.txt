@@ -7,81 +7,62 @@ SECTIONS
 	/* Gecko */
 	. = 0x80001800;
 	.text3 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		text3.o(.text);
 	}
 	.data6 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		data9.o(.data);
 	}
 	. = 0x80003f00;
 	. += 0x48; /* Section offsets */
 	dol_header0 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		dolheader.o(.text1);
-	}
-	. += 0x48; /* Section sizes */
-	dol_header1 :
-	ALIGN(4)
-	{
-		dolheader.o(.text3);
 	}
 	. += 0x0; /* Needed to match */
 	.text0 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		text0.o(.text);
 		text0.o(.data);
 	}
 	.data0 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		data0.o(.data);
 		data1.o(.data);
 	}
 	.text1 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		text1.o(.text);
 	}
 	.data1 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		data2.o(.data);
 		data3.o(.data);
 	}
 	. += 0x20; /* gap */
 	.data2 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		data4.o(.data);
 		data5.o(.data);
 	}
-	. = 0x8029fd00;
 	bss0Start = .;
 	.bss0 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 	}=0
 	/* CTGP-Code is loaded here */
 	. = 0x802a5000;
 	.text2 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		text2.o(.text);
 	}
 	. = 0x802a8000;
 	.data5 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		data8.o(.data);
 	}
 	.bss1 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 	} = 0
 	. = 0x80380870;
 	bss0End = .;
@@ -89,28 +70,24 @@ SECTIONS
 	. += 0x10; /* gap */
 	/* D6 and D7 overlap .bss, maybe default heap? */
 	.data3 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		data6.o(.data);
 	}
 	bss1Start = .;
-	.bss1 :
-	ALIGN(4)
-	{
+	.bss2 :
+	ALIGN(4) {
+		. = 0xfcc;
 	}=0
-	. = 0x80382c0c;
 	bss1End = .;
 	bss1Size = bss1End - bss1Start;
 	. += 0x14; /* gap */
 	.data4 :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		data7.o(.data);
 	}
 	bss2Start = .;
-	.bss2 :
-	ALIGN(4)
-	{
+	.bss3 :
+	ALIGN(4) {
 		. = 0x3c;
 	}=0
 	bss2End = .;

@@ -130,8 +130,8 @@ clean:
 	
 #### Recipes ####
 
-$(APL0_LDSCRIPT): ldscript_appl.txt
-	cp ldscript_appl.txt $(BUILD_DIR)/apploader-update/ld_script.ld
+$(APL0_LDSCRIPT): ldscript_appl_update.txt
+	cp ldscript_appl_update.txt $(BUILD_DIR)/apploader-update/ld_script.ld
 	
 $(APL0): $(APL0_ELF)
 	$(OBJCOPY) -O binary $< $@
