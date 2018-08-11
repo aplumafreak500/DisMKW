@@ -31,8 +31,13 @@ SECTIONS
 	. += 0x0; /* Needed to match */
 	.text0 :
 	ALIGN(4) {
-		text0.o(.text);
-		text0.o(.data);
+		Text0Start = .;
+		TRK_Exception.o(.text);
+		memset.o(.text);
+		CheckGCPad4.o(.text);
+		crt.o(.text);
+		crt.o(.data);
+		Text0End = .;
 	}
 	.data0 :
 	ALIGN(4) {

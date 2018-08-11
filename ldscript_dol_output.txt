@@ -33,14 +33,6 @@ SECTIONS
 		main_pre.elf(.text3); /* Why does it pad here? */
 		main_pre.elf(.data6);
 	}
-	.bss (NOLOAD):
-	ALIGN(4)
-	{
-		main_pre.elf(.bss0);
-		main_pre.elf(.bss1);
-		main_pre.elf(.bss2);
-		main_pre.elf(.bss3);
-	}=0
 
     /* Discard everything not specifically mentioned above. */
     /DISCARD/ :
