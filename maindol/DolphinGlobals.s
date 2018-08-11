@@ -16,12 +16,15 @@ DiscStreaming:
 	.space 1
 	.global DiscStreamingBufferSize
 DiscStreamingBufferSize:
-	.space 0xf
+	.space 1
+	.global DiscHeaderPadding
+DiscHeaderPadding:
+	.space 14
 	.global DiscMagic
 DiscMagic: # 0x5d1c9ea300000000
 	.space 8
-	.global NintendoStandardBootCode
-NintendoStandardBootCode: # 0xd15ea5e
+	.global BootType
+BootType: # 0xd15ea5e
 	.space 4
 	.global Version
 Version: # Set by apploader.img
@@ -44,13 +47,54 @@ FSTOffset:
 	.global FSTSize
 FSTSize:
 	.space 4
-	.global DebugInfo
-DebugInfo:
-	.space 0x20
+	.global DebugEnabled
+DebugEnabled:
+	.space 4
+	.global DebugMask
+DebugMask:
+	.space 4
+	.global DebugDestination
+DebugDestination:
+	.space 4
+	.global DebugTempArea
+DebugTempArea:
+	.space 0x14
 	.global DebugHook
 DebugHook:
 	.space 0x24
-	.space 0x68
+	.global DebugPadding
+DebugPadding:
+	.space 0x3c
+	.global current_context_phy
+current_context_phy:
+	.space 4
+	.global previous_interrupt_mask
+previous_interrupt_mask:
+	.space 4
+	.global TV_Mode
+TV_Mode:
+	.space 4
+	.global ARAM_Size
+ARAM_Size:
+	.space 4
+	.global current_context
+current_context:
+	.space 4
+	.global default_thread
+default_thread:
+	.space 4
+	.global thread_queue_head
+thread_queue_head:
+	.space 4
+	.global thread_queue_tail
+thread_queue_tail:
+	.space 4
+	.global current_thread
+current_thread:
+	.space 4
+	.global DevDebuggerMonitorSize
+DevDebuggerMonitorSize:
+	.space 4
 	.global DevDebuggerMonitorAddress
 DevDebuggerMonitorAddress:
 	.space 4
