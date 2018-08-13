@@ -296,10 +296,19 @@ t1_2452c:
 	.incbin "basemain.dol", 0x26a8c, 0x131a88
 	.global t1_155fb4
 t1_155fb4: # gx_draw: 0x167750
-	.incbin "basemain.dol", 0x158514, 0x42954
+	.incbin "basemain.dol", 0x158514, 0x41e94
+	.global t1_197e48
+t1_197e48:
+	.incbin "basemain.dol", 0x19a3a8, 0xac0
 	.global t1_198908
 t1_198908:
-	.incbin "basemain.dol", 0x19ae68, 0x8e18
+	.incbin "basemain.dol", 0x19ae68, 0x838
+	.global t1_199140
+t1_199140:
+	.incbin "basemain.dol", 0x19b6a0, 0x1644
+	.global t1_19a784
+t1_19a784:
+	.incbin "basemain.dol", 0x19cce4, 0x6f9c
 	.global t1_1a1720
 t1_1a1720:
 	.incbin "basemain.dol", 0x1a3c80, 0x5aa4

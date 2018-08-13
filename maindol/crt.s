@@ -145,12 +145,14 @@ InitRegs:
 	li %r29, 0
 	li %r30, 0
 	li %r31, 0
-	lis %r1, -0x7fc7
-	ori %r1, %r1, 0x4e00 # 0x80394e00
-	lis %r2, -0x7fc8
-	ori %r2, %r2, 0xac20 # 0x8038ac20
-	lis %r13, -0x7fc8
-	ori %r13, %r13, 0x8880 # 0x80388880
+	# Outside of dol memory map, why?
+	lis %r1, DolMemEnd@h+0x10000
+	ori %r1, %r1, DolMemEnd@l+4 # 0x80394e00
+	# These are different in European version
+	lis %r2, DolMemEnd@h
+	ori %r2, %r2, DolMemEnd@l+0x5e24 # 0x8038ac20
+	lis %r13, DolMemEnd@h
+	ori %r13, %r13, DolMemEnd@l+0x3a84 # 0x80388880
 	blr
 
 InitData:
@@ -210,9 +212,9 @@ InitHardware:
 	mtmsr %r0
 	mflr %r31
 	# TODO: Make these repointable
-	bl 0x19a0a8
-	bl 0x198dac
-	bl 0x19b6e4
+	bl t1_199140
+	bl t1_197e48
+	bl t1_19a784
 	mtlr %r31
 	blr
 
