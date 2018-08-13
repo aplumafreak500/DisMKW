@@ -64,7 +64,7 @@ DebugHook:
 	.space 0x24
 	.global DebugPadding
 DebugPadding:
-	.space 0x3c
+	.space 0x40
 	.global current_context_phy
 current_context_phy:
 	.space 4

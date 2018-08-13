@@ -23,8 +23,8 @@ dol_entrypoint:
 	lis %r6, DebugMask@h
 	addi %r6, %r6, DebugMask@l
 	stw %r0, 0(%r6)
-	lis %r6, BusSpeed@h
-	addi %r6, %r6, BusSpeed@l
+	lis %r6, Bi2Offset@h
+	addi %r6, %r6, Bi2Offset@l
 	lwz %r6, 0(%r6)
 	cmplwi %r6, 0
 	beq _20ec
@@ -57,14 +57,14 @@ _2138:
 	mtlr %r6
 	blrl
 _2148:
-	lis %r6, BusSpeed@h
-	addi %r6, %r6, BusSpeed@l
+	lis %r6, Bi2Offset@h
+	addi %r6, %r6, Bi2Offset@l
 	lwz %r5, 0(%r6)
 	cmplwi %r5, 0
-	.4byte 0x41a20060 # beq _21b8
+	beq+ _21b8
 	lwz %r6, 8(%r5)
 	cmplwi %r6, 0
-	.4byte 0x41a20054 # beq _21d0
+	beq+ _21b8
 	add %r6, %r5, %r6
 	lwz %r14, 0(%r6)
 	cmplwi %r14, 0
@@ -94,7 +94,6 @@ _21c0:
 	bl t1_198908
 	lis %r4, GCNPort4DebugState@h
 	addi %r4, %r4, GCNPort4DebugState@l+2
-_21d0:
 	lhz %r3, 0(%r4)
 	andi. %r5, %r3, 0x8000
 	beq _21e8
