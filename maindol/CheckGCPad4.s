@@ -1,6 +1,6 @@
 	.text
-	.global sub_2068
-sub_2068:
+	.global CheckGCPort4State
+CheckGCPort4State:
 	lis %r3, GCNPort4DebugState@h
 	lhz %r0, GCNPort4DebugState@l(%r3)
 	andi. %r0, %r0, 0xeef

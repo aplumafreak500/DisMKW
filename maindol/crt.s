@@ -101,7 +101,7 @@ _21c0:
 	cmplwi %r3, 1
 	bne _21ec
 _21e8:
-	bl sub_2068
+	bl CheckGCPort4State
 _21ec:
 	bl sub_209c
 	cmplwi %r3, 1
