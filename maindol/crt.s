@@ -18,7 +18,7 @@ dol_entrypoint:
 	stwu %r1, -8(%r1)
 	stw %r0, 4(%r1)
 	stw %r0, 0(%r1)
-	bl sub_22a0
+	bl InitData
 	li %r0, 0
 	lis %r6, DebugMask@h
 	addi %r6, %r6, DebugMask@l
@@ -52,8 +52,8 @@ _210c:
 	bl sub_2090
 	b _2148
 _2138:
-	lis %r6, -0x7ffe
-	addi %r6, %r6, -0x4814 # 0x8002b7ec
+	lis %r6, t1_2452c@h
+	addi %r6, %r6, t1_2452c@l
 	mtlr %r6
 	blrl
 _2148:
@@ -153,7 +153,7 @@ InitRegs:
 	ori %r13, %r13, 0x8880 # 0x80388880
 	blr
 
-sub_22a0:
+InitData:
 	stwu %r1, -0x20(%r1)
 	mflr %r0
 	stw %r0, 0x24(%r1)
