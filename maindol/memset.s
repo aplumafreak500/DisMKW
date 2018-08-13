@@ -26,6 +26,7 @@ _1f78:
 	addic. %r5, %r5, -1
 	bne _1f70
 	blr
+
 	.global sub_1f84
 sub_1f84:
 	cmplwi %r5, 0x20
@@ -82,6 +83,7 @@ _2028:
 	stbu %r7, 1(%r6)
 	bne _2028
 	blr
+
 	.global memset
 memset:
 	stwu %r1, -0x10(%r1)
