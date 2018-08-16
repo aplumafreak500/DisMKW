@@ -20,7 +20,7 @@ SECTIONS {
 	.loader :
 	ALIGN(4) {
 		loader_start = .;
-		loader.dol.o(.text);
+		loader.dol.o(.data);
 		loader_end = .;
 	} 
 	.bss : /* Does apploader.img really use a .bss portion? */
