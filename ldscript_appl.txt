@@ -1,28 +1,28 @@
 OUTPUT_ARCH(powerpc)
-Section0Size = Text0Size + Data0Size;
-Section1Size = Text1Size + Data1Size;
+Section0Size = init_start + init_end;
+Section1Size = loader_start + loader_end;
 SECTIONS {
 	. = 0x81200000;
-	Header :
+	.header :
 	ALIGN(4) {
 		header.o(.text);
 	}
-	.text.Section0 :
+	init_start = .;
+	.text :
 	ALIGN(4) {
-		text0.o(.text);
+		text.o(.text);
 	} 
-	.data.Section0 :
+	.data :
 	ALIGN(4) {
-		data0.o(.data);
+		data.o(.data);
 	}
-	.text.Section1 :
+	init_end = .;
+	.loader :
 	ALIGN(4) {
-		text1.o(.text);
+		loader_start = .;
+		loader.dol.o(.text);
+		loader_end = .;
 	} 
-	.data.Section1 :
-	ALIGN(4) {
-		data1.o(.data);
-	}
 	.bss : /* Does apploader.img really use a .bss portion? */
 	ALIGN(4) {
 	}=0
