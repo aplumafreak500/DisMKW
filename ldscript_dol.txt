@@ -171,7 +171,6 @@ SECTIONS
 		. = 0x3c;
 	}=0
 	sbss2_end = .;
-	bssTotalSize = sbss2_end - bss_start; /* main.dol header */
 
     /* Discard everything not specifically mentioned above. */
     /DISCARD/ :
