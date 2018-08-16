@@ -1,6 +1,6 @@
 OUTPUT_ARCH(powerpc)
-Section0Size = init_start + init_end;
-Section1Size = loader_start + loader_end;
+Section0Size = init_start - init_end;
+Section1Size = loader_start - loader_end;
 SECTIONS {
 	. = 0x81200000;
 	.header :
