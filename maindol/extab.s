@@ -1,8 +1,4 @@
 	.data
-	.global Data0Size
-	.set Data0Size, Data0End - Data0Start
-	.global Data0Start
-Data0Start:
 	.4byte 0x28080000, 0x70, 0x10, 0, 0x82000008, 0x800203d8, 0x18080000, 0
 	.4byte 0x20080000, 0x5c, 0x10, 0, 0x82000008, 0x800203d8, 0x20080000, 0
 	.4byte 0x30080000, 0
@@ -46,5 +42,3 @@ Data0Start:
 	.4byte 0x20080000, 0, 0x20080000, 0
 	.4byte 0x40080000, 0, 0x20080000, 0
 	.incbin "basemain.dol", 0x2402a0, 0x300
-	.global Data0End
-Data0End:

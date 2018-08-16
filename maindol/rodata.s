@@ -1,8 +1,4 @@
 	.data
-	.global Data4Size
-	.set Data4Size, Data4End - Data4Start
-	.global Data4Start
-Data4Start:
 	.global StrapStrings
 StrapStrings:
 	.asciz "/Boot/Strap/us/English.szs\0"
@@ -467,5 +463,3 @@ gUnknown_8e8:
 	
 	.incbin "basemain.dol", 0x2470a0, 0xd2a0
 
-	.global Data4End
-Data4End:

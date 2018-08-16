@@ -1,8 +1,4 @@
 	.text
-	.global Text1Size
-	.set Text1Size, Text1End - Text1Start
-	.global Text1Start
-Text1Start:
 	stwu %r1, -0x20(%r1)
 	mflr %r0
 	stw %r0, 0x24(%r1)
@@ -332,5 +328,3 @@ _2336cc:
 	.incbin "basemain.dol", 0x235c2c, 0x74
 _233740:
 	.incbin "basemain.dol", 0x235ca0, 0xa340
-	.global Text1End
-Text1End:

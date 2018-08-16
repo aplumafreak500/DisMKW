@@ -4,34 +4,33 @@ SECTIONS
 	dol_header :
 	ALIGN(4)
 	{
-		build/maindol/dolheader.o(.text);
-		build/maindol/dolheader.o(.text0);
-		main_pre.elf(dol_header0);
+		main_pre.elf(dol_header);
 	}
 	.text :
 	ALIGN(4)
 	{
-		main_pre.elf(.text0);
-		main_pre.elf(.text1);
+		main_pre.elf(.init);
+		main_pre.elf(.text);
 	} 
-
 	.data :
 	ALIGN(4)
 	{
-		main_pre.elf(.data0);
-		main_pre.elf(.data1);
-		main_pre.elf(.data2);
-		main_pre.elf(.data3);
-		main_pre.elf(.data4);
-
+		main_pre.elf(.extab);
+		main_pre.elf(.extab_index);
+		main_pre.elf(.ctors);
+		main_pre.elf(.dtors);
+		main_pre.elf(.rodata);
+		main_pre.elf(.data);
+		main_pre.elf(.sdata);
+		main_pre.elf(.sdata2);
 	}
-	Extensions :
+	.ext :
 	ALIGN(4)
 	{
-		main_pre.elf(.text2);
-		main_pre.elf(.data5);
-		main_pre.elf(.text3); /* Why does it pad here? */
-		main_pre.elf(.data6);
+		main_pre.elf(.bad0code);
+		main_pre.elf(.bad0data);
+		main_pre.elf(.codehandler); /* Why does it pad here? */
+		main_pre.elf(.gct);
 	}
 
     /* Discard everything not specifically mentioned above. */

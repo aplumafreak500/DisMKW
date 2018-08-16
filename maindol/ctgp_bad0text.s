@@ -1,10 +1,6 @@
 # This file is a slightly modified version of MrBean's CTGP-Code, reformatted
 # for the disassembly.
 	.text
-	.global Text2Size
-	.set Text2Size, Text2End - Text2Start
-	.global Text2Start
-Text2Start:
 	.ifdef CTGP_CODE
 	.int 0xbad0c0de	        #tag
 	.int Text2Size          #length
@@ -271,5 +267,3 @@ _methodMainLocationGet:
 	addi %r1,%r1,256
 	blr
 	.endif
-	.global Text2End
-Text2End:

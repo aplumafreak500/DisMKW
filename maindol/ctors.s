@@ -1,8 +1,4 @@
 	.data
-	.global Data2Size
-	.set Data2Size, Data2End - Data2Start
-	.global Data2Start
-Data2Start:
 	# some sort of table
 	.4byte 0x80020684 # t1_193c4
 	.4byte 0x8000998c # t1_26cc
@@ -48,5 +44,3 @@ Data2Start:
 	.4byte 0x8023e3b8
 	.4byte 0x80242d2c
 	.space 20
-	.global Data2End
-Data2End:

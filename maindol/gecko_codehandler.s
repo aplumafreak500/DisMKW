@@ -1,9 +1,5 @@
 # codehandler.s from Gecko OS
 	.text
-	.global Text3Size
-	.set Text3Size, Text3End - Text3Start
-	.global Text3Start
-Text3Start:
 	.ifdef USE_GECKO
 	.set r0,0
 	.set r1,1   
@@ -1463,5 +1459,3 @@ regbuffer:
 	.space 72*4
 	.align 3
 	.endif
-	.global Text3End
-Text3End:

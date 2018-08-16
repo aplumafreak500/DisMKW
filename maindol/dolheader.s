@@ -1,135 +1,133 @@
 	.text
 	.global DolHeader
 DolHeader:
-	.section .text0 # not to be confused with the TEX0 format
-	.4byte Text0Start
-	.4byte Text1Start
+	.4byte init_offset
+	.4byte text_offset
 	.ifdef CTGP_CODE
-	.4byte Text2Start
+	.4byte bad0text_offset
 	.ifdef USE_GECKO
-	.4byte Text3Start
+	.4byte codehandler_offset
 	.space 12
 	.else
 	.space 16
 	.endif
 	.else
 	.ifdef USE_GECKO
-	.4byte Text3Start
+	.4byte codehandler_offset
 	.space 16
 	.else
 	.space 20
 	.endif
 	.endif
-	.4byte Data0Start
-	.4byte Data1Start
-	.4byte Data2Start
-	.4byte Data3Start
-	.4byte Data4Start
-	.4byte Data5Start
-	.4byte Data6Start
-	.4byte Data7Start
+	.4byte extab_offset
+	.4byte extab_index_offset
+	.4byte ctors_offset
+	.4byte dtors_offset
+	.4byte rodata_offset
+	.4byte data_offset
+	.4byte sdata_offset
+	.4byte sdata2_offset
 	.ifdef CTGP_CODE
-	.4byte Data8Start
+	.4byte bad0data_offset
 	.ifdef USE_GECKO
-	.4byte Data9Start
+	.4byte gct_offset
 	.space 4
 	.else
 	.space 8
 	.endif
 	.else
 	.ifdef USE_GECKO
-	.4byte Data9Start
+	.4byte gct_offset
 	.space 8
 	.else
 	.space 12
 	.endif
 	.endif
-	.section .text1
-	.4byte Text0Start # Same symbol, different value. This is due to how we link the header.
-	.4byte Text1Start
+	.4byte init_start
+	.4byte text_start
 	.ifdef CTGP_CODE
-	.4byte Text2Start
+	.4byte bad0text_start
 	.ifdef USE_GECKO
-	.4byte Text3Start
+	.4byte codehandler_start
 	.space 12
 	.else
 	.space 16
 	.endif
 	.else
 	.ifdef USE_GECKO
-	.4byte Text3Start
+	.4byte codehandler_start
 	.space 16
 	.else
 	.space 20
 	.endif
 	.endif
-	.4byte Data0Start
-	.4byte Data1Start
-	.4byte Data2Start
-	.4byte Data3Start
-	.4byte Data4Start
-	.4byte Data5Start
-	.4byte Data6Start
-	.4byte Data7Start
+	.4byte extab_start
+	.4byte extab_index_start
+	.4byte ctors_start
+	.4byte dtors_start
+	.4byte rodata_start
+	.4byte data_start
+	.4byte sdata_start
+	.4byte sdata2_start
 	.ifdef CTGP_CODE
-	.4byte Data8Start
+	.4byte bad0data_start
 	.ifdef USE_GECKO
-	.4byte Data9Start
+	.4byte gct_start
 	.space 4
 	.else
 	.space 8
 	.endif
 	.else
 	.ifdef USE_GECKO
-	.4byte Data9Start
+	.4byte gct_start
 	.space 8
 	.else
 	.space 12
 	.endif
 	.endif
-	.4byte Text0Size
-	.4byte Text1Size
+	.4byte init_size
+	.4byte text_size
 	.ifdef CTGP_CODE
-	.4byte Text2Size
+	.4byte bad0text_size
 	.ifdef USE_GECKO
-	.4byte Text3Size
+	.4byte codehandler_size
 	.space 12
 	.else
 	.space 16
 	.endif
 	.else
 	.ifdef USE_GECKO
-	.4byte Text3Size
+	.4byte codehandler_size
 	.space 16
 	.else
 	.space 20
 	.endif
 	.endif
-	.4byte Data0Size
-	.4byte Data1Size
-	.4byte Data2Size
-	.4byte Data3Size
-	.4byte Data4Size
-	.4byte Data5Size
-	.4byte Data6Size
-	.4byte Data7Size
+	.4byte extab_size
+	.4byte extab_index_size
+	.4byte ctors_size
+	.4byte dtors_size
+	.4byte rodata_size
+	.4byte data_size
+	.4byte sdata_size
+	.4byte sdata2_size
 	.ifdef CTGP_CODE
-	.4byte Data8Size
+	.4byte bad0data_size
 	.ifdef USE_GECKO
-	.4byte Data9Size
+	.4byte gct_size
 	.space 4
 	.else
 	.space 8
 	.endif
 	.else
 	.ifdef USE_GECKO
-	.4byte Data9Size
+	.4byte gct_size
 	.space 8
 	.else
 	.space 12
 	.endif
 	.endif
-	.4byte bss0Start
+	.4byte bss_start
 	.4byte bssTotalSize
 	.ifdef CTGP_CODE
 	.4byte CTCode_Entrypoint

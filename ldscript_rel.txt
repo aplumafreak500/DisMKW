@@ -1,23 +1,66 @@
 OUTPUT_ARCH(powerpc)
+
+text_size = text_end - text_start;
+ctors_size = ctors_end - ctors_start;
+dtors_size = dtors_end - dtors_start;
+rodata_size = rodata_end - rodata_start;
+data_size = data_end - data_start;
+ImpTableSize = ImpTableEnd - ImpTable;
+
 SECTIONS
 {
+	.header :
+	ALIGN(4)
+	{
+		RelHeader.o(.text);
+	}
 	.text :
 	ALIGN(4)
 	{
-		StaticRHeader.o(.text);
-		Static1.o(.text);
-	} = 0
-
+		text_start = .;
+		text.o(.text);
+		text_end = .;
+	}
+	.ctors :
+	ALIGN(4)
+	{
+		ctors_start = .;
+		ctors.o(.data);
+		ctors_end = .;
+	}
+	.dtors :
+	ALIGN(4)
+	{
+		dtors_start = .;
+		dtors.o(.data);
+		dtors_end = .;
+	}
+	.rodata :
+	ALIGN(4)
+	{
+		rodata_start = .;
+		rodata.o(.data);
+		rodata_end = .;
+	}
 	.data :
 	ALIGN(4)
 	{
-		Static2.o(.data);
-		Static3.o(.data);
-		Static4.o(.data);
-		Static5.o(.data);
+		data_start = .;
+		data.o(.data);
+		data_end = .;
+	}
+	.imp :
+	ALIGN(4)
+	{
+		ImpTable = .;
 		StaticImp.o(.data);
-		StaticReloc.o(.data);
-		StaticRelocMainDol.o(.data);
+		ImpTableEnd = .;
+	}
+	.reloc :
+	ALIGN(4)
+	{
+		RelocTable.o(.data);
+		RelocTableMainDol.o(.data);
 	}
 	.bss :
 	ALIGN(4)

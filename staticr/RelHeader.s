@@ -11,8 +11,8 @@ StaticRRel:
 	.4byte 3 # Version of the format
 	.4byte 0x78b0 # Size of .bss section
 	.4byte gRelocTable
-	.4byte gImpTable
-	.4byte gImpTableSize
+	.4byte ImpTable
+	.4byte ImpTableSize
 	.byte 1 # Index into section table which prolog is relative to. Skip if this field is 0.
 	.byte 1 # Index into section table which epilog is relative to. Skip if this field is 0.
 	.byte 1 # Index into section table which unresolved is relative to. Skip if this field is 0.
@@ -26,11 +26,11 @@ StaticRRel:
 	.global gSectionTable
 gSectionTable:
 	.4byte 0, 0
-	.4byte Section1Start + 1, Section1Size # +1 is for bit 32, which marks the section as executable
-	.4byte Section2Start, Section2Size
-	.4byte Section3Start, Section3Size
-	.4byte Section4Start, Section4Size
-	.4byte Section5Start, Section5Size
+	.4byte text_start + 1, text_size # +1 is for bit 32, which marks the section as executable
+	.4byte ctors_start, ctors_size
+	.4byte dtors_start, dtors_size
+	.4byte rodata_start, rodata_size
+	.4byte data_start, data_size
 	.4byte 0, 0x78b0 # Size of .bss
 	.space 80
 

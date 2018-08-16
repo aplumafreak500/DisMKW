@@ -1,6 +1,40 @@
 OUTPUT_ARCH(powerpc)
 
-Text0Size = Text0End - Text0Start;
+init_size = init_end - init_start;
+extab_size = extab_end - extab_start;
+extab_index_size = extab_index_end - extab_index_start;
+text_size = text_end - text_start;
+ctors_size = ctors_end - ctors_start;
+dtors_size = dtors_end - dtors_start;
+rodata_size = rodata_end - rodata_start;
+data_size = data_end - data_start;
+bss_size = bss_end - bss_start;
+sdata_size = sdata_end - sdata_start;
+sbss_size = sbss_end - sbss_start;
+sdata2_size = sdata2_end - sdata2_start;
+sbss2_size = sbss2_end - sbss2_start;
+
+init_offset = init_start - 0x80003f00;
+text_offset = init_offset + init_size;
+extab_offset = text_offset + text_size;
+extab_index_offset = extab_offset + extab_size;
+ctors_offset = extab_index_offset + extab_index_size;
+dtors_offset = ctors_offset + ctors_size;
+rodata_offset = dtors_offset + dtors_size;
+data_offset = rodata_offset + rodata_size;
+sdata_offset = data_offset + data_size;
+sdata2_offset = sdata_offset + sdata_size;
+
+bssTotalSize = sbss2_end - bss_start; /* main.dol header */
+
+codehandler_size = codehandler_end - codehandler_start;
+gct_size = gct_end - gct_start;
+bad0text_size = bad0text_end - bad0text_start;
+bad0data_size = bad0data_end - bad0data_start;
+bad0text_offset = sdata2_offset + sdata2_size;
+bad0data_offset = bad0text_offset + bad0text_size;
+codehandler_offset = bad0data_offset + bad0data_size;
+gct_offset = codehandler_offset + codehandler_size;
 
 SECTIONS
 {
@@ -10,103 +44,134 @@ SECTIONS
 		DolphinGlobals.o(.bss);
 	}
 	/* Gecko */
-	.text3 :
+	.codehandler :
 	ALIGN(4) {
-		text3.o(.text);
+		codehandler_start = .;
+		gecko_codehandler.o(.text);
+		codehandler_end = .;
 	}
-	.data6 :
+	.gctdata :
 	ALIGN(4) {
-		data9.o(.data);
+		gct_start = .;
+		gct.o(.data);
+		gct_end = .;
 	}
 	. = 0x80003000;
 	DolphinGlobalsHigh :
 	ALIGN(4) {
 		DolphinGlobals2.o(.bss);
 	}
-	. += 0x48; /* Section offsets */
-	dol_header0 :
+	dol_header :
 	ALIGN(4) {
-		dolheader.o(.text1);
+		dolheader.o(.text);
 	}
-	. += 0x0; /* Needed to match */
-	.text0 :
+	/* . += 0x0; /* Needed to match */
+	.init :
 	ALIGN(4) {
-		Text0Start = .;
+		init_start = .;
 		TRK_Exception.o(.text);
 		memset.o(.text);
 		CheckGCPad4.o(.text);
 		crt.o(.text);
-		crt.o(.data);
-		Text0End = .;
+		init.o(.text);
+		init.o(.data);
+		init_end = .;
 	}
-	.data0 :
+	.extab :
 	ALIGN(4) {
-		data0.o(.data);
-		data1.o(.data);
+		extab_start = .;
+		extab.o(.data);
+		extab_end = .;
 	}
-	.text1 :
+	.extab_index :
 	ALIGN(4) {
-		text1.o(.text);
+		extab_index_start = .;
+		extabindex.o(.data);
+		extab_index_end = .;
 	}
-	.data1 :
+	.text :
 	ALIGN(4) {
-		data2.o(.data);
-		data3.o(.data);
+		text_start = .;
+		text.o(.text);
+		text_end = .;
+	}
+	.ctors :
+	ALIGN(4) {
+		ctors_start = .;
+		ctors.o(.data);
+		ctors_end = .;
+	}
+	.dtors :
+	ALIGN(4) {
+		dtors_start = .;
+		dtors.o(.data);
+		dtors_end = .;
 	}
 	. += 0x20; /* gap */
-	.data2 :
+	.rodata :
 	ALIGN(4) {
-		data4.o(.data);
-		data5.o(.data);
+		rodata_start = .;
+		rodata.o(.data);
+		rodata_end = .;
 	}
-	bss0Start = .;
-	.bss0 :
+	.data :
+	ALIGN(4) {
+		data_start = .;
+		data.o(.data);
+		data_end = .;
+	}
+	bss_start = .;
+	.bss :
 	ALIGN(4) {
 	}=0
 	/* CTGP-Code is loaded here */
 	. = 0x802a5000;
-	.text2 :
+	.bad0text :
 	ALIGN(4) {
-		text2.o(.text);
+		bad0text_start = .;
+		ctgp_bad0text.o(.text);
+		bad0text_end = .;
 	}
 	. = 0x802a8000;
-	.data5 :
+	.bad0data :
 	ALIGN(4) {
-		data8.o(.data);
+		bad0data_start = .;
+		ctgp_bad0data.o(.data);
+		bad0data_end = .;
 	}
 	.bss1 :
 	ALIGN(4) {
 	} = 0
 	. = 0x80380870;
-	bss0End = .;
-	bss0Size = bss0End - bss0Start;
+	bss_end = .;
 	. += 0x10; /* gap */
 	/* D6 and D7 overlap .bss, maybe default heap? */
-	.data3 :
+	.sdata :
 	ALIGN(4) {
-		data6.o(.data);
+		sdata_start = .;
+		sdata.o(.data);
+		sdata_end = .;
 	}
-	bss1Start = .;
-	.bss2 :
+	sbss_start = .;
+	.sbss :
 	ALIGN(4) {
 		. = 0xfcc;
 	}=0
-	bss1End = .;
-	bss1Size = bss1End - bss1Start;
+	sbss_end = .;
 	. += 0x14; /* gap */
-	.data4 :
+	.sdata2 :
 	ALIGN(4) {
-		data7.o(.data);
+		sdata2_start = .;
+		sdata2.o(.data);
+		sdata2_end = .;
 	}
-	bss2Start = .;
-	.bss3 :
+	sbss2_start = .;
+	.sbss2 :
 	ALIGN(4) {
 		. = 0x3c;
 	}=0
-	bss2End = .;
-	bss2Size = bss2End - bss2Start;
-	DolMemEnd = .;
-	bssTotalSize = DolMemEnd - bss0Start; /* main.dol header */
+	sbss2_end = .;
+	bssTotalSize = sbss2_end - bss_start; /* main.dol header */
 
     /* Discard everything not specifically mentioned above. */
     /DISCARD/ :

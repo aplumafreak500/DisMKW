@@ -1,8 +1,4 @@
 	.data
-	.global Data8Size
-	.set Data8Size, Data8End - Data8Start
-	.global Data8Start
-Data8Start:
 	.ifdef CTGP_CODE
 	.4byte 0xbad0da7a
 	.int Data8End - Data8Start      #length
@@ -75,5 +71,3 @@ mod0_end:
 	.4byte 0
 	.2byte 0
 	.endif
-	.global Data8End
-Data8End:
