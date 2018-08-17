@@ -1,15 +1,16 @@
 	.data
 	.ifdef CTGP_CODE
+bad0data_header:
 	.4byte 0xbad0da7a
-	.int Data8End - Data8Start      #length
+	.int bad0data_size              #length
 	.int 0                          #version
 	.int 1                          #section count
-	.int Data8Start                 #bad0data address
+	.int bad0data_start             #bad0data address
 	.int 0                          #padding
 	.int 0                          #padding
 	.int 0                          #padding
 	#Write contents
-	.int mod0Header-Data8Start
+	.int mod0Header-bad0data_header
 	.ascii "MOD0"
 	.space 24
 mod0Header:

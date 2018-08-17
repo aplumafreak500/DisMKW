@@ -1,5 +1,5 @@
 # DisMKW
-pret-style disassembly of Mario Kart Wii, done using Radare2.
+pret-style disassembly of Mario Kart Wii.
 
 This is a work in progress and far from production-ready.
 
@@ -94,20 +94,23 @@ make
 	- [ ] Reloc
 	- [ ] Reloc (main.dol)
 - [ ] Partiton 0 Apploader.img
-	 - [ ] T0
-	 - [ ] T1
-	 - [ ] D0
-	 - [ ] D1
+	 - [ ] .text
+	 - [ ] .data
+	 - [ ] .loader
+		 - [ ] .text
+		 - [ ] .data
 - [ ] Partition 1 Apploader.img
-	 - [ ] T0
-	 - [ ] T1
-	 - [ ] D0
-	 - [ ] D1
+	 - [ ] .text
+	 - [ ] .data
+	 - [ ] .loader
+		 - [ ] .text
+		 - [ ] .data
 - [ ] Partition 2 Apploader.img
-	 - [ ] T0
-	 - [ ] T1
-	 - [ ] D0
-	 - [ ] D1
+	 - [ ] .text
+	 - [ ] .data
+	 - [ ] .loader
+		 - [ ] .text
+		 - [ ] .data
 - [x] Partition 0 main.dol
 - [ ] Partition 2 main.dol
 	 - [ ] .text

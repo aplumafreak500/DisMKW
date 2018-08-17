@@ -14,7 +14,7 @@ sbss_size = sbss_end - sbss_start;
 sdata2_size = sdata2_end - sdata2_start;
 sbss2_size = sbss2_end - sbss2_start;
 
-init_offset = init_start - 0x80003f00;
+init_offset = init_start - DolHeader;
 text_offset = init_offset + init_size;
 extab_offset = text_offset + text_size;
 extab_index_offset = extab_offset + extab_size;
@@ -65,7 +65,6 @@ SECTIONS
 	ALIGN(4) {
 		dolheader.o(.text);
 	}
-	/* . += 0x0; /* Needed to match */
 	.init :
 	ALIGN(4) {
 		init_start = .;
@@ -141,7 +140,7 @@ SECTIONS
 	}
 	.bss1 :
 	ALIGN(4) {
-	} = 0
+	}=0
 	. = 0x80380870;
 	bss_end = .;
 	. += 0x10; /* gap */
@@ -152,12 +151,12 @@ SECTIONS
 		sdata.o(.data);
 		sdata_end = .;
 	}
-	sbss_start = .;
 	.sbss :
 	ALIGN(4) {
+		sbss_start = .;
 		. = 0xfcc;
+		sbss_end = .;
 	}=0
-	sbss_end = .;
 	. += 0x14; /* gap */
 	.sdata2 :
 	ALIGN(4) {
@@ -165,12 +164,12 @@ SECTIONS
 		sdata2.o(.data);
 		sdata2_end = .;
 	}
-	sbss2_start = .;
 	.sbss2 :
 	ALIGN(4) {
+		sbss2_start = .;
 		. = 0x3c;
+		sbss2_end = .;
 	}=0
-	sbss2_end = .;
 
     /* Discard everything not specifically mentioned above. */
     /DISCARD/ :

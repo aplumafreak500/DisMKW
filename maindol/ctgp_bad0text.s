@@ -2,12 +2,13 @@
 # for the disassembly.
 	.text
 	.ifdef CTGP_CODE
+bad0text_header:
 	.int 0xbad0c0de	        #tag
-	.int Text2Size          #length
+	.int bad0text_size      #length
 	.int 0                  #version
 	.int CTCode_Entrypoint  #entry point
-	.int Text2Start	        #address
-	.int Data8Start	        #bad0Data address
+	.int bad0text_start     #address
+	.int bad0data_start     #bad0Data address
 	.int 0	                #pad
 	.int 0	                #pad
 	.global CTCode_Entrypoint
@@ -243,7 +244,7 @@ _methodMain:
 	bl _methodMainLocationGet
 _methodMainLocationGet:
 	mflr %r12
-	subi %r3,%r12,_methodMainLocationGet - Text2Start
+	subi %r3,%r12,_methodMainLocationGet - bad0text_header
 	#call loadBad0Code
 	bl _methodLoadBad0Code
 	bl _methodCheckCanProceed
