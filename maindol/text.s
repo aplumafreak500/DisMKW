@@ -10,9 +10,9 @@ sub_0: # 0x800072c0
 	stw %r28, 0x10(%r1)
 	mr %r28, %r3
 	bl sub_2336cc
-	lis %r3, 0x8026
+	lis %r3, gUnknown_10058@h
 	addi %r30, %r28, 0x3c
-	subi %r3, %r3, 0x7d48
+	addi %r3, %r3, gUnknown_10058@l
 	stw %r3, 0x0(%r28)
 	addi %r31, %r28, 0xc3c
 _38:
@@ -67,9 +67,9 @@ _bc:
 _e8:
 	li %r29, 0x0
 _ec:
-	lis %r4, 0x8026
+	lis %r4,gUnknown_10030@h
 	li %r0, 0x0
-	subi %r4, %r4, 0x7d70
+	addi %r4, %r4, gUnknown_10030@l
 	stw %r30, 0x30(%r28)
 	mr %r3, %r28
 	stw %r31, 0x34(%r28)
