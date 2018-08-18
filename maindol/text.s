@@ -86,30 +86,33 @@ _ec:
 	blr
 
 	.global sub_130
-sub_130:
+sub_130: # 0x800073f0
 	stwu %r1, -0x10(%r1)
 	mflr %r0
-	cmpwi %r3, 0
+	cmpwi %r3, 0x0
 	stw %r0, 0x14(%r1)
 	stw %r31, 0xc(%r1)
 	mr %r31, %r4
-	stw %r30, 8(%r1)
+	stw %r30, 0x8(%r1)
 	mr %r30, %r3
-	beq _16c
-	li %r4, 0
-	bl _233740
-	cmpwi %r31, 0
-	ble _16c
+	beq- _16c
+	li %r4, 0x0
+	bl sub_233740
+	cmpwi %r31, 0x0
+	ble- _16c
 	mr %r3, %r30
-	bl t1_2227d0
+	bl sub_2227d0
 _16c:
 	mr %r3, %r30
 	lwz %r31, 0xc(%r1)
-	lwz %r30, 8(%r1)
+	lwz %r30, 0x8(%r1)
 	lwz %r0, 0x14(%r1)
 	mtlr %r0
 	addi %r1, %r1, 0x10
 	blr
+	
+	.global t1_188
+t1_188:
 	stwu %r1, -0x10(%r1)
 	mflr %r0
 	cmpwi %r3, 0
@@ -330,7 +333,45 @@ _a7c58:
 
 	.global t1_a7c90
 t1_a7c90:
-	.incbin "basemain.dol", 0xaa1f0, 0x190
+	.incbin "basemain.dol", 0xaa1f0, 0x120
+	
+	.global sub_a7db0
+sub_a7db0: # 0x800af070
+	lhz %r0, 0xa(%r3)
+	add %r6, %r4, %r0
+	lwzx %r4, %r4, %r0
+	cmpwi %r4, 0x0
+	bne- _a7dd0
+	lwz %r0, 0x4(%r6)
+	stw %r0, 0x0(%r3)
+	b _a7ddc
+_a7dd0:
+	add %r4, %r4, %r0
+	lwz %r0, 0x4(%r6)
+	stw %r0, 0x4(%r4)
+_a7ddc:
+	lwz %r5, 0x4(%r6)
+	cmpwi %r5, 0x0
+	bne- _a7df4
+	lwz %r0, 0x0(%r6)
+	stw %r0, 0x4(%r3)
+	b _a7e00
+_a7df4:
+	lhz %r0, 0xa(%r3)
+	lwz %r4, 0x0(%r6)
+	stwx %r4, %r5, %r0
+_a7e00:
+	li %r0, 0x0
+	stw %r0, 0x0(%r6)
+	stw %r0, 0x4(%r6)
+	lhz %r4, 0x8(%r3)
+	subi %r0, %r4, 0x1
+	sth %r0, 0x8(%r3)
+	blr
+	
+	.global t1_a7e1c
+t1_a7e1c:
+	.incbin "basemain.dol", 0xaa37c, 0x4
 
 	.global sub_a7e20
 sub_a7e20: # 0x800af0e0
@@ -1459,9 +1500,43 @@ _212dcc:
 	addi %r1, %r1, 0x10
 	blr
 	
-	.global t1_212de4
-t1_212de4:
-	.incbin "basemain.dol", 0x215344, 0xc9a8
+	.global sub_212de4
+sub_212de4: # 0x8021a0a4
+	stwu %r1, -0x10(%r1)
+	mflr %r0
+	cmpwi %r3, 0x0
+	stw %r0, 0x14(%r1)
+	stw %r31, 0xc(%r1)
+	mr %r31, %r4
+	stw %r30, 0x8(%r1)
+	mr %r30, %r3
+	beq- _212e3c
+	lwz %r5, 0x4(%r3)
+	lis %r4, 0x802a
+	subi %r4, %r4, 0x17f8
+	stw %r4, 0x0(%r3)
+	cmpwi %r5, 0x0
+	beq- _212e2c
+	mr %r4, %r30
+	addi %r3, %r5, 0x28
+	bl sub_a7db0
+_212e2c:
+	cmpwi %r31, 0x0
+	ble- _212e3c
+	mr %r3, %r30
+	bl sub_2227d0
+_212e3c:
+	mr %r3, %r30
+	lwz %r31, 0xc(%r1)
+	lwz %r30, 0x8(%r1)
+	lwz %r0, 0x14(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x10
+	blr
+	
+	.global t1_212e58
+t1_212e58:
+	.incbin "basemain.dol", 0x2153b8, 0xc934
 
 	.global sub_21f78c
 sub_21f78c: # 0x80226a4c
@@ -1577,9 +1652,67 @@ _222520:
 t1_222540:
 	.incbin "basemain.dol", 0x224aa0, 0x290
 
-	.global t1_2227d0
-t1_2227d0: # branch_to_mod2_addr: 0x233bec
-	.incbin "basemain.dol", 0x224d30, 0x10efc
+	.global sub_2227d0
+sub_2227d0: # 0x80229a90
+	stwu %r1, -0x20(%r1)
+	mflr %r0
+	stw %r0, 0x24(%r1)
+	stw %r31, 0x1c(%r1)
+	stw %r30, 0x18(%r1)
+	stw %r29, 0x14(%r1)
+	stw %r28, 0x10(%r1)
+	mr %r28, %r3
+	bl sub_1912f8
+	cmpwi %r3, 0x0
+	mr %r30, %r3
+	beq- _22287c
+	lis %r3, 0x8038
+	li %r29, 0x0
+	subi %r3, %r3, 0x50
+	bl sub_1a0b84
+	lwz %r0, -0x5d5c(%r13)
+	cmpwi %r0, 0x0
+	beq- _222850
+	li %r4, 0x0
+	lis %r31, 0x8038
+	b _22283c
+_222828:
+	lwz %r0, 0x10(%r3)
+	cmplw %r0, %r30
+	bne- _22283c
+	mr %r29, %r4
+	b _222850
+_22283c:
+	subi %r3, %r31, 0x60
+	bl sub_a7e20
+	cmpwi %r3, 0x0
+	mr %r4, %r3
+	bne+ _222828
+_222850:
+	lis %r3, 0x8038
+	subi %r3, %r3, 0x50
+	bl sub_1a0c60
+	cmpwi %r29, 0x0
+	beq- _22287c
+	lwz %r12, 0x0(%r29)
+	mr %r3, %r29
+	mr %r4, %r28
+	lwz %r12, 0x18(%r12)
+	mtctr %r12
+	bctrl 
+_22287c:
+	lwz %r0, 0x24(%r1)
+	lwz %r31, 0x1c(%r1)
+	lwz %r30, 0x18(%r1)
+	lwz %r29, 0x14(%r1)
+	lwz %r28, 0x10(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x20
+	blr
+	
+	.global t1_22289c
+t1_22289c:
+	.incbin "basemain.dol", 0x224dfc, 0x10e30
 
 	.global sub_2336cc
 sub_2336cc: # 0x8023a98c
@@ -1612,7 +1745,34 @@ sub_2336cc: # 0x8023a98c
 	mtlr %r0
 	addi %r1, %r1, 0x10
 	blr
-_233740:
-	.global t1_233740
-t1_233740:
-	.incbin "basemain.dol", 0x235ca0, 0xa340
+
+	.global sub_233740
+sub_233740: # 0x8023aa00
+	stwu %r1, -0x10(%r1)
+	mflr %r0
+	cmpwi %r3, 0x0
+	stw %r0, 0x14(%r1)
+	stw %r31, 0xc(%r1)
+	mr %r31, %r4
+	stw %r30, 0x8(%r1)
+	mr %r30, %r3
+	beq- _23377c
+	li %r4, 0x0
+	bl sub_212de4
+	cmpwi %r31, 0x0
+	ble- _23377c
+	mr %r3, %r30
+	bl sub_2227d0
+_23377c:
+	mr %r3, %r30
+	lwz %r31, 0xc(%r1)
+	lwz %r30, 0x8(%r1)
+	lwz %r0, 0x14(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x10
+	blr
+	
+	.global t1_233798
+t1_233798:
+	.incbin "basemain.dol", 0x235cf8, 0xa2e8
+
