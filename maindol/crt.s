@@ -52,7 +52,7 @@ _210c:
 	bl sub_2090
 	b _2148
 _2138:
-	lis %r6, t1_2452c@h
+	lis %r6, t1_2452c@h # InitMetroTRK
 	addi %r6, %r6, t1_2452c@l
 	mtlr %r6
 	blrl
@@ -90,8 +90,8 @@ _21b8:
 	li %r14, 0
 	li %r15, 0
 _21c0:
-	bl t1_155fb4
-	bl t1_198908
+	bl t1_155fb4 # DBInit
+	bl t1_198908 # OSInit
 	lis %r4, GCNPort4DebugState@h
 	addi %r4, %r4, GCNPort4DebugState@l+2
 	lhz %r3, 0(%r4)
@@ -111,5 +111,5 @@ _21fc:
 	bl t1_1a71c4
 	mr %r3, %r14
 	mr %r4, %r15
-	bl t1_4350
-	b t1_1a722c
+	bl t1_4350 # main
+	b t1_1a722c # exit

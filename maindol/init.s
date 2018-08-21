@@ -97,8 +97,8 @@ InitHardware:
 	ori %r0, %r0, 0x2000
 	mtmsr %r0
 	mflr %r31
-	bl t1_199140
-	bl t1_197e48
+	bl t1_199140 # __OSPSInit
+	bl t1_197e48 # __OSCacheInit
 	bl t1_19a784
 	mtlr %r31
 	blr
