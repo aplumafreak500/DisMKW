@@ -1,10 +1,10 @@
 OUTPUT_ARCH(powerpc)
 SECTIONS
 {
-	dol_header :
+	.header :
 	ALIGN(4)
 	{
-		main_pre.elf(dol_header);
+		main_pre.elf(.header);
 	}
 	.text :
 	ALIGN(4)

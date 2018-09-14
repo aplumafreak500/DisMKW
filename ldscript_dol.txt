@@ -1,4 +1,5 @@
 OUTPUT_ARCH(powerpc)
+/* ENTRY(dol_entrypoint) */
 
 init_size = init_end - init_start;
 extab_size = extab_end - extab_start;
@@ -14,7 +15,7 @@ sbss_size = sbss_end - sbss_start;
 sdata2_size = sdata2_end - sdata2_start;
 sbss2_size = sbss2_end - sbss2_start;
 
-init_offset = init_start - DolHeader;
+init_offset = init_start - 0x80003f00;
 text_offset = init_offset + init_size;
 extab_offset = text_offset + text_size;
 extab_index_offset = extab_offset + extab_size;
@@ -38,8 +39,12 @@ gct_offset = codehandler_offset + codehandler_size;
 
 SECTIONS
 {
+	.header :
+	ALIGN(4) {
+		dolheader.o(.text);
+	}
 	. = 0x80000000;
-	DolphinGlobalsLow :
+	.globalsLow :
 	ALIGN(4) {
 		DolphinGlobals.o(.bss);
 	}
@@ -57,13 +62,9 @@ SECTIONS
 		gct_end = .;
 	}
 	. = 0x80003000;
-	DolphinGlobalsHigh :
+	.globalsHigh :
 	ALIGN(4) {
 		DolphinGlobals2.o(.bss);
-	}
-	dol_header :
-	ALIGN(4) {
-		dolheader.o(.text);
 	}
 	.init :
 	ALIGN(4) {
