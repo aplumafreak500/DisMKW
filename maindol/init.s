@@ -30,9 +30,8 @@ InitRegs:
 	li %r29, 0
 	li %r30, 0
 	li %r31, 0
-	# Outside of dol memory map, why?
 	lis %r1, sbss2_end@h+0x10000
-	ori %r1, %r1, sbss2_end@l+4 # 0x80394e00
+	ori %r1, %r1, sbss2_end@l+4 # 0x80394e00, offset to the default/initial heap
 	# These are different in European version
 	lis %r2, sbss2_end@h
 	ori %r2, %r2, sbss2_end@l+0x5e24 # 0x8038ac20
