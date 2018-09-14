@@ -65,6 +65,7 @@ SECTIONS
 	.bss :
 	ALIGN(4)
 	{
+		. += 0x78b0;
 	} = 0
 
     /* Discard everything not specifically mentioned above. */
