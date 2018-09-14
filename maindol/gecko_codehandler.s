@@ -742,10 +742,8 @@ resumegame:
 	lwz	r0,8(r1)		# loads r0
 	addi	r1,r1,168
 	isync
-        blr				# return back to game
-	.else
-        blr
-        .endif
+	.endif
+	blr				# return back to game
 _readcodes:
 	lwz	r3,0(r15)		#load code address
 	lwz	r4,4(r15)		#load code value
