@@ -25,12 +25,15 @@ StaticRRel:
 	.4byte 0x3ccd2c # FixSize, unknown
 	.global gSectionTable
 gSectionTable:
-	.4byte 0, 0
+	.4byte 0, 0 # .init?
 	.4byte text_start + 1, text_size # +1 is for bit 32, which marks the section as executable
 	.4byte ctors_start, ctors_size
 	.4byte dtors_start, dtors_size
 	.4byte rodata_start, rodata_size
 	.4byte data_start, data_size
 	.4byte 0, 0x78b0 # Size of .bss
+	# .sdata, .sbss, .sdata2, .sbss2 all 0
+	# .extab, .extab_index absent
+	# 4 more sections according to header
 	.space 80
 
