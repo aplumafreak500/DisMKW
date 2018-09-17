@@ -5,7 +5,7 @@ init_text = ADDR(.header) + SIZEOF(.header);
 init_data = ADDR(.text) + + SIZEOF(.text);
 loader = ADDR(.data) +  + SIZEOF(.data);
 SECTIONS {
-	.header 0x80120000 :
+	.header 0x81200000 :
 	ALIGN(4) {
 		header.o(.data);
 	}
