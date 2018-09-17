@@ -47,11 +47,9 @@ DOL0_LDSCRIPT := $(BUILD_DIR)/maindol-update/ld_script.ld
 APL1_ELF     := $(APL1:.img=.elf)
 APL1_MAP      = $(APL1).map
 APL1_LDSCRIPT:= $(BUILD_DIR)/apploader/ld_script.ld
-DOL1_ELF      := $(DOL1:.dol=_pre.elf)
+DOL1_ELF      := $(DOL1:.dol=.elf)
 DOL1_MAP      := $(DOL1).map
 DOL1_LDSCRIPT := $(BUILD_DIR)/maindol/ld_script.ld
-DOL1_ELF2      := $(DOL1:.dol=.elf)
-DOL1_MAP2      := $(DOL1:.dol=_out.dol).map
 REL_ELF      := $(REL:.rel=.elf)
 REL_MAP      := $(REL).map
 REL_LDSCRIPT := $(BUILD_DIR)/staticr/ld_script.ld
@@ -118,7 +116,7 @@ $(shell mkdir -p $(SUBDIRS))
 # Get rid of the idiotic built-in rules
 .SUFFIXES:
 
-.PHONY: all clean compare
+.PHONY: all clean compare main dol dol0 dol1 dol2 staticr rel appldr appldr0 appldr1 appldr2 upd mkw chan mkc
 
 all: $(DOL1) $(REL)
 
@@ -126,7 +124,7 @@ compare: $(APL0) $(DOL0) $(APL1) $(DOL1) $(REL) $(DOL2) $(DOLC)
 	sha1sum -c sha1sums.txt
 
 clean:
-	$(RM) $(APL0) $(APL0_ELF) $(APL0_MAP) $(APL0_LDSCRIPT) $(DOL0) $(DOL0_ELF) $(DOL0_MAP) $(DOL0_LDSCRIPT) $(APL1) $(APL1_ELF) $(APL1_MAP) $(APL1_LDSCRIPT) $(DOL1) $(DOL1_ELF) $(DOL1_MAP) $(DOL1_LDSCRIPT) $(DOL1_ELF2) $(DOL1_MAP2) $(REL) $(REL_ELF) $(REL_MAP) $(REL_LDSCRIPT) $(DOL2) $(DOL2_ELF) $(DOL2_MAP) $(DOL2_LDSCRIPT) $(DOLC) $(DOLC_ELF) $(DOLC_MAP) $(DOLC_LDSCRIPT) $(ALL_OBJECTS)
+	$(RM) $(APL0) $(APL0_ELF) $(APL0_MAP) $(APL0_LDSCRIPT) $(DOL0) $(DOL0_ELF) $(DOL0_MAP) $(DOL0_LDSCRIPT) $(APL1) $(APL1_ELF) $(APL1_MAP) $(APL1_LDSCRIPT) $(DOL1) $(DOL1_ELF) $(DOL1_MAP) $(DOL1_LDSCRIPT) $(REL) $(REL_ELF) $(REL_MAP) $(REL_LDSCRIPT) $(DOL2) $(DOL2_ELF) $(DOL2_MAP) $(DOL2_LDSCRIPT) $(DOLC) $(DOLC_ELF) $(DOLC_MAP) $(DOLC_LDSCRIPT) $(ALL_OBJECTS)
 	
 #### Recipes ####
 
@@ -163,10 +161,7 @@ $(DOL1_LDSCRIPT): ldscript_dol.txt
 $(DOL1_ELF): $(DOL1_LDSCRIPT) $(DOL1_OFILES)
 	cd $(BUILD_DIR)/maindol && $(LD) -T ld_script.ld -Map ../../$(DOL1_MAP) -o ../../$@
 
-$(DOL1_ELF2): ldscript_dol_output.txt $(DOL1_ELF)
-	$(LD) -T ldscript_dol_output.txt -Map $(DOL1_MAP2) -o $@
-
-$(DOL1): $(DOL1_ELF2)
+$(DOL1): $(DOL1_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
 $(REL_LDSCRIPT): ldscript_rel.txt
@@ -204,4 +199,22 @@ $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
+
+# Aliases
+
+main : $(DOL1)
+dol : $(DOL1)
+dol0 : $(DOL0)
+dol1 : $(DOL1)
+dol2 : $(DOL2)
+staticr : $(REL)
+rel : $(REL)
+appldr : $(APL1)
+appldr0 : $(APL0)
+appldr1 : $(APL1)
+appldr2 : $(APL1)
+upd : $(APL0) $(DOL0)
+mkw : $(APL1) $(DOL1) $(REL)
+chan : $(APL1) $(DOL2)
+mkc : $(DOLC)
 

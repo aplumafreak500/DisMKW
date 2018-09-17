@@ -1,4 +1,4 @@
-	.text
+	.data
 	.global DolHeader
 DolHeader:
 	.4byte init_offset

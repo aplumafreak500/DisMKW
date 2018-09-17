@@ -1,20 +1,20 @@
-	.text
+	.data
 	.global DolHeader
 DolHeader:
-	.4byte TextStart-DolHeader
+	.4byte text_offset
 	.space 24
-	.4byte DataStart-DolHeader
+	.4byte data_offset
 	.space 40
-	.4byte TextStart
+	.4byte text_start
 	.space 24
-	.4byte DataStart+0x40 # gap for .bss
+	.4byte data_start
 	.space 40
-	.4byte TextSize
+	.4byte text_size
 	.space 24
-	.4byte DataSize
+	.4byte data_size
 	.space 40
-	.4byte TextEnd+0x20
-	.4byte 4          # .bss size
-	.4byte TextStart
+	.4byte bss_start
+	.4byte bss_size
+	.4byte dol_entrypoint
 	.space 28
 

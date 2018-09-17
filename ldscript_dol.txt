@@ -1,6 +1,5 @@
 OUTPUT_ARCH(powerpc)
 /* ENTRY(dol_entrypoint) */
-
 init_size = init_end - init_start;
 extab_size = extab_end - extab_start;
 extab_index_size = extab_index_end - extab_index_start;
@@ -14,8 +13,7 @@ sdata_size = sdata_end - sdata_start;
 sbss_size = sbss_end - sbss_start;
 sdata2_size = sdata2_end - sdata2_start;
 sbss2_size = sbss2_end - sbss2_start;
-
-init_offset = init_start - 0x80003f00;
+init_offset = ADDR(.header) + SIZEOF(.header);
 text_offset = init_offset + init_size;
 extab_offset = text_offset + text_size;
 extab_index_offset = extab_offset + extab_size;
@@ -25,9 +23,7 @@ rodata_offset = dtors_offset + dtors_size;
 data_offset = rodata_offset + rodata_size;
 sdata_offset = data_offset + data_size;
 sdata2_offset = sdata_offset + sdata_size;
-
 bssTotalSize = sbss2_end - bss_start; /* main.dol header */
-
 codehandler_size = codehandler_end - codehandler_start;
 gct_size = gct_end - gct_start;
 bad0text_size = bad0text_end - bad0text_start;
@@ -36,37 +32,36 @@ bad0text_offset = sdata2_offset + sdata2_size;
 bad0data_offset = bad0text_offset + bad0text_size;
 codehandler_offset = bad0data_offset + bad0data_size;
 gct_offset = codehandler_offset + codehandler_size;
-
-SECTIONS
-{
+SECTIONS {
 	.header :
 	ALIGN(4) {
-		dolheader.o(.text);
+		dolheader.o(.data);
 	}
-	. = 0x80000000;
-	.globalsLow :
+	.globalsLow 0x80000000 (NOLOAD):
 	ALIGN(4) {
 		DolphinGlobals.o(.bss);
-	}
+	} = 0
 	/* Gecko */
-	.codehandler :
+	.codehandler 0x80001800 :
+	AT(codehandler_offset)
 	ALIGN(4) {
 		codehandler_start = .;
 		gecko_codehandler.o(.text);
 		codehandler_end = .;
 	}
 	.gctdata :
+	AT(gct_offset)
 	ALIGN(4) {
 		gct_start = .;
 		gct.o(.data);
 		gct_end = .;
 	}
-	. = 0x80003000;
-	.globalsHigh :
+	.globalsHigh 0x80003000 (NOLOAD):
 	ALIGN(4) {
 		DolphinGlobals2.o(.bss);
-	}
-	.init :
+	} = 0
+	.init 0x80004000 :
+	AT(init_offset)
 	ALIGN(4) {
 		init_start = .;
 		TRK_Exception.o(.text);
@@ -77,105 +72,104 @@ SECTIONS
 		init.o(.data);
 		init_end = .;
 	}
-	.extab :
+	.text extab_index_end :
+	AT(text_offset)
+	ALIGN(4) {
+		text_start = .;
+		text.o(.text);
+		text_end = .;
+	}
+	.extab (0x80004000 + init_size) :
+	AT(extab_offset)
 	ALIGN(4) {
 		extab_start = .;
 		extab.o(.data);
 		extab_end = .;
 	}
 	.extab_index :
+	AT(extab_index_offset)
 	ALIGN(4) {
 		extab_index_start = .;
 		extabindex.o(.data);
 		extab_index_end = .;
 	}
-	.text :
-	ALIGN(4) {
-		text_start = .;
-		text.o(.text);
-		text_end = .;
-	}
-	.ctors :
+	.ctors text_end :
+	AT(ctors_offset)
 	ALIGN(4) {
 		ctors_start = .;
 		ctors.o(.data);
 		ctors_end = .;
 	}
 	.dtors :
+	AT(dtors_offset)
 	ALIGN(4) {
 		dtors_start = .;
 		dtors.o(.data);
 		dtors_end = .;
 	}
-	. += 0x20; /* gap */
-	.rodata :
+	.rodata (dtors_end + 0x20) :
+	AT(rodata_offset)
 	ALIGN(4) {
 		rodata_start = .;
 		rodata.o(.data);
 		rodata_end = .;
 	}
 	.data :
+	AT(data_offset)
 	ALIGN(4) {
 		data_start = .;
 		data.o(.data);
 		data_end = .;
 	}
-	bss_start = .;
-	.bss :
+	.bss data_end (NOLOAD) :
 	ALIGN(4) {
-	}=0
-	/* CTGP-Code is loaded here */
-	. = 0x802a5000;
-	.bad0text :
+		bss_start = .;
+		. += 0xe0b70;
+		bss_end = .;
+	} = 0
+	.bad0text 0x802a5000 :
+	AT(bad0text_offset)
 	ALIGN(4) {
 		bad0text_start = .;
 		ctgp_bad0text.o(.text);
 		bad0text_end = .;
 	}
-	. = 0x802a8000;
-	.bad0data :
+	.bad0data 0x802a8000 :
+	AT(bad0data_offset)
 	ALIGN(4) {
 		bad0data_start = .;
 		ctgp_bad0data.o(.data);
 		bad0data_end = .;
 	}
-	.bss1 :
-	ALIGN(4) {
-	}=0
-	. = 0x80380870;
-	bss_end = .;
-	. += 0x10; /* gap */
-	/* D6 and D7 overlap .bss, maybe default heap? */
-	.sdata :
+	.sdata (bss_end + 0x10) :
+	AT(sdata_offset)
 	ALIGN(4) {
 		sdata_start = .;
 		sdata.o(.data);
 		sdata_end = .;
 	}
-	.sbss :
+	.sbss sdata_end (NOLOAD) :
 	ALIGN(4) {
 		sbss_start = .;
 		. = 0xfcc;
 		sbss_end = .;
-	}=0
-	. += 0x14; /* gap */
-	.sdata2 :
+	} = 0
+	.sdata2 (sbss_end + 0x14) :
+	AT(sdata2_offset)
 	ALIGN(4) {
 		sdata2_start = .;
 		sdata2.o(.data);
 		sdata2_end = .;
 	}
-	.sbss2 :
+	.sbss2 sdata2_end (NOLOAD) :
 	ALIGN(4) {
 		sbss2_start = .;
 		. = 0x3c;
 		sbss2_end = .;
-	}=0
-
-    /* Discard everything not specifically mentioned above. */
-    /DISCARD/ :
-    {
-        *(*);
-    }
+	} = 0
+	/* Discard everything not specifically mentioned above. */
+	/DISCARD/ : {
+		*(*);
+	}
 }
 

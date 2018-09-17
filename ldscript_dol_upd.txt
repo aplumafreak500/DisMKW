@@ -1,27 +1,38 @@
 OUTPUT_ARCH(powerpc)
-SECTIONS
-{
-	. = 0x80003f00;
-	DolHeader :
-	ALIGN(4)
-	{
-		dolheader.o(.text);
+ENTRY(dol_entrypoint)
+text_size = text_end - text_start;
+data_size = data_end - data_start;
+bss_size = bss_end - bss_start;
+text_offset = ADDR(.header) + SIZEOF(.header);
+data_offset = text_offset + text_size;
+SECTIONS {
+	.header :
+	ALIGN(4) {
+		dolheader.o(.data);
 	}
-	.text :
-	ALIGN(4)
-	{
+	.text 0x80004000 :
+	AT(text_offset)
+	ALIGN(4) {
+		text_start = .;
 		text.o(.text);
+		text_end = .;
 	}
-	.data :
-	ALIGN(4)
-	{
+	.bss (text_end + 0x20) (NOLOAD) :
+	ALIGN(4) {
+		bss_start = .;
+		. += 4;
+		bss_end = .;
+	} = 0
+	.data (text_end + 0x40) :
+	AT(data_offset)
+	ALIGN(4) {
+		data_start = .;
 		data.o(.data);
+		data_end = .;
 	}
-
-    /* Discard everything not specifically mentioned above. */
-    /DISCARD/ :
-    {
-        *(*);
-    }
+	/* Discard everything not specifically mentioned above. */
+	/DISCARD/ : {
+		*(*);
+	}
 }
 

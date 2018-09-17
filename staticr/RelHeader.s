@@ -1,4 +1,4 @@
-	.text
+	.data
 	.global StaticRRel
 StaticRRel:
 	.4byte 1 # ID

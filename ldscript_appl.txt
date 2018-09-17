@@ -1,35 +1,38 @@
 OUTPUT_ARCH(powerpc)
 Section0Size = init_end - init_start;
 Section1Size = loader_end - loader_start;
+init_text = ADDR(.header) + SIZEOF(.header);
+init_data = ADDR(.text) + + SIZEOF(.text);
+loader = ADDR(.data) +  + SIZEOF(.data);
 SECTIONS {
-	. = 0x81200000;
-	.header :
+	.header 0x80120000 :
 	ALIGN(4) {
-		header.o(.text);
+		header.o(.data);
 	}
 	init_start = .;
 	.text :
+	AT(init_text)
 	ALIGN(4) {
 		text.o(.text);
 	} 
 	.data :
+	AT(init_data)
 	ALIGN(4) {
 		data.o(.data);
 	}
 	init_end = .;
-	.loader :
+	.loader : /* TODO: Has its own memory map; etc. */
+	AT(loader)
 	ALIGN(4) {
 		loader_start = .;
-		loader.dol.o(.data);
+		loader.dol.o(.text);
 		loader_end = .;
 	} 
-	.bss : /* Does apploader.img really use a .bss portion? */
+	.bss (NOLOAD) : /* Does apploader.img really use a .bss portion? */
 	ALIGN(4) {
-	}=0
-
-    /* Discard everything not specifically mentioned above. */
-    /DISCARD/ :
-    {
-        *(*);
-    }
+	} = 0
+	/* Discard everything not specifically mentioned above. */
+	/DISCARD/ : {
+		*(*);
+	}
 }

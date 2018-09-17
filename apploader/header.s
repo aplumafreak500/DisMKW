@@ -1,4 +1,4 @@
-	.text
+	.data
 	.global ApploaderHeader
 ApploaderHeader:
 	.ascii "2007/12/06" # Build date

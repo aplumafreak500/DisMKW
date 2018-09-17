@@ -1,77 +1,63 @@
 OUTPUT_ARCH(powerpc)
-
 text_size = text_end - text_start;
 ctors_size = ctors_end - ctors_start;
 dtors_size = dtors_end - dtors_start;
 rodata_size = rodata_end - rodata_start;
 data_size = data_end - data_start;
 ImpTableSize = ImpTableEnd - ImpTable;
-
-SECTIONS
-{
+SECTIONS {
 	.header :
-	ALIGN(4)
-	{
-		RelHeader.o(.text);
+	ALIGN(4) {
+		RelHeader.o(.data);
 	}
 	.text :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		text_start = .;
 		text.o(.text);
 		text_end = .;
 	}
 	.ctors :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		ctors_start = .;
 		ctors.o(.data);
 		ctors_end = .;
 	}
 	.dtors :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		dtors_start = .;
 		dtors.o(.data);
 		dtors_end = .;
 	}
 	.rodata :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		rodata_start = .;
 		rodata.o(.data);
 		rodata_end = .;
 	}
 	.data :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		data_start = .;
 		data.o(.data);
 		data_end = .;
 	}
 	.imp :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		ImpTable = .;
 		StaticImp.o(.data);
 		ImpTableEnd = .;
 	}
 	.reloc :
-	ALIGN(4)
-	{
+	ALIGN(4) {
 		RelocTable.o(.data);
 		RelocTableMainDol.o(.data);
 	}
-	.bss :
-	ALIGN(4)
-	{
+	.bss (NOLOAD) :
+	ALIGN(4) {
 		. += 0x78b0;
 	} = 0
-
-    /* Discard everything not specifically mentioned above. */
-    /DISCARD/ :
-    {
-        *(*);
-    }
+	/* Discard everything not specifically mentioned above. */
+	/DISCARD/ : {
+		*(*);
+	}
 }
 
