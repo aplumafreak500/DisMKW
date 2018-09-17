@@ -78,8 +78,8 @@ TooBigDataSectionStr:
 FailedAssertStr2:
 	.asciz "Failed assertion SecondTimeForThePart == TRUE"
 	.2byte 0
-	.global gUnknown_
-gUnknown_:
+	.global gUnknown_196c
+gUnknown_196c:
 	.4byte apl_658, apl_658, apl_698, apl_704
 	.4byte apl_8a0, apl_a78, apl_aa8, apl_d00
 	.4byte apl_e28, apl_f50, apl_fe4, apl_1054
