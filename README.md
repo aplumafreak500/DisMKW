@@ -72,14 +72,14 @@ make
 - [ ] Partiton 1 main.dol
 	- [x] T0
 	- [ ] T1
-		* Currently disassembled up to T1 0x400
+		* First incbin call at T1 0x400
 	- [ ] D0
 		* Currently disassembled up to D0 0x2c0
 	- [ ] D1
 	- [x] D2
 	- [x] D3
 	- [ ] D4
-		* Currently disassembled up to D4 0x6180 (first basedol call at D4 0x560)
+		* Currently disassembled up to D4 0x6180 (first incbin call at D4 0x560)
 	- [ ] D5
 	- [ ] D6
 	- [ ] D7
@@ -101,7 +101,7 @@ make
 		 - [ ] .data
 - [ ] Partition 1 Apploader.img
 	 - [ ] .text
-	 - [ ] .data
+	 - [x] .data
 	 - [ ] .loader
 		 - [ ] .text
 		 - [ ] .data
