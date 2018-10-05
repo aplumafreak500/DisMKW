@@ -1,4 +1,5 @@
 OUTPUT_ARCH(powerpc)
+ENTRY(apl_entrypoint)
 Section0Size = init_data_end - init_text_start;
 Section1Size = loader_end - loader_start;
 init_text = ADDR(.header) + SIZEOF(.header);
