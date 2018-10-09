@@ -80,10 +80,10 @@ FailedAssertStr2:
 	.2byte 0
 	.global gUnknown_196c
 gUnknown_196c:
-	.4byte apl_658, apl_658, apl_698, apl_704
-	.4byte apl_8a0, apl_a78, apl_aa8, apl_d00
-	.4byte apl_e28, apl_f50, apl_fe4, apl_1054
-	.4byte apl_10b8
+	.4byte sub_658, sub_658, sub_698, sub_704
+	.4byte sub_8a0, sub_a78, sub_aa8, sub_d00
+	.4byte sub_e28, sub_f50, sub_fe4, sub_1054
+	.4byte sub_10b8
 	
 	.space 412 # Black and gold, yo.
 

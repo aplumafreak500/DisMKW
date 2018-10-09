@@ -1,10 +1,37 @@
 OUTPUT_ARCH(powerpc)
 ENTRY(apl_entrypoint)
 Section0Size = init_data_end - init_text_start;
-Section1Size = loader_end - loader_start;
+Section1Size = (sdata2_end - init_start) + 0x100;
 init_text = ADDR(.header) + SIZEOF(.header);
 init_data = init_text + (init_text_end - init_text_start);
 loader = init_data + (init_data_end - init_data_start);
+
+/* loader.dol */
+init_size = init_end - init_start;
+extab_size = extab_end - extab_start;
+extab_index_size = extab_index_end - extab_index_start;
+text_size = text_end - text_start;
+ctors_size = ctors_end - ctors_start;
+dtors_size = dtors_end - dtors_start;
+rodata_size = rodata_end - rodata_start;
+data_size = data_end - data_start;
+bss_size = bss_end - bss_start;
+sdata_size = sdata_end - sdata_start;
+sbss_size = sbss_end - sbss_start;
+sdata2_size = sdata2_end - sdata2_start;
+sbss2_size = sbss2_end - sbss2_start;
+init_offset = 0x100;
+text_offset = init_offset + init_size;
+extab_offset = text_offset + text_size;
+extab_index_offset = extab_offset + extab_size;
+ctors_offset = extab_index_offset + extab_index_size;
+dtors_offset = ctors_offset + ctors_size;
+rodata_offset = dtors_offset + dtors_size;
+data_offset = rodata_offset + rodata_size;
+sdata_offset = data_offset + data_size;
+sdata2_offset = sdata_offset + sdata_size;
+bssTotalSize = sbss2_end - bss_start; /* main.dol header */
+
 SECTIONS {
 	.globalsLow 0x80000000 (NOLOAD):
 	ALIGN(4) {
@@ -14,7 +41,7 @@ SECTIONS {
 	ALIGN(4) {
 		../global/DolphinGlobals2.o(.bss);
 	} = 0
-	.header :
+	.header 0x0:
 	ALIGN(4) {
 		header.o(.data);
 	}
@@ -32,13 +59,99 @@ SECTIONS {
 		data.o(.data);
 		init_data_end = .;
 	}
-	.loader : /* TODO: Has its own memory map; etc. */
+	.loader.header 0x0:
 	AT(loader)
 	ALIGN(4) {
-		loader_start = .;
-		loader.dol.o(.text);
-		loader_end = .;
-	} 
+		loader/header.o(.data);
+	}
+	.loader.init 0x81330000:
+	AT(loader + init_offset)
+	ALIGN(4) {
+		init_start = .;
+		loader/init.o(.text);
+		init_end = .;
+	}
+	.loader.extab :
+	AT(loader + extab_offset)
+	ALIGN(4) {
+		extab_start = .;
+		loader/extab.o(.data);
+		extab_end = .;
+	}
+	.loader.extab_index :
+	AT(loader + extab_index_offset)
+	ALIGN(4) {
+		extab_index_start = .;
+		loader/extabindex.o(.data);
+		extab_index_end = .;
+	}
+	.loader.text :
+	AT(loader + text_offset)
+	ALIGN(4) {
+		text_start = .;
+		loader/text.o(.text);
+		text_end = .;
+	}
+	.loader.ctors :
+	AT(loader + ctors_offset)
+	ALIGN(4) {
+		ctors_start = .;
+		loader/ctors.o(.data);
+		ctors_end = .;
+	}
+	.loader.dtors :
+	AT(loader + dtors_offset)
+	ALIGN(4) {
+		dtors_start = .;
+		loader/dtors.o(.data);
+		dtors_end = .;
+	}
+	.loader.rodata :
+	AT(loader + rodata_offset)
+	ALIGN(4) {
+		rodata_start = .;
+		loader/rodata.o(.data);
+		rodata_end = .;
+	}
+	.loader.data :
+	AT(loader + data_offset)
+	ALIGN(4) {
+		data_start = .;
+		loader/data.o(.data);
+		data_end = .;
+	}
+	.loader.sdata :
+	AT(loader + sdata_offset)
+	ALIGN(4) {
+		sdata_start = .;
+		loader/sdata.o(.data);
+		sdata_end = .;
+	}
+	.loader.sdata2 :
+	AT(loader + sdata2_offset)
+	ALIGN(4) {
+		sdata2_start = .;
+		loader/sdata2.o(.data);
+		sdata2_end = .;
+	}
+	.loader.bss (NOLOAD) :
+	ALIGN(4) {
+		bss_start = .;
+		loader/bss.o(.bss);
+		bss_end = .;
+	} = 0
+	.loader.sbss (NOLOAD) :
+	ALIGN(4) {
+		sbss_start = .;
+		loader/sbss.o(.bss);
+		sbss_end = .;
+	} = 0
+	.loader.sbss2 (NOLOAD) :
+	ALIGN(4) {
+		sbss2_start = .;
+		loader/sbss2.o(.bss);
+		sbss2_end = .;
+	} = 0
 	.bss (NOLOAD) : /* Does apploader.img really use a .bss portion? */
 	ALIGN(4) {
 	} = 0

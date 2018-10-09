@@ -46,14 +46,14 @@ SECTIONS {
 	AT(codehandler_offset)
 	ALIGN(4) {
 		codehandler_start = .;
-		gecko_codehandler.o(.text);
+		../global/gecko_codehandler.o(.text);
 		codehandler_end = .;
 	}
 	.gctdata :
 	AT(gct_offset)
 	ALIGN(4) {
 		gct_start = .;
-		gct.o(.data);
+		../global/gct.o(.data);
 		gct_end = .;
 	}
 	.globalsHigh 0x80003000 (NOLOAD):
