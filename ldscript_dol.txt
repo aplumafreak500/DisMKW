@@ -39,7 +39,7 @@ SECTIONS {
 	}
 	.globalsLow 0x80000000 (NOLOAD):
 	ALIGN(4) {
-		DolphinGlobals.o(.bss);
+		../global/DolphinGlobals.o(.bss);
 	} = 0
 	/* Gecko */
 	.codehandler 0x80001800 :
@@ -58,7 +58,7 @@ SECTIONS {
 	}
 	.globalsHigh 0x80003000 (NOLOAD):
 	ALIGN(4) {
-		DolphinGlobals2.o(.bss);
+		../global/DolphinGlobals2.o(.bss);
 	} = 0
 	.init 0x80004000 :
 	AT(init_offset)

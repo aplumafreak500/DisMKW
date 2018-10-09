@@ -62,6 +62,8 @@ DOLC_LDSCRIPT := $(BUILD_DIR)/maindol-mkc/ld_script.ld
 
 # Source List
 
+GLBL_CSOURCES  := $(wildcard global/*.c)
+GLBL_ASMSOURCES  := $(wildcard global/*.s)
 APL0_CSOURCES  := $(wildcard apploader-update/*.c)
 APL0_ASMSOURCES  := $(wildcard apploader-update/*.s)
 APL0_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(APL0_CSOURCES:%.c=%.o))
@@ -92,6 +94,7 @@ DOLC_ASMOBJECTS   := $(addprefix $(BUILD_DIR)/, $(DOLC_ASMSOURCES:%.s=%.o))
 
 # All objects from each file
 
+GLBL_OFILES := $(GLBL_COBJECTS) $(GLBL_ASMOBJECTS)
 APL0_OFILES  := $(APL0_COBJECTS) $(APL0_ASMOBJECTS)
 DOL0_OFILES  := $(DOL0_ASMOBJECTS)
 APL1_OFILES  := $(APL1_COBJECTS) $(APL1_ASMOBJECTS)
@@ -102,8 +105,8 @@ DOLC_OFILES  := $(DOLC_COBJECTS) $(DOLC_ASMOBJECTS)
 
 # Combined lists of objects
 
-C_OBJECTS  := $(APL0_COBJECTS) $(APL1_COBJECTS) $(DOL1_COBJECTS) $(REL_COBJECTS) $(DOL2_COBJECTS) $(DOLC_COBJECTS)
-ASM_OBJECTS  := $(APL0_ASMOBJECTS) $(DOL0_ASMOBJECTS) $(APL1_ASMOBJECTS) $(DOL1_ASMOBJECTS) $(REL_ASMOBJECTS) $(DOL2_ASMOBJECTS) $(DOLC_ASMOBJECTS)
+C_OBJECTS  := $(GLBL_COBJECTS) $(APL0_COBJECTS) $(APL1_COBJECTS) $(DOL1_COBJECTS) $(REL_COBJECTS) $(DOL2_COBJECTS) $(DOLC_COBJECTS)
+ASM_OBJECTS  := $(GLBL_ASMOBJECTS) $(APL0_ASMOBJECTS) $(DOL0_ASMOBJECTS) $(APL1_ASMOBJECTS) $(DOL1_ASMOBJECTS) $(REL_ASMOBJECTS) $(DOL2_ASMOBJECTS) $(DOLC_ASMOBJECTS)
 
 ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
 
@@ -134,13 +137,13 @@ $(APL0_LDSCRIPT): ldscript_appl_update.txt
 $(APL0): $(APL0_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
-$(APL0_ELF): $(APL0_LDSCRIPT) $(APL0_OFILES)
+$(APL0_ELF): $(APL0_LDSCRIPT) $(GLBL_OFILES) $(APL0_OFILES)
 	cd $(BUILD_DIR)/apploader-update && $(LD) -T ld_script.ld -Map ../../$(APL0_MAP) -o ../../$@
 	
 $(DOL0_LDSCRIPT): ldscript_dol_upd.txt
 	cp ldscript_dol_upd.txt $(BUILD_DIR)/maindol-update/ld_script.ld
 	
-$(DOL0_ELF): $(DOL0_LDSCRIPT) $(DOL0_OFILES)
+$(DOL0_ELF): $(DOL0_LDSCRIPT) $(GLBL_OFILES) $(DOL0_OFILES)
 	cd $(BUILD_DIR)/maindol-update && $(LD) -T ld_script.ld -Map ../../$(DOL0_MAP) -o ../../$@
 
 $(DOL0): $(DOL0_ELF)
@@ -149,7 +152,7 @@ $(DOL0): $(DOL0_ELF)
 $(APL1_LDSCRIPT): ldscript_appl.txt
 	cp ldscript_appl.txt $(BUILD_DIR)/apploader/ld_script.ld
 	
-$(APL1_ELF): $(APL1_LDSCRIPT) $(APL1_OFILES)
+$(APL1_ELF): $(APL1_LDSCRIPT) $(GLBL_OFILES) $(APL1_OFILES)
 	cd $(BUILD_DIR)/apploader && $(LD) -T ld_script.ld -Map ../../$(APL1_MAP) -o ../../$@
 
 $(APL1): $(APL1_ELF)
@@ -158,7 +161,7 @@ $(APL1): $(APL1_ELF)
 $(DOL1_LDSCRIPT): ldscript_dol.txt
 	cp ldscript_dol.txt $(BUILD_DIR)/maindol/ld_script.ld
 
-$(DOL1_ELF): $(DOL1_LDSCRIPT) $(DOL1_OFILES)
+$(DOL1_ELF): $(DOL1_LDSCRIPT) $(GLBL_OFILES) $(DOL1_OFILES)
 	cd $(BUILD_DIR)/maindol && $(LD) -T ld_script.ld -Map ../../$(DOL1_MAP) -o ../../$@
 
 $(DOL1): $(DOL1_ELF)
@@ -167,7 +170,7 @@ $(DOL1): $(DOL1_ELF)
 $(REL_LDSCRIPT): ldscript_rel.txt
 	cp ldscript_rel.txt $(BUILD_DIR)/staticr/ld_script.ld
 	
-$(REL_ELF): $(REL_LDSCRIPT) $(REL_OFILES)
+$(REL_ELF): $(REL_LDSCRIPT) $(GLBL_OFILES) $(REL_OFILES)
 	cd $(BUILD_DIR)/staticr && $(LD) -T ld_script.ld -Map ../../$(REL_MAP) -o ../../$@
 
 $(REL): $(REL_ELF)
@@ -176,7 +179,7 @@ $(REL): $(REL_ELF)
 $(DOL2_LDSCRIPT): ldscript_dol_mkc_installer.txt
 	cp ldscript_dol_mkc_installer.txt $(BUILD_DIR)/maindol-mkc-installer/ld_script.ld
 
-$(DOL2_ELF): $(DOL2_LDSCRIPT) $(DOL2_OFILES)
+$(DOL2_ELF): $(DOL2_LDSCRIPT) $(GLBL_OFILES) $(DOL2_OFILES)
 	cd $(BUILD_DIR)/maindol-mkc-installer && $(LD) -T ld_script.ld -Map ../../$(DOL2_MAP) -o ../../$@
 
 $(DOL2): $(DOL2_ELF)
@@ -185,7 +188,7 @@ $(DOL2): $(DOL2_ELF)
 $(DOLC_LDSCRIPT): ldscript_dol_mkc.txt
 	cp ldscript_dol_mkc.txt $(BUILD_DIR)/maindol-mkc/ld_script.ld
 
-$(DOLC_ELF): $(DOLC_LDSCRIPT) $(DOLC_OFILES)
+$(DOLC_ELF): $(DOLC_LDSCRIPT) $(GLBL_OFILES) $(DOLC_OFILES)
 	cd $(BUILD_DIR)/maindol-mkc && $(LD) -T ld_script.ld -Map ../../$(DOLC_MAP) -o ../../$@
 
 $(DOLC): $(DOLC_ELF)

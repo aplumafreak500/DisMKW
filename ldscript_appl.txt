@@ -6,6 +6,14 @@ init_text = ADDR(.header) + SIZEOF(.header);
 init_data = init_text + (init_text_end - init_text_start);
 loader = init_data + (init_data_end - init_data_start);
 SECTIONS {
+	.globalsLow 0x80000000 (NOLOAD):
+	ALIGN(4) {
+		../global/DolphinGlobals.o(.bss);
+	} = 0
+	.globalsHigh 0x80003000 (NOLOAD):
+	ALIGN(4) {
+		../global/DolphinGlobals2.o(.bss);
+	} = 0
 	.header :
 	ALIGN(4) {
 		header.o(.data);
