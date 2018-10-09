@@ -64,6 +64,8 @@ DOLC_LDSCRIPT := $(BUILD_DIR)/maindol-mkc/ld_script.ld
 
 GLBL_CSOURCES  := $(wildcard global/*.c)
 GLBL_ASMSOURCES  := $(wildcard global/*.s)
+GLBL_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(GLPL_CSOURCES:%.c=%.o))
+GLBL_ASMOBJECTS   := $(addprefix $(BUILD_DIR)/, $(GLPL_ASMSOURCES:%.s=%.o))
 APL0_CSOURCES  := $(wildcard apploader-update/*.c)
 APL0_ASMSOURCES  := $(wildcard apploader-update/*.s)
 APL0_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(APL0_CSOURCES:%.c=%.o))
