@@ -100,7 +100,7 @@ make
 		 - [ ] .text
 		 - [ ] .data
 - [ ] Partition 1 Apploader.img
-	 - [ ] .text
+	 - [x] .text
 	 - [x] .data
 	 - [ ] .loader
 		 - [ ] .text
