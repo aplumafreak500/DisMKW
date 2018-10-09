@@ -72,14 +72,7 @@ SECTIONS {
 		init.o(.data);
 		init_end = .;
 	}
-	.text extab_index_end :
-	AT(text_offset)
-	ALIGN(4) {
-		text_start = .;
-		text.o(.text);
-		text_end = .;
-	}
-	.extab (0x80004000 + init_size) :
+	.extab :
 	AT(extab_offset)
 	ALIGN(4) {
 		extab_start = .;
@@ -93,7 +86,44 @@ SECTIONS {
 		extabindex.o(.data);
 		extab_index_end = .;
 	}
-	.ctors text_end :
+	.text :
+	AT(text_offset)
+	ALIGN(4) {
+		text_start = .;
+		text.o(.text);
+		. += 8;
+		text_1a940.o(.text);
+		. += 12;
+		text_1ad80.o(.text);
+		. += 4;
+		text_1ae60.o(.text);
+		. += 4;
+		text_1b310.o(.text);
+		. += 12;
+		text_1b750.o(.text);
+		. += 4;
+		text_1b7d0.o(.text);
+		. += 12;
+		text_1bb80.o(.text);
+		. += 8;
+		text_1bc60.o(.text);
+		. += 8;
+		text_1ea60.o(.text);
+		. += 4;
+		text_1eb10.o(.text);
+		. += 8;
+		text_44c10.o(.text);
+		. += 8;
+		text_44cf0.o(.text);
+		. += 4;
+		text_44d70.o(.text);
+		. += 8;
+		text_44de0.o(.text);
+		. += 8;
+		text_45180.o(.text);
+		text_end = .;
+	}
+	.ctors :
 	AT(ctors_offset)
 	ALIGN(4) {
 		ctors_start = .;
@@ -107,7 +137,8 @@ SECTIONS {
 		dtors.o(.data);
 		dtors_end = .;
 	}
-	.rodata (dtors_end + 0x20) :
+	. += 0x20;
+	.rodata :
 	AT(rodata_offset)
 	ALIGN(4) {
 		rodata_start = .;
@@ -121,10 +152,10 @@ SECTIONS {
 		data.o(.data);
 		data_end = .;
 	}
-	.bss data_end (NOLOAD) :
+	.bss (NOLOAD) :
 	ALIGN(4) {
 		bss_start = .;
-		. += 0xe0b70;
+		bss.o(.bss);
 		bss_end = .;
 	} = 0
 	.bad0text 0x802a5000 :
@@ -148,23 +179,24 @@ SECTIONS {
 		sdata.o(.data);
 		sdata_end = .;
 	}
-	.sbss sdata_end (NOLOAD) :
+	.sbss (NOLOAD) :
 	ALIGN(4) {
 		sbss_start = .;
-		. = 0xfcc;
+		sbss.o(.bss);
 		sbss_end = .;
 	} = 0
-	.sdata2 (sbss_end + 0x14) :
+	. += 0x14;
+	.sdata2 :
 	AT(sdata2_offset)
 	ALIGN(4) {
 		sdata2_start = .;
 		sdata2.o(.data);
 		sdata2_end = .;
 	}
-	.sbss2 sdata2_end (NOLOAD) :
+	.sbss2 (NOLOAD) :
 	ALIGN(4) {
 		sbss2_start = .;
-		. = 0x3c;
+		sbss2.o(.bss);
 		sbss2_end = .;
 	} = 0
 	/* Discard everything not specifically mentioned above. */
