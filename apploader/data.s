@@ -85,5 +85,11 @@ gUnknown_196c:
 	.4byte sub_e28, sub_f50, sub_fe4, sub_1054
 	.4byte sub_10b8
 	
-	.space 412 # Black and gold, yo.
+	.global gUnknown_19a0
+gUnknown_19a0:
+	.space 24
+	
+	.global gUnknown_19b8
+gUnknown_19b8:
+	.space 388
 

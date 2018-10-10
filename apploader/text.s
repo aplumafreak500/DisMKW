@@ -104,8 +104,8 @@ sub_104:
 	
 	.global sub_140
 sub_140:
-	lis %r10, 0x8120
-	addi %r10, %r10, 0x19a0
+	lis %r10, gUnknown_19a0@h
+	addi %r10, %r10, gUnknown_19a0@l
 	lwz %r0, 0x0(%r10)
 	cmpwi %r0, 0x0
 	beq- _180
@@ -149,8 +149,8 @@ _180:
 	
 	.global sub_1e4
 sub_1e4:
-	lis %r4, 0x8120
-	addi %r4, %r4, 0x0
+	lis %r4, sub_0@h
+	addi %r4, %r4, sub_0@l
 	lis %r5, 0x10
 	addi %r5, %r5, 0x0
 	clrrwi  %r6, %r4, 5
@@ -160,7 +160,7 @@ sub_1e4:
 	srwi  %r7, %r7, 5
 	mtctr %r7
 _20c:
-	icbi %r0, %r6
+	icbi 0, %r6
 	addi %r6, %r6, 0x20
 	bdnz+ _20c
 	sync
@@ -173,6 +173,8 @@ _20c:
 	.global sub_230
 sub_230: # 0x81200230
 	ori %r0, %r0, 0x0
+	.global sub_234
+sub_234:
 	mflr %r0
 	stwu %r1, -0x8(%r1)
 	stw %r0, 0xc(%r1)
@@ -188,8 +190,8 @@ sub_254:
 	stwu %r1, -0x8(%r1)
 	stw %r0, 0xc(%r1)
 	bl sub_600
-	lis %r5, 0x8133
-	subi %r5, %r5, 0x80
+	lis %r5, ldr_ff80@h
+	subi %r5, %r5, ldr_ff80@l
 	mtlr %r5
 	blr
 	
@@ -199,8 +201,8 @@ sub_274:
 	stwu %r1, -0x8(%r1)
 	stw %r0, 0xc(%r1)
 	bl sub_1118
-	lis %r5, 0x8133
-	subi %r5, %r5, 0x80
+	lis %r5, ldr_ff80@h
+	subi %r5, %r5, ldr_ff80@l
 	mtlr %r5
 	blr
 	
@@ -208,45 +210,45 @@ sub_274:
 apl_entrypoint:
 	stwu %r1, -0x20(%r1)
 	mflr %r0
-	lis %r8, 0x8120
-	lis %r7, 0x8120
+	lis %r8, sub_234@h
+	lis %r7, sub_254@h
 	stw %r0, 0x24(%r1)
-	lis %r6, 0x8120
-	addi %r8, %r8, 0x234
-	addi %r7, %r7, 0x254
+	lis %r6, sub_230@h
+	addi %r8, %r8, sub_234@l
+	addi %r7, %r7, sub_254@l
 	stw %r31, 0x1c(%r1)
-	addi %r6, %r6, 0x230
+	addi %r6, %r6, sub_230@l
 	stw %r30, 0x18(%r1)
-	lis %r30, 0x8120
-	addi %r30, %r30, 0x1e4
+	lis %r30, sub_1e4@h
+	addi %r30, %r30, sub_1e4@l
 	stw %r29, 0x14(%r1)
 	subf %r29, %r30, %r6
 	cmplwi %r29, 0x80
 	stw %r8, 0x0(%r3)
-	lis %r3, 0x8120
-	addi %r3, %r3, 0x274
+	lis %r3, sub_274@h
+	addi %r3, %r3, sub_274@l
 	stw %r7, 0x0(%r4)
 	stw %r3, 0x0(%r5)
 	ble- _30c
-	lis %r3, 0x8120
-	addi %r3, %r3, 0x12c0
+	lis %r3, FailedAssertStr@h
+	addi %r3, %r3, FailedAssertStr@l
 	crxor 6, 6, 6
-	lis %r4, 0x8120
-	lwz %r12, 0x19b8(%r4)
+	lis %r4, gUnknown_19b8@h
+	lwz %r12, gUnknown_19b8@l(%r4)
 	mtctr %r12
 	bctrl 
 	bl sub_1128
 _30c:
-	lis %r31, 0x8133
+	lis %r31, ldr_ff80@h
 	mr %r4, %r30
 	mr %r5, %r29
-	subi %r3, %r31, 0x80
+	addi %r3, %r31, ldr_ff80@l
 	bl sub_0
 	mr %r4, %r29
-	subi %r3, %r31, 0x80
+	addi %r3, %r31, ldr_ff80@l
 	bl sub_1198
 	mr %r4, %r29
-	subi %r3, %r31, 0x80
+	addi %r3, %r31, ldr_ff80@l
 	
 	.global sub_334
 sub_334:
@@ -267,11 +269,11 @@ sub_354:
 	li %r5, 0x20
 	stw %r0, 0x24(%r1)
 	stw %r31, 0x1c(%r1)
-	lis %r31, 0x8120
-	addi %r31, %r31, 0x19a0
+	lis %r31, gUnknown_19a0@h
+	addi %r31, %r31, gUnknown_19a0@l
 	stw %r30, 0x18(%r1)
-	lis %r30, 0x8120
-	addi %r30, %r30, 0x12c0
+	lis %r30, FailedAssertStr@h
+	addi %r30, %r30, FailedAssertStr@l
 	stw %r29, 0x14(%r1)
 	mr %r29, %r3
 	addi %r3, %r31, 0x20
@@ -302,9 +304,9 @@ sub_354:
 	mtctr %r12
 	bctrl 
 	li %r0, 0x80
-	lis %r3, 0x8000
-	stb %r0, 0x315dL(%r3)
-	lhz %r0, 0x315e(%r3)
+	lis %r3, EnableLegacyDI@h
+	stb %r0, EnableLegacyDI@l(%r3)
+	lhz %r0, DevkitBootProgramVersion@l(%r3)
 	cmplwi %r0, 0x107
 	bge- _420
 	addi %r3, %r30, 0x88
@@ -314,10 +316,10 @@ sub_354:
 	bctrl 
 _420:
 	lis %r0, 0x24
-	lis %r3, 0x8000
+	lis %r3, MinIOSVersion@h
 	ori %r0, %r0, 0x412
-	stw %r0, 0x3188(%r3)
-	lwz %r3, 0x18(%r3)
+	stw %r0, MinIOSVersion@l(%r3)
+	lwz %r3, DiscMagic@l(%r3)
 	addis %r0, %r3, 0xa2e4
 	cmplwi %r0, 0x9ea3
 	bne- _44c
@@ -1282,7 +1284,7 @@ sub_113c:
 	srwi  %r4, %r4, 5
 	mtctr %r4
 _1158:
-	dcbi %r0, %r3
+	dcbi 0, %r3
 	addi %r3, %r3, 0x20
 	bdnz+ _1158
 	blr
@@ -1297,7 +1299,7 @@ sub_1168:
 	srwi  %r4, %r4, 5
 	mtctr %r4
 _1184:
-	dcbf %r0, %r3
+	dcbf 0, %r3
 	addi %r3, %r3, 0x20
 	bdnz+ _1184
 	sc
@@ -1313,7 +1315,7 @@ sub_1198:
 	srwi  %r4, %r4, 5
 	mtctr %r4
 _11b4:
-	dcbst %r0, %r3
+	dcbst 0, %r3
 	addi %r3, %r3, 0x20
 	bdnz+ _11b4
 	sc
@@ -1329,7 +1331,7 @@ sub_11c8:
 	srwi  %r4, %r4, 5
 	mtctr %r4
 _11e4:
-	icbi %r0, %r3
+	icbi 0, %r3
 	addi %r3, %r3, 0x20
 	bdnz+ _11e4
 	sync
