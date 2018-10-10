@@ -1,4 +1,4 @@
-*.inc linguist-language=Unix\ Assembly
-*.s linguist-language=Unix\ Assembly
-*.txt linguist-language=Linker\ Script
+*.inc linguist-language=Assembly
+*.s linguist-language=Assembly
+*.txt linguist-language=Linker Script
 sha1sums.txt linguist-language=Text
