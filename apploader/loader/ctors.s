@@ -1,2 +1,3 @@
 	.data
-	.incbin "baseapploader.img", 0x1b5c + 0x27d80, 0x20
+	.4byte 0x81353de8
+	.space 28

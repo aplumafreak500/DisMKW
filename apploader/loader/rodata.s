@@ -1,6 +1,6 @@
 	.data
 	
-	# table of pointers
+	# table of pointers, all in .data
 	
 	.global gUnknown_0
 gUnknown_0:
