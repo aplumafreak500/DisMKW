@@ -172,15 +172,16 @@ _20c:
 	
 	.global sub_230
 sub_230: # 0x81200230
-	ori %r0, %r0, 0x0
+	nop # Why would you call something that does nothing? I don't understand.
+
 	.global sub_234
 sub_234:
 	mflr %r0
 	stwu %r1, -0x8(%r1)
 	stw %r0, 0xc(%r1)
 	bl sub_354
-	lis %r5, 0x8133
-	subi %r5, %r5, 0x80
+	lis %r5, ldr_ff80@h
+	addi %r5, %r5, ldr_ff80@l
 	mtlr %r5
 	blr
 	
@@ -191,7 +192,7 @@ sub_254:
 	stw %r0, 0xc(%r1)
 	bl sub_600
 	lis %r5, ldr_ff80@h
-	subi %r5, %r5, ldr_ff80@l
+	addi %r5, %r5, ldr_ff80@l
 	mtlr %r5
 	blr
 	
@@ -202,7 +203,7 @@ sub_274:
 	stw %r0, 0xc(%r1)
 	bl sub_1118
 	lis %r5, ldr_ff80@h
-	subi %r5, %r5, ldr_ff80@l
+	addi %r5, %r5, ldr_ff80@l
 	mtlr %r5
 	blr
 	
@@ -340,9 +341,9 @@ _454:
 	
 	.global sub_470
 sub_470:
-	lis %r4, 0x8120
+	lis %r4, gUnknown_19e0@h
 	li %r0, 0x7
-	addi %r6, %r4, 0x19e0
+	addi %r6, %r4, gUnknown_19e0@l
 	lis %r9, 0x8110
 	li %r4, 0x0
 	lis %r8, 0x8113
@@ -377,9 +378,9 @@ _4b8:
 _4f0:
 	addi %r4, %r4, 0x4
 	bdnz+ _48c
-	lis %r4, 0x8120
+	lis %r4, gUnknown_19e0@h
 	li %r0, 0xb
-	addi %r6, %r4, 0x19e0
+	addi %r6, %r4, gUnknown_19e0@l
 	lis %r9, 0x8110
 	li %r4, 0x0
 	lis %r8, 0x8113
@@ -414,9 +415,9 @@ _540:
 _578:
 	addi %r4, %r4, 0x4
 	bdnz+ _514
-	lis %r4, 0x8120
+	lis %r4, gUnknown_19e0@h
 	lis %r0, 0x8110
-	addi %r4, %r4, 0x19e0
+	addi %r4, %r4, gUnknown_19e0@l
 	lwz %r5, 0xd8(%r4)
 	lwz %r4, 0xdc(%r4)
 	cmplw %r5, %r0
@@ -428,9 +429,9 @@ _578:
 	li %r3, 0x1
 	blr
 _5b4:
-	lis %r5, 0x8120
+	lis %r5, gUnknown_19e0@h
 	rlwinm  %r4, %r3, 0, 2, 3
-	addi %r5, %r5, 0x19e0
+	addi %r5, %r5, gUnknown_19e0@l
 	lwz %r5, 0xd8(%r5)
 	cntlzw %r4, %r4
 	srwi  %r4, %r4, 5
@@ -457,20 +458,20 @@ sub_600:
 	stw %r0, 0x34(%r1)
 	addi %r11, %r1, 0x30
 	bl sub_124c
-	lis %r31, 0x8120
-	lis %r30, 0x8120
-	addi %r31, %r31, 0x19a0
+	lis %r31, gUnknown_19a0@h
+	lis %r30, FailedAssertStr@h
+	addi %r31, %r31, gUnknown_19a0@l
 	mr %r25, %r3
 	lwz %r0, 0x144(%r31)
 	mr %r26, %r4
 	mr %r27, %r5
-	addi %r30, %r30, 0x12c0
+	addi %r30, %r30, FailedAssertStr@l
 	cmplwi %r0, 0xc
 	lis %r28, 0x8000
 	bgt- sub_10f4
-	lis %r6, 0x8120
+	lis %r6, gUnknown_196c@h
 	slwi  %r0, %r0, 2
-	addi %r6, %r6, 0x196c
+	addi %r6, %r6, gUnknown_196c@l
 	lwzx %r6, %r6, %r0
 	mtctr %r6
 	bctr
@@ -528,28 +529,28 @@ _6c4:
 	.global sub_704
 sub_704:
 	lwz %r6, 0x180(%r31)
-	lis %r5, 0x8000
+	lis %r5, DevDebuggerMonitorSize@h
 	addi %r3, %r31, 0x180
-	stw %r6, 0xe8(%r5)
+	stw %r6, DevDebuggerMonitorSize@l(%r5)
 	clrlwi. %r0, %r6, 27
 	lwz %r4, 0x28(%r28)
-	addis %r0, %r4, 0x8000
+	addis %r0, %r4, 0x8000 # sign flip?
 	subf %r0, %r6, %r0
 	clrrwi  %r0, %r0, 5
-	stw %r0, 0xec(%r5)
+	stw %r0, DevDebuggerMonitorAddress@l(%r5)
 	lwz %r0, 0x4(%r3)
-	stw %r0, 0xf0(%r5)
+	stw %r0, SimulatedMemSize@l(%r5)
 	beq- _754
 	addi %r3, %r30, 0x140
-	lwz %r4, 0xe8(%r5)
+	lwz %r4, DevDebuggerMonitorSize@l(%r5)
 	crxor 6, 6, 6
 	lwz %r12, 0x18(%r31)
 	mtctr %r12
 	bctrl 
 	bl sub_1128
 _754:
-	lis %r3, 0x8000
-	lwz %r4, 0xf0(%r3)
+	lis %r3, SimulatedMemSize@h
+	lwz %r4, SimulatedMemSize@l(%r3)
 	clrlwi. %r0, %r4, 27
 	beq- _77c
 	addi %r3, %r30, 0x188
@@ -559,16 +560,16 @@ _754:
 	bctrl 
 	bl sub_1128
 _77c:
-	lis %r3, 0x8000
-	lwz %r0, 0xf0(%r3)
+	lis %r3, SimulatedMemSize@h
+	lwz %r0, SimulatedMemSize@l(%r3)
 	cmpwi %r0, 0x0
 	bne- _794
 	lwz %r0, 0x28(%r28)
-	stw %r0, 0xf0(%r3)
+	stw %r0, SimulatedMemSize@l(%r3)
 _794:
-	lis %r29, 0x8000
+	lis %r29, SimulatedMemSize@h
 	lwz %r4, 0x28(%r28)
-	lwz %r5, 0xf0(%r29)
+	lwz %r5, SimulatedMemSize@l(%r29)
 	cmplw %r5, %r4
 	bge- _804
 	lwz %r6, 0xe8(%r29)
@@ -584,10 +585,10 @@ _794:
 _7d0:
 	lwz %r0, 0x14(%r31)
 	addi %r5, %r31, 0x20
-	lis %r3, 0x8000
+	lis %r3, SimulatedMemSize@h
 	lwz %r4, 0xc(%r5)
 	not %r0, %r0
-	lwz %r3, 0xf0(%r3)
+	lwz %r3, SimulatedMemSize@l(%r3)
 	rlwinm  %r0, %r0, 0, 30, 30
 	slw %r4, %r4, %r0
 	addis %r0, %r3, 0x8000
@@ -607,10 +608,10 @@ _804:
 _824:
 	lwz %r0, 0x14(%r31)
 	addi %r6, %r31, 0x20
-	lis %r3, 0x8000
+	lis %r3, DevDebuggerMonitorAddress@h
 	lwz %r5, 0xc(%r6)
 	not %r4, %r0
-	lwz %r0, 0xec(%r3)
+	lwz %r0, DevDebuggerMonitorAddress@l(%r3)
 	rlwinm  %r3, %r4, 0, 30, 30
 	slw %r3, %r5, %r3
 	subf %r0, %r3, %r0
@@ -618,13 +619,13 @@ _824:
 	stw %r0, 0x10(%r6)
 _850:
 	addi %r3, %r31, 0x20
-	lis %r5, 0x8000
+	lis %r5, Bi2Offset@h
 	lwz %r6, 0x10(%r3)
 	li %r3, 0x2000
 	li %r4, 0x440
 	li %r0, 0x4
 	subi %r6, %r6, 0x2000
-	stw %r6, 0xf4(%r5)
+	stw %r6, Bi2Offset@l(%r5)
 	stw %r6, 0x0(%r25)
 	stw %r3, 0x0(%r26)
 	lwz %r3, 0x14(%r31)
@@ -640,9 +641,9 @@ _850:
 	
 	.global sub_8a0
 sub_8a0:
-	lis %r4, 0x8000
+	lis %r4, Bi2Offset@h
 	lis %r0, 0x7ed4
-	lwz %r3, 0xf4(%r4)
+	lwz %r3, Bi2Offset@l(%r4)
 	lwz %r3, 0x30(%r3)
 	cmpw %r3, %r0
 	beq- _8d4
@@ -651,42 +652,42 @@ sub_8a0:
 	cmpw %r3, %r0
 _8c4:
 	li %r0, 0x80
-	lis %r3, 0x8000
-	stb %r0, 0x319c(%r3)
+	lis %r3, Unk319C@h
+	stb %r0, Unk319C@l(%r3)
 	b _8dc
 _8d4:
 	li %r0, 0x81
-	stb %r0, 0x319c(%r4)
+	stb %r0, Unk319C@l(%r4)
 _8dc:
-	lis %r4, 0x8000
-	lwz %r3, 0xf4(%r4)
-	lwz %r5, 0x2c(%r3)
+	lis %r4, GameID@h
+	lwz %r3, Bi2Offset@l(%r4)
+	lwz %r5, 0x2c(%r3) # middle of SystemResetInterrupt
 	cmpwi %r5, 0x0
 	beq- _950
-	lwz %r0, 0x3118(%r4)
+	lwz %r0, Mem2Size@l(%r4)
 	cmplw %r5, %r0
 	bge- _950
-	lwz %r3, 0x3120(%r4)
-	lwz %r0, 0x311c(%r4)
+	lwz %r3, Unk3120@l(%r4)
+	lwz %r0, SimulatedMem2Size@l(%r4)
 	subf %r0, %r3, %r0
 	subf %r0, %r0, %r5
-	stw %r0, 0x3120(%r4)
-	lwz %r3, 0x3128(%r4)
-	lwz %r0, 0x311c(%r4)
+	stw %r0, Unk3120@l(%r4)
+	lwz %r3, Unk3120@l+0x8(%r4)
+	lwz %r0, SimulatedMem2Size@l(%r4)
 	subf %r0, %r3, %r0
 	subf %r0, %r0, %r5
-	stw %r0, 0x3128(%r4)
-	lwz %r3, 0x3130(%r4)
-	lwz %r0, 0x311c(%r4)
+	stw %r0, Unk3120@l+0x8(%r4)
+	lwz %r3, IOSHeapRange@l(%r4)
+	lwz %r0, SimulatedMem2Size@l(%r4)
 	subf %r0, %r3, %r0
 	subf %r0, %r0, %r5
-	stw %r0, 0x3130(%r4)
-	lwz %r3, 0x3134(%r4)
-	lwz %r0, 0x311c(%r4)
+	stw %r0, IOSHeapRange@l(%r4)
+	lwz %r3, IOSHeapRange@l+0x4(%r4)
+	lwz %r0, SimulatedMem2Size@l(%r4)
 	subf %r0, %r3, %r0
 	subf %r0, %r0, %r5
-	stw %r0, 0x3134(%r4)
-	stw %r5, 0x311c(%r4)
+	stw %r0, IOSHeapRange@l+0x4(%r4)
+	stw %r5, SimulatedMem2Size@l(%r4)
 _950:
 	lwz %r0, 0x14c(%r31)
 	cmpwi %r0, 0x0
@@ -703,24 +704,24 @@ _978:
 	lwz %r0, 0x14(%r3)
 	cmpwi %r0, 0x0
 	bne- _9cc
-	lwz %r4, 0x18(%r3)
+	lwz %r4, DiscMagic@l(%r3)
 	cmpwi %r4, 0x0
 	beq- _9cc
-	lis %r3, 0x8000
-	lwz %r0, 0x8(%r4)
-	lwz %r3, 0xf4(%r3)
+	lis %r3, Bi2Offset@h
+	lwz %r0, 0x8(%r4) # BootType
+	lwz %r3, Bi2Offset@l(%r3)
 	addi %r4, %r4, 0x1000
 	li %r5, 0x1000
-	stw %r0, 0x8(%r3)
-	addi %r3, %r3, 0x1000
+	stw %r0, DiscStreaming@l(%r3)
+	addi %r3, %r3, 0x1000 # UnusedInterrupt1000... but why?
 	bl sub_0
 	b _9cc
 _9b8:
 	lwz %r4, 0x20(%r31)
 	li %r0, 0x0
-	lis %r3, 0x8000
+	lis %r3, Unk30E8@h
 	stw %r4, 0x190(%r31)
-	stw %r0, 0x30ec(%r3)
+	stw %r0, Unk30E8@l+0x4(%r3)
 _9cc:
 	addi %r6, %r31, 0x20
 	lwz %r0, 0x190(%r31)
@@ -858,8 +859,8 @@ _b80:
 _ba0:
 	addi %r3, %r3, 0x4
 	bdnz+ _b80
-	lis %r3, 0x8000
-	lwz %r3, 0xf4(%r3)
+	lis %r3, Bi2Offset@h
+	lwz %r3, Bi2Offset@l(%r3)
 	lwz %r6, 0x28(%r3)
 	cmpwi %r6, 0x0
 	beq- _bf4
@@ -884,24 +885,24 @@ _bf4:
 	lwz %r0, 0x14(%r31)
 	addi %r3, %r31, 0x20
 	lwz %r4, 0x8(%r3)
-	lis %r3, 0x8000
+	lis %r3, UnkNandTitleValue@h
 	not %r0, %r0
 	rlwinm  %r0, %r0, 0, 30, 30
 	slw %r4, %r4, %r0
 	addi %r0, %r4, 0x1f
 	clrrwi  %r0, %r0, 5
 	add %r0, %r29, %r0
-	stw %r0, 0x30d4(%r3)
+	stw %r0, UnkNandTitleValue@l-0x4(%r3)
 	b _c38
 _c30:
-	lis %r3, 0x8000
-	stw %r29, 0x30d4(%r3)
+	lis %r3, UnkNandTitleValue@h
+	stw %r29, UnkNandTitleValue@l-0x4(%r3)
 _c38:
 	lwz %r0, 0x14c(%r31)
 	cmpwi %r0, 0x0
 	bne- _cd8
-	lis %r3, 0x8000
-	lwz %r0, 0x2c(%r3)
+	lis %r3, BoardModel@h
+	lwz %r0, BoardModel@l(%r3)
 	clrrwi. %r0, %r0, 28
 	bne- _c84
 	lis %r3, 0x8090
@@ -933,7 +934,7 @@ _cac:
 	cmpwi %r3, 0x0
 	bne- _cd8
 	addi %r3, %r30, 0x574
-	lis %r4, 0x8120
+	lis %r4, init_text_start@h
 	crxor 6, 6, 6
 	lwz %r12, 0x18(%r31)
 	mtctr %r12
@@ -1009,7 +1010,7 @@ _d4c:
 	addis %r0, %r3, 0xf000
 	cmplwi %r0, 0x0
 	beq- _de0
-	lis %r0, 0x8120
+	lis %r0, init_text_start@h
 	cmplw %r4, %r0
 	ble- _de0
 	li %r5, 0x0
@@ -1033,6 +1034,7 @@ _e0c:
 	lwz %r4, 0x0(%r26)
 	bl sub_113c
 	b sub_10fc
+
 	.global sub_e28
 sub_e28:
 	lwz %r5, 0x140(%r31)
@@ -1091,7 +1093,7 @@ _e70:
 	addis %r0, %r3, 0xf000
 	cmplwi %r0, 0x0
 	beq- _f08
-	lis %r0, 0x8120
+	lis %r0, init_text_start@h
 	cmplw %r4, %r0
 	ble- _f08
 	li %r5, 0x0
@@ -1168,7 +1170,7 @@ sub_fe4:
 	addi %r4, %r31, 0x40
 	lis %r3, 0x8000
 	stw %r0, 0x24(%r28)
-	addi %r0, %r3, 0x4000
+	addi %r0, %r3, 0x4000 # 0x80004000 - typical load address of main.dol .init
 	stw %r5, 0x30(%r28)
 	lwz %r5, 0x10(%r7)
 	stw %r5, 0x34(%r28)
@@ -1188,6 +1190,7 @@ sub_fe4:
 _104c:
 	li %r0, 0xb
 	stw %r0, 0x144(%r31)
+
 	.global sub_1054
 sub_1054:
 	lwz %r0, 0x14c(%r31)
@@ -1213,8 +1216,8 @@ _1098:
 	stw %r0, 0x8(%r1)
 _10a4:
 	lhz %r0, 0x8(%r1)
-	lis %r3, 0x8000
-	sth %r0, 0x30e4(%r3)
+	lis %r3, GCNPort4DebugState@h
+	sth %r0, GCNPort4DebugState@l(%r3)
 _10b0:
 	li %r3, 0x0
 	b sub_1100
@@ -1258,9 +1261,9 @@ sub_1100:
 	
 	.global sub_1118
 sub_1118:
-	lis %r3, 0x8120
-	addi %r3, %r3, 0x19e0
-	lwz %r3, 0xe0(%r3)
+	lis %r3, gUnknown_19e0@h
+	addi %r3, %r3, gUnknown_19e0@l
+	lwz %r3, 0xe0(%r3) # 0x81201ac0
 	blr
 	
 	.global sub_1128
@@ -1340,8 +1343,8 @@ _11e4:
 	
 	.global sub_11fc
 sub_11fc:
-	lis %r5, 0x8000
-	lwz %r4, 0x30f0(%r5)
+	lis %r5, DolParams@h
+	lwz %r4, DolParams@l(%r5)
 	cmplw %r4, %r5
 	blt- _1214
 	li %r5, 0x1c

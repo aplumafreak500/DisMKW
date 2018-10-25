@@ -91,5 +91,9 @@ gUnknown_19a0:
 	
 	.global gUnknown_19b8
 gUnknown_19b8:
-	.space 388
+	.space 40
+	
+	.global gUnknown_19e0
+gUnknown_19e0:
+	.space 348
 
