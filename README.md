@@ -9,8 +9,7 @@ This is a work in progress and far from production-ready.
 - [x] Partition 1 main.dol
 - [ ] Partition 2 main.dol
 - [ ] Partition 0 apploader.img
-- [x] Partition 1 apploader.img
-- [ ] Partition 2 apploader.img (need to re-verify if it's the same as Partition 1's apploader.img)
+- [x] Partition 1 & 2 apploader.img (identical)
 - [ ] Mario Kart Channel dol
 - [ ] Mario Kart Channel misc. executables
 - [x] StaticR.rel
@@ -99,15 +98,9 @@ make
 	 - [ ] .loader
 		 - [ ] .text
 		 - [ ] .data
-- [ ] Partition 1 Apploader.img
+- [ ] Partition 1 & 2 Apploader.img
 	 - [x] .text
 	 - [x] .data
-	 - [ ] .loader
-		 - [ ] .text
-		 - [ ] .data
-- [ ] Partition 2 Apploader.img
-	 - [ ] .text
-	 - [ ] .data
 	 - [ ] .loader
 		 - [ ] .text
 		 - [ ] .data
