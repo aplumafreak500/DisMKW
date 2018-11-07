@@ -1,0 +1,135 @@
+OUTPUT_ARCH(powerpc)
+ENTRY(dol_entrypoint)
+init_size = init_end - init_start;
+extab_size = extab_end - extab_start;
+extab_index_size = extab_index_end - extab_index_start;
+text_size = text_end - text_start;
+ctors_size = ctors_end - ctors_start;
+dtors_size = dtors_end - dtors_start;
+rodata_size = rodata_end - rodata_start;
+data_size = data_end - data_start;
+bss_size = bss_end - bss_start;
+sdata_size = sdata_end - sdata_start;
+sbss_size = sbss_end - sbss_start;
+sdata2_size = sdata2_end - sdata2_start;
+sbss2_size = sbss2_end - sbss2_start;
+init_offset = ADDR(.header) + SIZEOF(.header);
+text_offset = init_offset + init_size;
+extab_offset = text_offset + text_size;
+extab_index_offset = extab_offset + extab_size;
+ctors_offset = extab_index_offset + extab_index_size;
+dtors_offset = ctors_offset + ctors_size;
+rodata_offset = dtors_offset + dtors_size;
+data_offset = rodata_offset + rodata_size;
+sdata_offset = data_offset + data_size;
+sdata2_offset = sdata_offset + sdata_size;
+bssTotalSize = sbss2_end - bss_start; /* main.dol header */
+SECTIONS {
+	.header :
+	ALIGN(4) {
+		header.o(.data);
+	}
+	.globalsLow 0x80000000 (NOLOAD):
+	ALIGN(4) {
+		../global/DolphinGlobals.o(.bss);
+	} = 0
+	.globalsHigh 0x80003000 (NOLOAD):
+	ALIGN(4) {
+		../global/DolphinGlobals2.o(.bss);
+	} = 0
+	.init 0x80004000 :
+	AT(init_offset)
+	ALIGN(4) {
+		init_start = .;
+		init.o(.text);
+		init_end = .;
+	}
+	.extab :
+	AT(extab_offset)
+	ALIGN(4) {
+		extab_start = .;
+		extab.o(.data);
+		extab_end = .;
+	}
+	.extab_index :
+	AT(extab_index_offset)
+	ALIGN(4) {
+		extab_index_start = .;
+		extabindex.o(.data);
+		extab_index_end = .;
+	}
+	.text :
+	AT(text_offset)
+	ALIGN(4) {
+		text_start = .;
+		text.o(.text);
+		text_end = .;
+	}
+	.ctors :
+	AT(ctors_offset)
+	ALIGN(4) {
+		ctors_start = .;
+		ctors.o(.data);
+		ctors_end = .;
+	}
+	.dtors :
+	AT(dtors_offset)
+	ALIGN(4) {
+		dtors_start = .;
+		dtors.o(.data);
+		dtors_end = .;
+	}
+	.rodata :
+	AT(rodata_offset)
+	ALIGN(4) {
+		rodata_start = .;
+		rodata.o(.data);
+		rodata_end = .;
+	}
+	.data :
+	AT(data_offset)
+	ALIGN(4) {
+		data_start = .;
+		data.o(.data);
+		data_end = .;
+	}
+	.bss (NOLOAD) :
+	ALIGN(4) {
+		bss_start = .;
+		bss.o(.bss);
+		bss_end = .;
+	} = 0
+	. += 0xc;
+	.sdata :
+	AT(sdata_offset)
+	ALIGN(4) {
+		sdata_start = .;
+		sdata.o(.data);
+		sdata_end = .;
+	}
+	.sbss (NOLOAD) :
+	ALIGN(4) {
+		sbss_start = .;
+		sbss.o(.bss);
+		sbss_end = .;
+	} = 0
+	. += 0x14;
+	.sdata2 :
+	AT(sdata2_offset)
+	ALIGN(4) {
+		sdata2_start = .;
+		sdata2.o(.data);
+		sdata2_end = .;
+	}
+	.sbss2 (NOLOAD) :
+	ALIGN(4) {
+		sbss2_start = .;
+		sbss2.o(.bss);
+		sbss2_end = .;
+	} = 0
+	/* Discard everything not specifically mentioned above. */
+	/DISCARD/ : {
+		*(*);
+	}
+}
+
