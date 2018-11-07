@@ -119,6 +119,3 @@ PartitionOffset:
 	.global Unk319C
 Unk319C:
 	.space 0x264
-	.global NandApploader
-NandApploader:
-	.space 0xc00

@@ -1,0 +1,77 @@
+OUTPUT_ARCH(powerpc)
+ENTRY(dol_entrypoint)
+init_size = init_end - init_start;
+loader_size = loader_end - loader_start;
+bss_size = 0x10000; /* bss_end - bss_start; */
+init_offset = 0x100;
+loader_offset = init_offset + init_size;
+
+SECTIONS {
+	.header 0x0 :
+	ALIGN(4) {
+		header.o(.data);
+	}
+	.globalsLow 0x80000000 (NOLOAD) :
+	ALIGN(4) {
+		../global/DolphinGlobals.o(.bss);
+	} = 0
+	.globalsHigh 0x80003000 (NOLOAD) :
+	ALIGN(4) {
+		../global/DolphinGlobals2.o(.bss);
+	} = 0
+	.stub 0x80003400 :
+	AT(init_offset)
+	ALIGN(4) {
+		init_start = .;
+		loader_stub.o(.text);
+		init_end = .;
+	} 
+	.init 0x81330000 :
+	AT(loader_offset)
+	ALIGN(4) {
+		loader_start = .;
+		init.o(.text);
+	}
+	.extab :
+	ALIGN(4) {
+		extab.o(.data);
+	}
+	.extab_index :
+	ALIGN(4) {
+		extabindex.o(.data);;
+	}
+	.text :
+	ALIGN(4) {
+		text.o(.text);
+	}
+	.ctors :
+	ALIGN(4) {
+		ctors.o(.data);
+	}
+	.dtors :
+	ALIGN(4) {
+		dtors.o(.data);
+	}
+	.data :
+	ALIGN(4) {
+		data.o(.data);
+		. += 0xc280;
+		loader_end = .;
+		/* extra padding at the end which for some reason isn't tracked in the dol's header */
+		. += 0x500;
+	}
+	/* The header specifies .bss to be at 0x81340000, but this address is in the middle of .text, so here's a hacky way to get the header to match. */
+	bss_start = 0x81340000;
+	/*
+	.bss 0x81340000 (NOLOAD) :
+	ALIGN(4) {
+		bss_start = .;
+		bss.o(.bss);
+		bss_end = .;
+	} = 0
+	*/
+	/* Discard everything not specifically mentioned above. */
+	/DISCARD/ : {
+		*(*);
+	}
+}

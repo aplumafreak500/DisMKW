@@ -4,3 +4,5 @@ b136d5f35909e682b1a15352f429edb412f0b247  main-update.dol
 1b367209919fcc225c74a155dc46f29c5d64b9a2  main.dol
 072ba44382fdca9bf5c0ec9d1e9b922cafd99260  StaticR.rel
 751a4e61e85df6c0a243e8ffde3f9246a28ff8dc  main-mkc-installer.dol
+6f4c46e3c5723a778a16c61b9089b37f9d70f7d5  mkc-nandloader.dol
+eaef5493ce3231f9137ab40b8eb4599d60051f2c  main-mkc.dol

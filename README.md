@@ -3,16 +3,7 @@ pret-style disassembly of Mario Kart Wii.
 
 This is a work in progress and far from production-ready.
 
-## What you can build (NTSC-U version only)
-
-- [x] Partition 0 main.dol
-- [x] Partition 1 main.dol
-- [x] Partition 2 main.dol
-- [x] Partition 0 apploader.img
-- [x] Partition 1 & 2 apploader.img (identical)
-- [ ] Mario Kart Channel dol
-- [ ] Mario Kart Channel misc. executables
-- [x] StaticR.rel
+Currently, all PPC code within the game (including the Mario Kart Channel) is buildable. Only the NTSC-U version is disassembled at the moment.
 
 ### Common patches to main.dol and StaticR.rel that are included:
 
@@ -106,5 +97,11 @@ make
 		 - [ ] .data
 - [x] Partition 0 main.dol
 - [ ] Partition 2 main.dol
+	 - [ ] .text
+	 - [ ] .data
+- [ ] Mario Kart Channel main.dol
+	 - [ ] .text
+	 - [ ] .data
+- [ ] Mario Kart Channel NAND loader
 	 - [ ] .text
 	 - [ ] .data

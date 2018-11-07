@@ -36,6 +36,7 @@ APL1         := apploader.img
 DOL1         := main.dol
 REL          := StaticR.rel
 DOL2         := main-mkc-installer.dol
+APLC         := mkc-nandloader.dol
 DOLC         := main-mkc.dol
 
 APL0_ELF     := $(APL0:.img=.elf)
@@ -56,6 +57,9 @@ REL_LDSCRIPT := $(BUILD_DIR)/staticr/ld_script.ld
 DOL2_ELF      := $(DOL2:.dol=.elf)
 DOL2_MAP      := $(DOL2).map
 DOL2_LDSCRIPT := $(BUILD_DIR)/maindol-mkc-installer/ld_script.ld
+APLC_ELF      := $(APLC:.dol=.elf)
+APLC_MAP      := $(APLC).map
+APLC_LDSCRIPT := $(BUILD_DIR)/mkc-nandloader/ld_script.ld
 DOLC_ELF      := $(DOLC:.dol=.elf)
 DOLC_MAP      := $(DOLC).map
 DOLC_LDSCRIPT := $(BUILD_DIR)/maindol-mkc/ld_script.ld
@@ -89,6 +93,10 @@ DOL2_CSOURCES  := $(wildcard maindol-mkc-installer/*.c)
 DOL2_ASMSOURCES  := $(wildcard maindol-mkc-installer/*.s)
 DOL2_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(DOL2_CSOURCES:%.c=%.o))
 DOL2_ASMOBJECTS   := $(addprefix $(BUILD_DIR)/, $(DOL2_ASMSOURCES:%.s=%.o))
+APLC_CSOURCES  := $(wildcard mkc-nandloader/*.c)
+APLC_ASMSOURCES  := $(wildcard mkc-nandloader/*.s)
+APLC_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(APLC_CSOURCES:%.c=%.o))
+APLC_ASMOBJECTS   := $(addprefix $(BUILD_DIR)/, $(APLC_ASMSOURCES:%.s=%.o))
 DOLC_CSOURCES  := $(wildcard maindol-mkc/*.c)
 DOLC_ASMSOURCES  := $(wildcard maindol-mkc/*.s)
 DOLC_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(DOLC_CSOURCES:%.c=%.o))
@@ -103,12 +111,13 @@ APL1_OFILES  := $(APL1_COBJECTS) $(APL1_ASMOBJECTS)
 DOL1_OFILES  := $(DOL1_COBJECTS) $(DOL1_ASMOBJECTS)
 REL_OFILES  := $(REL_COBJECTS) $(REL_ASMOBJECTS)
 DOL2_OFILES  := $(DOL2_COBJECTS) $(DOL2_ASMOBJECTS)
+APLC_OFILES  := $(APLC_COBJECTS) $(APLC_ASMOBJECTS)
 DOLC_OFILES  := $(DOLC_COBJECTS) $(DOLC_ASMOBJECTS)
 
 # Combined lists of objects
 
-C_OBJECTS  := $(GLBL_COBJECTS) $(APL0_COBJECTS) $(APL1_COBJECTS) $(DOL1_COBJECTS) $(REL_COBJECTS) $(DOL2_COBJECTS) $(DOLC_COBJECTS)
-ASM_OBJECTS  := $(GLBL_ASMOBJECTS) $(APL0_ASMOBJECTS) $(DOL0_ASMOBJECTS) $(APL1_ASMOBJECTS) $(DOL1_ASMOBJECTS) $(REL_ASMOBJECTS) $(DOL2_ASMOBJECTS) $(DOLC_ASMOBJECTS)
+C_OBJECTS  := $(GLBL_COBJECTS) $(APL0_COBJECTS) $(APL1_COBJECTS) $(DOL1_COBJECTS) $(REL_COBJECTS) $(DOL2_COBJECTS) $(APLC_COBJECTS) $(DOLC_COBJECTS)
+ASM_OBJECTS  := $(GLBL_ASMOBJECTS) $(APL0_ASMOBJECTS) $(DOL0_ASMOBJECTS) $(APL1_ASMOBJECTS) $(DOL1_ASMOBJECTS) $(REL_ASMOBJECTS) $(DOL2_ASMOBJECTS) $(APLC_ASMOBJECTS) $(DOLC_ASMOBJECTS)
 
 ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
 
@@ -125,11 +134,11 @@ $(shell mkdir -p $(SUBDIRS))
 
 all: $(DOL1) $(REL)
 
-compare: $(APL0) $(DOL0) $(APL1) $(DOL1) $(REL) $(DOL2) $(DOLC)
+compare: $(APL0) $(DOL0) $(APL1) $(DOL1) $(REL) $(DOL2) $(APLC) $(DOLC)
 	sha1sum -c sha1sums.txt
 
 clean:
-	$(RM) $(APL0) $(APL0_ELF) $(APL0_MAP) $(APL0_LDSCRIPT) $(DOL0) $(DOL0_ELF) $(DOL0_MAP) $(DOL0_LDSCRIPT) $(APL1) $(APL1_ELF) $(APL1_MAP) $(APL1_LDSCRIPT) $(DOL1) $(DOL1_ELF) $(DOL1_MAP) $(DOL1_LDSCRIPT) $(REL) $(REL_ELF) $(REL_MAP) $(REL_LDSCRIPT) $(DOL2) $(DOL2_ELF) $(DOL2_MAP) $(DOL2_LDSCRIPT) $(DOLC) $(DOLC_ELF) $(DOLC_MAP) $(DOLC_LDSCRIPT) $(ALL_OBJECTS)
+	$(RM) $(APL0) $(APL0_ELF) $(APL0_MAP) $(APL0_LDSCRIPT) $(DOL0) $(DOL0_ELF) $(DOL0_MAP) $(DOL0_LDSCRIPT) $(APL1) $(APL1_ELF) $(APL1_MAP) $(APL1_LDSCRIPT) $(DOL1) $(DOL1_ELF) $(DOL1_MAP) $(DOL1_LDSCRIPT) $(REL) $(REL_ELF) $(REL_MAP) $(REL_LDSCRIPT) $(DOL2) $(DOL2_ELF) $(DOL2_MAP) $(DOL2_LDSCRIPT) $(APLC) $(APLC_ELF) $(APLC_MAP) $(APLC_LDSCRIPT) $(DOLC) $(DOLC_ELF) $(DOLC_MAP) $(DOLC_LDSCRIPT) $(ALL_OBJECTS)
 	
 #### Recipes ####
 
@@ -187,6 +196,15 @@ $(DOL2_ELF): $(DOL2_LDSCRIPT) $(GLBL_OFILES) $(DOL2_OFILES)
 $(DOL2): $(DOL2_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
+$(APLC_LDSCRIPT): ldscript_mkc_nandloader.txt
+	cp ldscript_mkc_nandloader.txt $(BUILD_DIR)/mkc-nandloader/ld_script.ld
+	
+$(APLC_ELF): $(APLC_LDSCRIPT) $(GLBL_OFILES) $(APLC_OFILES)
+	cd $(BUILD_DIR)/mkc-nandloader && $(LD) -T ld_script.ld -Map ../../$(APLC_MAP) -o ../../$@
+
+$(APLC): $(APLC_ELF)
+	$(OBJCOPY) -O binary $< $@
+	
 $(DOLC_LDSCRIPT): ldscript_dol_mkc.txt
 	cp ldscript_dol_mkc.txt $(BUILD_DIR)/maindol-mkc/ld_script.ld
 
@@ -212,17 +230,17 @@ dol : $(DOL1)
 dol0 : $(DOL0)
 dol1 : $(DOL1)
 dol2 : $(DOL2)
-all-dol: $(DOL0) $(DOL1) $(DOL2)
+all-dol: $(DOL0) $(DOL1) $(DOL2) $(DOLC)
 staticr : $(REL)
 rel : $(REL)
 appldr : $(APL1)
 appldr0 : $(APL0)
 appldr1 : $(APL1)
 appldr2 : $(APL1)
-all-appldr: $(APL0) $(APL1)
+all-appldr: $(APL0) $(APL1) $(APLC)
 apploader-mkc-installer.img: $(APL1)
 upd : $(APL0) $(DOL0)
 mkw : $(APL1) $(DOL1) $(REL)
 chan : $(APL1) $(DOL2)
-mkc : $(DOLC)
+mkc : $(APLC) $(DOLC)
 
