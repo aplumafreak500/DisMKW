@@ -66,8 +66,8 @@ GLBL_CSOURCES  := $(wildcard global/*.c)
 GLBL_ASMSOURCES  := $(wildcard global/*.s)
 GLBL_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(GLBL_CSOURCES:%.c=%.o))
 GLBL_ASMOBJECTS   := $(addprefix $(BUILD_DIR)/, $(GLBL_ASMSOURCES:%.s=%.o))
-APL0_CSOURCES  := $(wildcard apploader-update/*.c)
-APL0_ASMSOURCES  := $(wildcard apploader-update/*.s)
+APL0_CSOURCES  := $(wildcard apploader-update/*.c apploader-update/loader/*.c)
+APL0_ASMSOURCES  := $(wildcard apploader-update/*.s apploader-update/loader/*.s)
 APL0_COBJECTS   := $(addprefix $(BUILD_DIR)/, $(APL0_CSOURCES:%.c=%.o))
 APL0_ASMOBJECTS   := $(addprefix $(BUILD_DIR)/, $(APL0_ASMSOURCES:%.s=%.o))
 # DOL0 only uses ASM
@@ -133,8 +133,8 @@ clean:
 	
 #### Recipes ####
 
-$(APL0_LDSCRIPT): ldscript_appl_update.txt
-	cp ldscript_appl_update.txt $(BUILD_DIR)/apploader-update/ld_script.ld
+$(APL0_LDSCRIPT): ldscript_appl.txt
+	cp ldscript_appl.txt $(BUILD_DIR)/apploader-update/ld_script.ld
 	
 $(APL0): $(APL0_ELF)
 	$(OBJCOPY) -O binary $< $@
@@ -212,12 +212,15 @@ dol : $(DOL1)
 dol0 : $(DOL0)
 dol1 : $(DOL1)
 dol2 : $(DOL2)
+all-dol: $(DOL0) $(DOL1) $(DOL2)
 staticr : $(REL)
 rel : $(REL)
 appldr : $(APL1)
 appldr0 : $(APL0)
 appldr1 : $(APL1)
 appldr2 : $(APL1)
+all-appldr: $(APL0) $(APL1)
+apploader-mkc-installer.img: $(APL1)
 upd : $(APL0) $(DOL0)
 mkw : $(APL1) $(DOL1) $(REL)
 chan : $(APL1) $(DOL2)
