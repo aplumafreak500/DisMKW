@@ -8,7 +8,7 @@ This is a work in progress and far from production-ready.
 - [x] Partition 0 main.dol
 - [x] Partition 1 main.dol
 - [ ] Partition 2 main.dol
-- [ ] Partition 0 apploader.img
+- [x] Partition 0 apploader.img
 - [x] Partition 1 & 2 apploader.img (identical)
 - [ ] Mario Kart Channel dol
 - [ ] Mario Kart Channel misc. executables
