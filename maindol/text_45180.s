@@ -31,7 +31,10 @@ _451d8:
 	mtlr %r0
 	addi %r1, %r1, 0x20
 	blr
-	.incbin "./dol.text.bin", 0x451ec, 0x8004d590 - 0x8004c4ac
+	
+	.global t1_451ec
+t1_451ec:
+	.incbin "basemain.dol", 0x4774c, 0x10e4
 
 	.global sub_462d0
 sub_462d0: # 0x8004d590
@@ -239,7 +242,10 @@ _46574:
 	mtlr %r0
 	addi %r1, %r1, 0x60
 	blr
-	.incbin "./dol.text.bin", 0x46594, 0x8004e3f0 - 0x8004d854
+	
+	.global t1_46594
+t1_46594:
+	.incbin "basemain.dol", 0x48af4, 0xb9c
 
 	.global sub_47130
 sub_47130: # 0x8004e3f0
@@ -268,7 +274,10 @@ _47174:
 _4717c:
 	li %r3, 0x0
 	blr
-	.incbin "./dol.text.bin", 0x47184, 0x8004e540 - 0x8004e444
+	
+	.global t1_47184
+t1_47184:
+	.incbin "basemain.dol", 0x496e4, 0xfc
 
 	.global sub_47280
 sub_47280: # 0x8004e540
@@ -297,7 +306,10 @@ _472c4:
 _472cc:
 	li %r3, 0x0
 	blr
-	.incbin "./dol.text.bin", 0x472d4, 0x8004e690 - 0x8004e594
+	
+	.global t1_472d4
+t1_472d4:
+	.incbin "basemain.dol", 0x49834, 0xfc
 
 	.global sub_473d0
 sub_473d0: # 0x8004e690
@@ -326,7 +338,10 @@ _47414:
 _4741c:
 	li %r3, 0x0
 	blr
-	.incbin "./dol.text.bin", 0x47424, 0x8004e790 - 0x8004e6e4
+	
+	.global t1_47424
+t1_47424:
+	.incbin "basemain.dol", 0x49984, 0xac
 
 	.global sub_474d0
 sub_474d0: # 0x8004e790
@@ -355,7 +370,10 @@ _47514:
 _4751c:
 	li %r3, 0x0
 	blr
-	.incbin "./dol.text.bin", 0x47524, 0x8004ed90 - 0x8004e7e4
+	
+	.global t1_47524
+t1_47524:
+	.incbin "basemain.dol", 0x49a84, 0x5ac
 
 	.global sub_47ad0
 sub_47ad0: # 0x8004ed90
@@ -813,7 +831,10 @@ _48048:
 	mtlr %r0
 	addi %r1, %r1, 0x40
 	blr
-	.incbin "./dol.text.bin", 0x48068, 0x8004f4b0 - 0x8004f328
+	
+	.global t1_48068
+t1_48068:
+	.incbin "basemain.dol", 0x4a5c8, 0x188
 
 	.global sub_481f0
 sub_481f0: # 0x8004f4b0
@@ -1077,7 +1098,10 @@ _4855c:
 	mtlr %r0
 	addi %r1, %r1, 0x50
 	blr
-	.incbin "./dol.text.bin", 0x4857c, 0x800520f0 - 0x8004f83c
+	
+	.global t1_4857c
+t1_4857c:
+	.incbin "basemain.dol", 0x4aadc, 0x28b4
 
 	.global sub_4ae30
 sub_4ae30: # 0x800520f0
@@ -1092,7 +1116,10 @@ _4ae48:
 _4ae4c:
 	li %r4, 0x180
 	b _19a358
-	.incbin "./dol.text.bin", 0x4ae54, 0x80052460 - 0x80052114
+	
+	.global t1_4ae54
+t1_4ae54:
+	.incbin "basemain.dol", 0x4d3b4, 0x34c
 
 	.global sub_4b1a0
 sub_4b1a0: # 0x80052460
@@ -1115,7 +1142,10 @@ _4b1c8:
 	lbz %r0, 0x1d(%r3)
 	stb %r0, 0x0(%r5)
 	blr
-	.incbin "./dol.text.bin", 0x4b1e0, 0x80052540 - 0x800524a0
+	
+	.global t1_4b1e0
+t1_4b1e0:
+	.incbin "basemain.dol", 0x4d740, 0xa0
 
 	.global sub_4b280
 sub_4b280: # 0x80052540
@@ -1138,7 +1168,10 @@ _4b2a8:
 	lbz %r0, 0x1d(%r3)
 	stb %r0, 0x0(%r5)
 	blr
-	.incbin "./dol.text.bin", 0x4b2c0, 0x80052620 - 0x80052580
+	
+	.global t1_4b2c0
+t1_4b2c0:
+	.incbin "basemain.dol", 0x4d820, 0xa0
 
 	.global sub_4b360
 sub_4b360: # 0x80052620
@@ -1161,7 +1194,10 @@ _4b388:
 	lbz %r0, 0x1c(%r3)
 	stb %r0, 0x0(%r5)
 	blr
-	.incbin "./dol.text.bin", 0x4b3a0, 0x800526c0 - 0x80052660
+	
+	.global t1_4b3a0
+t1_4b3a0:
+	.incbin "basemain.dol", 0x4d900, 0x60
 
 	.global sub_4b400
 sub_4b400: # 0x800526c0
@@ -1184,7 +1220,10 @@ _4b428:
 	lbz %r0, 0x1d(%r3)
 	stb %r0, 0x0(%r5)
 	blr
-	.incbin "./dol.text.bin", 0x4b440, 0x80052780 - 0x80052700
+	
+	.global t1_4b440
+t1_4b440:
+	.incbin "basemain.dol", 0x4d9a0, 0x80052780 - 0x80052700
 
 	.global sub_4b4c0
 sub_4b4c0: # 0x80052780
@@ -1195,7 +1234,8 @@ sub_4b4c0: # 0x80052780
 	b sub_19a2fc
 _4b4d4:
 	b _19a358
-	.incbin "./dol.text.bin", 0x4b4d8, 0x800527a0 - 0x80052798
+	
+	.space 12
 
 	.global sub_4b4e0
 sub_4b4e0: # 0x800527a0
@@ -1206,7 +1246,8 @@ sub_4b4e0: # 0x800527a0
 	b sub_19a2fc
 _4b4f4:
 	b _19a358
-	.incbin "./dol.text.bin", 0x4b4f8, 0x800527c0 - 0x800527b8
+	
+	.space 12
 
 	.global sub_4b500
 sub_4b500: # 0x800527c0
@@ -1217,6 +1258,7 @@ sub_4b500: # 0x800527c0
 	b sub_19a2fc
 _4b514:
 	b _19a358
+	
 	.incbin "./dol.text.bin", 0x4b518, 0x800527e0 - 0x800527d8
 
 	.global sub_4b520
@@ -1228,6 +1270,7 @@ sub_4b520: # 0x800527e0
 	b sub_19a2fc
 _4b534:
 	b _19a358
+	
 	.incbin "./dol.text.bin", 0x4b538, 0x80052800 - 0x800527f8
 
 	.global sub_4b540
@@ -1239,6 +1282,7 @@ sub_4b540: # 0x80052800
 	b sub_19a2fc
 _4b554:
 	b _19a358
+	
 	.incbin "./dol.text.bin", 0x4b558, 0x80052820 - 0x80052818
 
 	.global sub_4b560
@@ -1250,6 +1294,7 @@ sub_4b560: # 0x80052820
 	b sub_19a2fc
 _4b574:
 	b _19a358
+	
 	.incbin "./dol.text.bin", 0x4b578, 0x80052840 - 0x80052838
 
 	.global sub_4b580
@@ -1261,6 +1306,7 @@ sub_4b580: # 0x80052840
 	b sub_19a2fc
 _4b594:
 	b _19a358
+	
 	.incbin "./dol.text.bin", 0x4b598, 0x80052890 - 0x80052858
 
 	.global sub_4b5d0
@@ -1322,6 +1368,7 @@ _4b664:
 _4b684:
 	li %r3, 0x1
 	blr
+	
 	.incbin "./dol.text.bin", 0x4b68c, 0x80052a40 - 0x8005294c
 
 	.global sub_4b780
@@ -1329,7 +1376,6 @@ sub_4b780: # 0x80052a40
 	lwz %r3, 0x0(%r3)
 	lwz %r4, 0x4(%r3)
 	b _19a32c
-	
 
 	.incbin "./dol.text.bin", 0x4b78c, 0x8007c290 - 0x80052a4c
 	
