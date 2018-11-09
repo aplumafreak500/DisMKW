@@ -1235,7 +1235,7 @@ sub_4b4c0: # 0x80052780
 _4b4d4:
 	b _19a358
 	
-	.space 12
+	.space 8
 
 	.global sub_4b4e0
 sub_4b4e0: # 0x800527a0
@@ -1247,7 +1247,7 @@ sub_4b4e0: # 0x800527a0
 _4b4f4:
 	b _19a358
 	
-	.space 12
+	.space 8
 
 	.global sub_4b500
 sub_4b500: # 0x800527c0
