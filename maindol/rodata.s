@@ -8,12 +8,21 @@ StrapStrings:
 	.asciz "/Boot/Strap/us/Spanish_US.szs\0\0"
 	.asciz "/Boot/Strap/us/English.szs\0"
 	.asciz "/Boot/Strap/us/English.szs\0"
+	.global mod_mod0_texture_addr
+mod_mod0_texture_addr:
 	.global StrapImageStrings
-StrapImageStrings: # mod_mod0_texture_addr
+StrapImageStrings:
+	.ifdef CTGP_CODE
+	.asciz "CTGP_CODE\0\0\0\0\0\0\0\0\0\0"
+	.asciz "CTGP_CODE\0\0\0\0\0\0"
+	.asciz "CTGP_CODE\0\0\0\0\0\0\0\0\0\0"
+	.asciz "CTGP_CODE\0\0\0\0\0\0"
+	.else
 	.asciz "strapA_16_9_832x456"
 	.asciz "strapA_608x456\0"
 	.asciz "strapB_16_9_832x456"
 	.asciz "strapB_608x456\0"
+	.endif
 	.global gUnknown_110
 gUnknown_110:
 	.4byte 0x80000000, 0x40000000, 0x20000000, 0x10000000

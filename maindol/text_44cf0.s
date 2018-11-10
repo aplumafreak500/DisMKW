@@ -26,9 +26,14 @@ sub_44cf0: # 0x8004bfb0
 	add %r3, %r4, %r0
 	.global mod_mod0_entry_addr
 mod_mod0_entry_addr:
+	.ifdef CTGP_CODE
+	b mod0_mod_start
+	.else
 	b _44d54
+	.endif
 _44d50:
 	li %r3, 0x0
+	.global _44d54
 _44d54:
 	lwz %r0, 0x14(%r1)
 	lwz %r31, 0xc(%r1)

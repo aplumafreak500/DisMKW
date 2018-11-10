@@ -1,8 +1,34 @@
 	.text
 	.asciz "Metrowerks Target Resident Kernel for PowerPC"
 	.space 18
-	# MOD0 does something here
+	.global mod0_mod_start
+mod0_mod_start:
+	.ifdef CTGP_CODE
+	stwu %r1, -256(%r1)
+	stmw %r0, 8(%r1)
+	mflr %r0
+	stw %r0, 260(%r1)
+	lwz %r12, 76(%r3)
+	add %r12, %r3, %r12
+	mtlr %r12
+	blrl
+ 	lis %r0, 0x4800
+	ori %r0, %r0,0x0008
+	lis %r3, mod_mod0_entry_addr@h
+	ori %r3, %r3, mod_mod0_entry_addr@l
+	stw %r0, 0(%r3)
+	li %r4, 0
+	icbi %r3, %r4
+	lwz %r0, 260(%r1)
+	mtlr %r0
+	lmw %r2, 16(%r1)
+	lwz %r0, 8(%r1)
+	addi %r1, %r1, 256
+	b _44d54
+	.space 108
+	.else
 	.space 192
+	.endif
 
 	.global TRK_Exceptions
 TRK_Exceptions:

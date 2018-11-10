@@ -26,11 +26,7 @@ sdata2_offset = sdata_offset + sdata_size;
 bssTotalSize = sbss2_end - bss_start; /* main.dol header */
 codehandler_size = codehandler_end - codehandler_start;
 gct_size = gct_end - gct_start;
-bad0text_size = bad0text_end - bad0text_start;
-bad0data_size = bad0data_end - bad0data_start;
-bad0text_offset = sdata2_offset + sdata2_size;
-bad0data_offset = bad0text_offset + bad0text_size;
-codehandler_offset = bad0data_offset + bad0data_size;
+codehandler_offset = sdata2_offset + sdata2_size;
 gct_offset = codehandler_offset + codehandler_size;
 SECTIONS {
 	.header :
@@ -158,20 +154,6 @@ SECTIONS {
 		bss.o(.bss);
 		bss_end = .;
 	} = 0
-	.bad0text 0x802a5000 :
-	AT(bad0text_offset)
-	ALIGN(4) {
-		bad0text_start = .;
-		ctgp_bad0text.o(.text);
-		bad0text_end = .;
-	}
-	.bad0data 0x802a8000 :
-	AT(bad0data_offset)
-	ALIGN(4) {
-		bad0data_start = .;
-		ctgp_bad0data.o(.data);
-		bad0data_end = .;
-	}
 	.sdata (bss_end + 0x10) :
 	AT(sdata_offset)
 	ALIGN(4) {
