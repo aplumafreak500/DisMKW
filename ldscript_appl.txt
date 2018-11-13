@@ -49,6 +49,8 @@ SECTIONS {
 	AT(init_text)
 	ALIGN(4) {
 		init_text_start = .;
+		memset.o(.text);
+		. += 0xc;
 		text.o(.text);
 		init_text_end = .;
 	} 
