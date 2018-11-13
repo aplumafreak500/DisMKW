@@ -231,7 +231,7 @@ def writeSSEQListToFile(filename_out, filename, base_address, filesize):
         # add .incbins in gaps
         if old_offset != item.offset:
             #.incbin "./baserom/overlay/overlay_0011.bin", 0x14c, 0x221f96c - 0x221f94c
-            output_sseq += "\t.incbin \"" + filename + "\", " + hex(old_offset-base_address)[:-1:] + ", " + hex(item.offset)[:-1:] + " - " + hex(old_offset)[:-1:] + "\n"
+            output_sseq += "\t.incbin \"" + filename + "\", " + hex(old_offset-base_address)[:-1:] + ", " + hex(item.offset - old_offset)[:-1:] + "\n"
             old_offset = item.offset+4
         else:
             old_offset = item.offset+4
@@ -1423,7 +1423,7 @@ def writeSSEQListToFile(filename_out, filename, base_address, filesize):
     
     if old_offset < (base_address+filesize):
         #.incbin "./baserom.bin", 0x14c, 0x221f96c - 0x221f94c
-        output_sseq += "\t.incbin \"" + filename + "\", " + hex(old_offset-base_address)[:-1:] + ", " + hex(base_address+filesize)[:-1:] + " - " + hex(old_offset)[:-1:] + "\n"
+        output_sseq += "\t.incbin \"" + filename + "\", " + hex(old_offset-base_address)[:-1:] + ", " + hex((base_address+filesize)-old_offset)[:-1:] + "\n"
     
     write_string_to_file(filename_out, output_sseq)
 
@@ -1901,23 +1901,22 @@ class Disassembler(object):
                         CmdDict = CmdDict4_2
                         CmdNr2 = ((word >> 1) & 0x3ff)
                         if interpretCmdDict(word, CmdNr2, CmdDict, offset, i) == 0:
-                            raise NameError('Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")")
+                            print 'Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")"
                 elif (CmdNr == 19):
                     CmdDict = CmdDict19
                     CmdNr2 = ((word >> 1) & 0x3ff)
                     if interpretCmdDict(word, CmdNr2, CmdDict, offset, i) == 0:
-                        raise NameError('Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")")
+                        print 'Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")"
                 elif (CmdNr == 31):
                     CmdDict = CmdDict31
                     CmdNr2 = ((word >> 1) & 0x3ff)
                     if interpretCmdDict(word, CmdNr2, CmdDict, offset, i) == 0:
-                        #raise NameError('Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")")
-                        output_sseq += ".4byte " + hex(word) + " # TODO"
+                       print 'Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")"
                 elif (CmdNr == 59):
                     CmdDict = CmdDict59
                     CmdNr2 = ((word >> 1) & 0x1f)
                     if interpretCmdDict(word, CmdNr2, CmdDict, offset, i) == 0:
-                        raise NameError('Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")")
+                        print 'Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")"
                 elif (CmdNr == 63):
                     CmdDict = CmdDict63_1
                     CmdNr2 = ((word >> 1) & 0x1f)
@@ -1925,12 +1924,12 @@ class Disassembler(object):
                         CmdDict = CmdDict63_2
                         CmdNr2 = ((word >> 1) & 0x3ff)
                         if interpretCmdDict(word, CmdNr2, CmdDict, offset, i) == 0:
-                            raise NameError('Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")")
+                            print 'Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")"
                 else:
                     CmdDict = CmdDict0
                     if interpretCmdDict(word, CmdNr, CmdDict, offset, i) == 0:
-                        # raise NameError('Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")")
-                        output_sseq += ".4byte " + hex(word) + " # TODO"
+                        #raise NameError('Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")")
+                       print 'Unknown Cmd: ' + hex(word) + " " + hex(CmdNr) + ' at ' + hex(offset+i) + ' (' + hex(offset+i-base_address) + ")"
                 """
                 else:
                     CmdTable = CmdTable0
@@ -1959,7 +1958,7 @@ class Disassembler(object):
         #output_sseq += "offset: " + str(offset+i) + "\n"
         
         filename_out = filename.replace(".bin", ".bin.txt")
-        write_string_to_file(filename_out, output_sseq)
+        #write_string_to_file(filename_out, output_sseq)
         writeSSEQListToFile(outfilename, self.filenamepath, base_address, self.filesize)
 
         return (output)
