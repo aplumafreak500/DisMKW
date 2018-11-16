@@ -90,6 +90,12 @@ SECTIONS {
 		. += 8;
 		text_1a940.o(.text);
 		. += 12;
+		text_1ab10.o(.text);
+		. += 12;
+		text_1ab30.o(.text);
+		. += 12;
+		text_1ac20.o(.text);
+		. += 12;
 		text_1ad80.o(.text);
 		. += 4;
 		text_1ae60.o(.text);
@@ -103,10 +109,26 @@ SECTIONS {
 		text_1bb80.o(.text);
 		. += 8;
 		text_1bc60.o(.text);
+		. += 4;
+		text_1bdf0.o(.text);
+		. += 4;
+		text_1e9a0.o(.text);
 		. += 8;
 		text_1ea60.o(.text);
 		. += 4;
 		text_1eb10.o(.text);
+		. += 12;
+		text_1ec50.o(.text);
+		. += 12;
+		text_1ecf0.o(.text);
+		. += 4;
+		text_44980.o(.text);
+		. += 8;
+		text_44a60.o(.text);
+		. += 4;
+		text_44a90.o(.text);
+		. += 12;
+		text_44b30.o(.text);
 		. += 8;
 		text_44c10.o(.text);
 		. += 8;
@@ -115,8 +137,17 @@ SECTIONS {
 		text_44d70.o(.text);
 		. += 8;
 		text_44de0.o(.text);
-		. += 8;
+		. += 12;
 		text_45180.o(.text);
+		. += 12;
+		text_b2a30.o(.text);
+		. += 4;
+		text_b2e30.o(.text);
+		. += 12;
+		text_b34c0.o(.text);
+		. += 8;
+		text_b34d0.o(.text);
+		. += 12;
 		text_end = .;
 	}
 	.ctors :
