@@ -11163,9 +11163,59 @@ _160e6c:
 	addi %r1, %r1, 0x30
 	blr
 
-	.global t1_160e84
-t1_160e84:
-	.incbin "basemain.dol", 0x1633e4, 0x19c
+	.global sub_160e84
+sub_160e84: # 0x80168144
+	stwu %r1, -0x20(%r1)
+	mflr %r0
+	stw %r0, 0x24(%r1)
+	addi %r11, %r1, 0x20
+	bl sub_19780
+	mr %r27, %r3
+	mr %r28, %r4
+	mr %r29, %r5
+	mr %r30, %r6
+	b _160f04
+_160eac:
+	cmpwi %r29, 0x4
+	li %r31, 0x4
+	bge- _160ebc
+	mr %r31, %r29
+_160ebc:
+	mr %r3, %r27
+	mr %r4, %r28
+	mr %r5, %r31
+	mr %r6, %r30
+	li %r7, 0x0
+	bl sub_160c08
+	cmpwi %r3, 0x0
+	bne- _160ee4
+	li %r3, 0x0
+	b _160f10
+_160ee4:
+	mr %r3, %r27
+	bl sub_161020
+	cmpwi %r3, 0x0
+	bne- _160efc
+	li %r3, 0x0
+	b _160f10
+_160efc:
+	add %r28, %r28, %r31
+	subf %r29, %r31, %r29
+_160f04:
+	cmpwi %r29, 0x0
+	bne+ _160eac
+	li %r3, 0x1
+_160f10:
+	addi %r11, %r1, 0x20
+	bl sub_197cc
+	lwz %r0, 0x24(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x20
+	blr
+
+	.global t1_160f28
+t1_160f28:
+	.incbin "basemain.dol", 0x163488, 0xf8
 
 	.global sub_161020
 sub_161020: # 0x801682e0
@@ -16310,7 +16360,2688 @@ _18dca0:
 
 	.global t1_18dcb4
 t1_18dcb4:
-	.incbin "basemain.dol", 0x190214, 0x31d8
+	.incbin "basemain.dol", 0x190214, 0x110
+	
+	.global sub_18ddc4
+sub_18ddc4: # 0x80195084
+	stwu %r1, -0x20(%r1)
+	addi %r0, %r3, 0xc4
+	lfs %f6, -0x6794(%r2)
+	li %r4, -0x1
+	stw %r31, 0x1c(%r1)
+	lfs %f5, -0x6790(%r2)
+	stw %r30, 0x18(%r1)
+	li %r30, 0x0
+	lfs %f4, -0x678c(%r2)
+	stw %r29, 0x14(%r1)
+	addi %r29, %r3, 0xe8
+	lfs %f3, -0x6788(%r2)
+	stb %r30, 0x51d(%r3)
+	lfs %f1, 0xa4(%r3)
+	lfs %f0, -0x723c(%r13)
+	lhz %r5, 0x4d0(%r3)
+	fadds %f0, %f6, %f0
+	lfs %f2, -0x67a0(%r2)
+	lwz %r11, 0xb0(%r3)
+	lwz %r10, 0xb4(%r3)
+	stfs %f0, 0x4f4(%r3)
+	lfs %f0, -0x723c(%r13)
+	fsubs %f0, %f5, %f0
+	stfs %f0, 0x4fc(%r3)
+	lfs %f0, -0x723c(%r13)
+	fadds %f0, %f4, %f0
+	stfs %f0, 0x4f8(%r3)
+	lfs %f0, -0x723c(%r13)
+	fsubs %f0, %f3, %f0
+	stfs %f0, 0x500(%r3)
+	lfs %f0, -0x7234(%r13)
+	fdivs %f0, %f5, %f0
+	stfs %f0, 0x504(%r3)
+	lfs %f0, -0x7234(%r13)
+	fdivs %f0, %f6, %f0
+	stfs %f0, 0x508(%r3)
+	lfs %f0, -0x7248(%r13)
+	fmuls %f0, %f0, %f0
+	stfs %f0, 0x50c(%r3)
+	lfs %f0, -0x63cc(%r13)
+	stfs %f0, 0x514(%r3)
+	lfs %f3, -0x63d0(%r13)
+	fdivs %f0, %f3, %f1
+	stfs %f3, 0x510(%r3)
+	stw %r30, 0x8(%r3)
+	stw %r30, 0x4(%r3)
+	stw %r30, 0x0(%r3)
+	sth %r30, 0x4cc(%r3)
+	sth %r5, 0x4ce(%r3)
+	stb %r30, 0x5e(%r3)
+	stb %r30, 0x4ca(%r3)
+	lwz %r8, -0x63d8(%r13)
+	lwz %r7, -0x63d4(%r13)
+	stfs %f5, 0x4b8(%r3)
+	stfs %f2, 0x4bc(%r3)
+	lwz %r6, 0x4b8(%r3)
+	stw %r8, 0x28(%r3)
+	lwz %r5, 0x4bc(%r3)
+	stw %r7, 0x2c(%r3)
+	stw %r8, 0x20(%r3)
+	stw %r7, 0x24(%r3)
+	stfs %f2, 0x30(%r3)
+	stfs %f5, 0x4b0(%r3)
+	stfs %f5, 0x34(%r3)
+	stfs %f2, 0x4b4(%r3)
+	stfs %f2, 0x38(%r3)
+	lwz %r31, -0x63d8(%r13)
+	lwz %r12, -0x63d4(%r13)
+	stfs %f2, 0x14(%r3)
+	stfs %f2, 0xc(%r3)
+	lwz %r7, 0x14(%r3)
+	stfs %f6, 0x10(%r3)
+	lwz %r9, 0xc(%r3)
+	lwz %r8, 0x10(%r3)
+	stw %r31, 0x3c(%r3)
+	stw %r12, 0x40(%r3)
+	stfs %f2, 0x44(%r3)
+	stfs %f5, 0x54(%r3)
+	stfs %f2, 0x58(%r3)
+	stfs %f1, 0x48(%r3)
+	stfs %f2, 0x50(%r3)
+	stfs %f2, 0x4c(%r3)
+	stfs %f1, 0x49c(%r3)
+	stfs %f0, 0x4a0(%r3)
+	stfs %f0, 0x490(%r3)
+	stw %r11, 0x494(%r3)
+	stw %r10, 0x498(%r3)
+	stfs %f5, 0x18(%r3)
+	stfs %f2, 0x1c(%r3)
+	stw %r9, 0x4a4(%r3)
+	stw %r8, 0x4a8(%r3)
+	stw %r7, 0x4ac(%r3)
+	stw %r6, 0x4c0(%r3)
+	stw %r5, 0x4c4(%r3)
+	lhz %r5, -0x7240(%r13)
+	sth %r5, 0x4c8(%r3)
+	sth %r30, 0x10c(%r3)
+_18df48:
+	stb %r4, 0x8(%r29)
+	subi %r29, %r29, 0xc
+	cmplw %r29, %r0
+	bge+ _18df48
+	addi %r5, %r3, 0x100
+	addi %r0, %r3, 0xf4
+	li %r4, -0x1
+_18df64:
+	stb %r4, 0x8(%r5)
+	subi %r5, %r5, 0xc
+	cmplw %r5, %r0
+	bge+ _18df64
+	li %r4, 0x0
+	li %r0, 0x1
+	stb %r4, 0x10f(%r3)
+	stb %r0, 0x51e(%r3)
+	lwz %r31, 0x1c(%r1)
+	lwz %r30, 0x18(%r1)
+	lwz %r29, 0x14(%r1)
+	addi %r1, %r1, 0x20
+	blr
+
+	.global sub_18df98
+sub_18df98: # 0x80195258
+	lwz %r0, 0x4(%r3)
+	cmpwi %r0, 0x0
+	bne- _18dfb0
+	lwz %r0, 0x8(%r3)
+	cmpwi %r0, 0x0
+	beq- _18dfe8
+_18dfb0:
+	lwz %r0, 0x4(%r3)
+	li %r7, 0x0
+	lhz %r6, 0x4d0(%r3)
+	cmpwi %r0, 0x0
+	sth %r7, 0x4cc(%r3)
+	sth %r6, 0x4ce(%r3)
+	beq- _18e05c
+	lhz %r0, 0x4d2(%r3)
+	cmpwi %r0, 0x0
+	beq- _18e05c
+	lwz %r0, 0x0(%r3)
+	oris %r0, %r0, 0x8000
+	stw %r0, 0x0(%r3)
+	b _18e05c
+_18dfe8:
+	lwz %r0, 0x0(%r3)
+	cmpwi %r0, 0x0
+	beq- _18e05c
+	lhz %r0, 0x4cc(%r3)
+	add %r0, %r0, %r5
+	clrlwi  %r6, %r0, 16
+	sth %r0, 0x4cc(%r3)
+	cmplwi %r6, 0x9c40
+	blt- _18e018
+	addis %r6, %r6, 0xffff
+	addi %r0, %r6, 0x63c0
+	sth %r0, 0x4cc(%r3)
+_18e018:
+	lhz %r8, 0x4cc(%r3)
+	lhz %r7, 0x4ce(%r3)
+	cmplw %r8, %r7
+	blt- _18e05c
+	lwz %r6, 0x0(%r3)
+	cmplwi %r8, 0x4e20
+	lhz %r0, 0x4d2(%r3)
+	oris %r6, %r6, 0x8000
+	add %r0, %r7, %r0
+	stw %r6, 0x0(%r3)
+	sth %r0, 0x4ce(%r3)
+	blt- _18e05c
+	clrlwi  %r6, %r0, 16
+	subi %r7, %r8, 0x4e20
+	subi %r0, %r6, 0x4e20
+	sth %r7, 0x4cc(%r3)
+	sth %r0, 0x4ce(%r3)
+_18e05c:
+	cmplwi %r4, 0x2
+	bnelr- 
+	lwz %r0, 0x64(%r3)
+	cmpwi %r0, 0x0
+	bne- _18e07c
+	lwz %r0, 0x68(%r3)
+	cmpwi %r0, 0x0
+	beq- _18e0b4
+_18e07c:
+	lwz %r0, 0x64(%r3)
+	li %r5, 0x0
+	lhz %r4, 0x4d0(%r3)
+	cmpwi %r0, 0x0
+	sth %r5, 0x4d4(%r3)
+	sth %r4, 0x4d6(%r3)
+	beqlr- 
+	lhz %r0, 0x4d2(%r3)
+	cmpwi %r0, 0x0
+	beqlr- 
+	lwz %r0, 0x60(%r3)
+	oris %r0, %r0, 0x8000
+	stw %r0, 0x60(%r3)
+	blr
+_18e0b4:
+	lwz %r0, 0x60(%r3)
+	cmpwi %r0, 0x0
+	beqlr- 
+	lhz %r0, 0x4d4(%r3)
+	add %r0, %r0, %r5
+	clrlwi  %r4, %r0, 16
+	sth %r0, 0x4d4(%r3)
+	cmplwi %r4, 0x9c40
+	blt- _18e0e4
+	addis %r4, %r4, 0xffff
+	addi %r0, %r4, 0x63c0
+	sth %r0, 0x4d4(%r3)
+_18e0e4:
+	lhz %r6, 0x4d4(%r3)
+	lhz %r5, 0x4d6(%r3)
+	cmplw %r6, %r5
+	bltlr- 
+	lwz %r4, 0x60(%r3)
+	cmplwi %r6, 0x4e20
+	lhz %r0, 0x4d2(%r3)
+	oris %r4, %r4, 0x8000
+	add %r0, %r5, %r0
+	stw %r4, 0x60(%r3)
+	sth %r0, 0x4d6(%r3)
+	bltlr- 
+	clrlwi  %r4, %r0, 16
+	subi %r5, %r6, 0x4e20
+	subi %r0, %r4, 0x4e20
+	sth %r5, 0x4d4(%r3)
+	sth %r0, 0x4d6(%r3)
+	blr
+
+	.global sub_18e12c
+sub_18e12c: # 0x801953ec
+	lfs %f2, 0x0(%r4)
+	lwz %r0, 0x534(%r3)
+	fsubs %f3, %f1, %f2
+	cmpwi %r0, 0x0
+	bne- _18e198
+	lfs %f0, -0x67a0(%r2)
+	fcmpo %cr0, %f3, %f0
+	bge- _18e154
+	fneg  %f2, %f3
+	b _18e158
+_18e154:
+	fmr  %f2, %f3
+_18e158:
+	lfs %f0, 0x9c(%r3)
+	fcmpo %cr0, %f2, %f0
+	cror 2, 1, 2
+	bne- _18e170
+	lfs %f2, -0x6790(%r2)
+	b _18e17c
+_18e170:
+	fdivs %f2, %f2, %f0
+	fmuls %f2, %f2, %f2
+	fmuls %f2, %f2, %f2
+_18e17c:
+	lfs %f1, 0xa0(%r3)
+	lfs %f0, 0x0(%r4)
+	fmuls %f2, %f2, %f1
+	fmuls %f1, %f2, %f3
+	fadds %f0, %f0, %f1
+	stfs %f0, 0x0(%r4)
+	blr
+_18e198:
+	lfs %f1, 0x9c(%r3)
+	fneg  %f0, %f1
+	fcmpo %cr0, %f3, %f0
+	bge- _18e1c0
+	fadds %f1, %f3, %f1
+	lfs %f0, 0xa0(%r3)
+	fmuls %f0, %f0, %f1
+	fadds %f0, %f2, %f0
+	stfs %f0, 0x0(%r4)
+	blr
+_18e1c0:
+	fcmpo %cr0, %f3, %f1
+	blelr- 
+	fsubs %f1, %f3, %f1
+	lfs %f0, 0xa0(%r3)
+	fmuls %f0, %f0, %f1
+	fadds %f0, %f2, %f0
+	stfs %f0, 0x0(%r4)
+	blr
+
+	.global sub_18e1e0
+sub_18e1e0: # 0x801954a0
+	stwu %r1, -0x30(%r1)
+	mflr %r0
+	stw %r0, 0x34(%r1)
+	stfd %f31, 0x20(%r1)
+	psq_st 31, 0x28, 1, 0, 0
+	stfd %f30, 0x10(%r1)
+	psq_st 30, 0x18, 1, 0, 0
+	stw %r31, 0xc(%r1)
+	mr %r31, %r3
+	lfs %f1, 0x4a4(%r3)
+	lfs %f0, 0x4a8(%r3)
+	fmuls %f1, %f1, %f1
+	fmuls %f0, %f0, %f0
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f8, %f1
+	lfs %f0, -0x67a0(%r2)
+	fcmpu %cr0, %f0, %f8
+	beq- _18e350
+	lfs %f2, -0x6784(%r2)
+	fcmpo %cr0, %f8, %f2
+	cror 2, 1, 2
+	bne- _18e240
+	b _18e350
+_18e240:
+	lfs %f0, 0x4a4(%r31)
+	lfs %f1, 0x4a8(%r31)
+	fdivs %f9, %f0, %f8
+	lfs %f0, -0x6790(%r2)
+	fdivs %f10, %f1, %f8
+	fcmpo %cr0, %f8, %f0
+	ble- _18e260
+	fsubs %f8, %f2, %f8
+_18e260:
+	lfs %f0, 0xac(%r31)
+	lfs %f6, 0xa8(%r31)
+	fmuls %f4, %f0, %f10
+	lfs %f7, -0x724c(%r13)
+	fmuls %f5, %f6, %f9
+	lfs %f3, 0x4b8(%r31)
+	fmuls %f2, %f0, %f9
+	lfs %f1, 0x4bc(%r31)
+	fmuls %f0, %f6, %f10
+	fmuls %f6, %f8, %f7
+	fadds %f4, %f5, %f4
+	fsubs %f0, %f2, %f0
+	fmuls %f8, %f8, %f6
+	fsubs %f2, %f4, %f3
+	fsubs %f0, %f0, %f1
+	fmuls %f2, %f8, %f2
+	fmuls %f0, %f8, %f0
+	fadds %f31, %f3, %f2
+	fadds %f30, %f1, %f0
+	fmuls %f1, %f31, %f31
+	fmuls %f0, %f30, %f30
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f1, %f1
+	lfs %f0, -0x67a0(%r2)
+	fcmpu %cr0, %f0, %f1
+	beq- _18e350
+	fdivs %f7, %f31, %f1
+	lfs %f5, 0x4c0(%r31)
+	lfs %f4, 0x4c4(%r31)
+	lfs %f0, 0x50c(%r31)
+	fdivs %f6, %f30, %f1
+	stfs %f7, 0x4b8(%r31)
+	stfs %f6, 0x4bc(%r31)
+	fsubs %f2, %f7, %f5
+	fsubs %f3, %f6, %f4
+	lfs %f1, -0x7244(%r13)
+	fmuls %f1, %f1, %f2
+	fadds %f1, %f5, %f1
+	fsubs %f2, %f7, %f1
+	stfs %f1, 0x4c0(%r31)
+	lfs %f1, -0x7244(%r13)
+	fmuls %f2, %f2, %f2
+	fmuls %f1, %f1, %f3
+	fadds %f1, %f4, %f1
+	fsubs %f3, %f6, %f1
+	stfs %f1, 0x4c4(%r31)
+	fmuls %f1, %f3, %f3
+	fadds %f1, %f2, %f1
+	fcmpo %cr0, %f1, %f0
+	cror 2, 0, 2
+	bne- _18e348
+	lhz %r3, 0x4c8(%r31)
+	cmpwi %r3, 0x0
+	beq- _18e350
+	subi %r0, %r3, 0x1
+	sth %r0, 0x4c8(%r31)
+	b _18e350
+_18e348:
+	lhz %r0, -0x7240(%r13)
+	sth %r0, 0x4c8(%r31)
+_18e350:
+	psq_l 31, 0x28, 1, 0, 0
+	lfd %f31, 0x20(%r1)
+	psq_l 30, 0x18, 1, 0, 0
+	lfd %f30, 0x10(%r1)
+	lwz %r0, 0x34(%r1)
+	lwz %r31, 0xc(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x30
+	blr
+
+	.global sub_18e374
+sub_18e374: # 0x80195634
+	stwu %r1, -0x40(%r1)
+	mflr %r0
+	stw %r0, 0x44(%r1)
+	stfd %f31, 0x30(%r1)
+	psq_st 31, 0x38, 1, 0, 0
+	stfd %f30, 0x20(%r1)
+	psq_st 30, 0x28, 1, 0, 0
+	stfd %f29, 0x10(%r1)
+	psq_st 29, 0x18, 1, 0, 0
+	stw %r31, 0xc(%r1)
+	mr %r31, %r3
+	lfs %f1, 0x4a4(%r3)
+	lfs %f0, 0x4a8(%r3)
+	fmuls %f1, %f1, %f1
+	fmuls %f0, %f0, %f0
+	fadds %f30, %f1, %f0
+	fmr  %f1, %f30
+	bl sub_13dd4
+	lfs %f0, 0x4ac(%r31)
+	frsp  %f31, %f1
+	fneg  %f29, %f0
+	fmuls %f0, %f29, %f29
+	fadds %f1, %f30, %f0
+	bl sub_13dd4
+	frsp  %f5, %f1
+	lfs %f0, -0x67a0(%r2)
+	fcmpu %cr0, %f0, %f5
+	beq- _18e46c
+	lfs %f1, -0x6784(%r2)
+	fcmpo %cr0, %f5, %f1
+	cror 2, 1, 2
+	bne- _18e3f8
+	b _18e46c
+_18e3f8:
+	fdivs %f2, %f31, %f5
+	lfs %f0, -0x6790(%r2)
+	fdivs %f29, %f29, %f5
+	fcmpo %cr0, %f5, %f0
+	ble- _18e410
+	fsubs %f5, %f1, %f5
+_18e410:
+	lfs %f0, -0x724c(%r13)
+	lfs %f3, 0x54(%r31)
+	fmuls %f4, %f5, %f0
+	lfs %f1, 0x58(%r31)
+	fsubs %f2, %f2, %f3
+	fsubs %f0, %f29, %f1
+	fmuls %f5, %f5, %f4
+	fmuls %f2, %f5, %f2
+	fmuls %f0, %f5, %f0
+	fadds %f31, %f3, %f2
+	fadds %f30, %f1, %f0
+	fmuls %f1, %f31, %f31
+	fmuls %f0, %f30, %f30
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f2, %f1
+	lfs %f0, -0x67a0(%r2)
+	fcmpu %cr0, %f0, %f2
+	beq- _18e46c
+	fdivs %f1, %f31, %f2
+	fdivs %f0, %f30, %f2
+	stfs %f1, 0x54(%r31)
+	stfs %f0, 0x58(%r31)
+_18e46c:
+	psq_l 31, 0x38, 1, 0, 0
+	lfd %f31, 0x30(%r1)
+	psq_l 30, 0x28, 1, 0, 0
+	lfd %f30, 0x20(%r1)
+	psq_l 29, 0x18, 1, 0, 0
+	lfd %f29, 0x10(%r1)
+	lwz %r0, 0x44(%r1)
+	lwz %r31, 0xc(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x40
+	blr
+
+	.global sub_18e498
+sub_18e498: # 0x80195758
+	stwu %r1, -0x50(%r1)
+	mflr %r0
+	lis %r5, 0x4330
+	stw %r0, 0x54(%r1)
+	stw %r31, 0x4c(%r1)
+	mr %r31, %r4
+	stw %r30, 0x48(%r1)
+	mr %r30, %r3
+	lbz %r0, 0x36(%r4)
+	stw %r5, 0x30(%r1)
+	cmpwi %r0, 0x6
+	stw %r5, 0x38(%r1)
+	beq- _18e8e8
+	bge- _18e4e8
+	cmpwi %r0, 0x3
+	beq- _18e8e8
+	bge- _18e4f8
+	cmpwi %r0, 0x1
+	bge- _18e4f8
+	b _18e8e8
+_18e4e8:
+	cmpwi %r0, 0x9
+	bge- _18e8e8
+	b _18e4f8
+
+	.global t1_18e4f4
+t1_18e4f4:
+	.incbin "basemain.dol", 0x190a54, 0x4
+_18e4f8:
+	lha %r0, 0x2(%r4)
+	lfd %f3, -0x6780(%r2)
+	neg %r0, %r0
+	lfs %f1, 0x4dc(%r3)
+	xoris %r0, %r0, 0x8000
+	lfs %f0, -0x67a0(%r2)
+	stw %r0, 0x34(%r1)
+	lfs %f4, -0x7204(%r13)
+	lfd %f2, 0x30(%r1)
+	fsubs %f2, %f2, %f3
+	fmuls %f1, %f2, %f1
+	fcmpo %cr0, %f1, %f0
+	bge- _18e53c
+	fneg  %f4, %f4
+	fcmpo %cr0, %f1, %f4
+	bge- _18e548
+	b _18e54c
+_18e53c:
+	fcmpo %cr0, %f1, %f4
+	ble- _18e548
+	b _18e54c
+_18e548:
+	fmr  %f4, %f1
+_18e54c:
+	stfs %f4, 0x4a4(%r3)
+	lfd %f3, -0x6780(%r2)
+	lha %r0, 0x6(%r4)
+	lfs %f1, 0x4e4(%r3)
+	neg %r0, %r0
+	lfs %f0, -0x67a0(%r2)
+	xoris %r0, %r0, 0x8000
+	lfs %f4, -0x7204(%r13)
+	stw %r0, 0x3c(%r1)
+	lfd %f2, 0x38(%r1)
+	fsubs %f2, %f2, %f3
+	fmuls %f1, %f2, %f1
+	fcmpo %cr0, %f1, %f0
+	bge- _18e594
+	fneg  %f4, %f4
+	fcmpo %cr0, %f1, %f4
+	bge- _18e5a0
+	b _18e5a4
+_18e594:
+	fcmpo %cr0, %f1, %f4
+	ble- _18e5a0
+	b _18e5a4
+_18e5a0:
+	fmr  %f4, %f1
+_18e5a4:
+	stfs %f4, 0x4a8(%r3)
+	lfd %f3, -0x6780(%r2)
+	lha %r0, 0x4(%r4)
+	lfs %f1, 0x4e0(%r3)
+	xoris %r0, %r0, 0x8000
+	lfs %f0, -0x67a0(%r2)
+	stw %r0, 0x34(%r1)
+	lfs %f4, -0x7204(%r13)
+	lfd %f2, 0x30(%r1)
+	fsubs %f2, %f2, %f3
+	fmuls %f1, %f2, %f1
+	fcmpo %cr0, %f1, %f0
+	bge- _18e5e8
+	fneg  %f4, %f4
+	fcmpo %cr0, %f1, %f4
+	bge- _18e5f4
+	b _18e5f8
+_18e5e8:
+	fcmpo %cr0, %f1, %f4
+	ble- _18e5f4
+	b _18e5f8
+_18e5f4:
+	fmr  %f4, %f1
+_18e5f8:
+	lwz %r6, 0xc(%r3)
+	addi %r4, %r30, 0xc
+	lwz %r5, 0x10(%r3)
+	lwz %r0, 0x14(%r3)
+	stfs %f4, 0x4ac(%r3)
+	mr %r3, %r30
+	lfs %f1, 0x4a4(%r30)
+	stw %r6, 0x14(%r1)
+	stw %r5, 0x18(%r1)
+	stw %r0, 0x1c(%r1)
+	bl sub_18e12c
+	lfs %f1, 0x4a8(%r30)
+	mr %r3, %r30
+	addi %r4, %r30, 0x10
+	bl sub_18e12c
+	lfs %f1, 0x4ac(%r30)
+	mr %r3, %r30
+	addi %r4, %r30, 0x14
+	bl sub_18e12c
+	lfs %f1, 0xc(%r30)
+	lfs %f0, 0x10(%r30)
+	fmuls %f1, %f1, %f1
+	lfs %f2, 0x14(%r30)
+	fmuls %f0, %f0, %f0
+	fmuls %f2, %f2, %f2
+	fadds %f0, %f1, %f0
+	fadds %f1, %f2, %f0
+	bl sub_13dd4
+	lfs %f2, 0x14(%r1)
+	frsp  %f6, %f1
+	lfs %f0, 0xc(%r30)
+	lfs %f1, 0x18(%r1)
+	fsubs %f5, %f2, %f0
+	lfs %f0, 0x10(%r30)
+	lfs %f2, 0x1c(%r1)
+	fsubs %f4, %f1, %f0
+	lfs %f0, 0x14(%r30)
+	fmuls %f1, %f5, %f5
+	fsubs %f3, %f2, %f0
+	stfs %f6, 0x18(%r30)
+	fmuls %f0, %f4, %f4
+	stfs %f5, 0x14(%r1)
+	fmuls %f2, %f3, %f3
+	fadds %f0, %f1, %f0
+	stfs %f4, 0x18(%r1)
+	stfs %f3, 0x1c(%r1)
+	fadds %f1, %f2, %f0
+	bl sub_13dd4
+	frsp  %f0, %f1
+	mr %r3, %r30
+	stfs %f0, 0x1c(%r30)
+	bl sub_18e1e0
+	mr %r3, %r30
+	bl sub_18e374
+	lbz %r0, 0x29(%r31)
+	extsb. %r0, %r0
+	bne- _18e8e8
+	lbz %r0, 0x28(%r31)
+	cmplwi %r0, 0x1
+	bne- _18e8e8
+	lbz %r0, 0x36(%r31)
+	cmplwi %r0, 0x4
+	beq- _18e700
+	cmplwi %r0, 0x5
+	beq- _18e700
+	b _18e8e8
+_18e700:
+	lha %r0, 0x2a(%r31)
+	lfd %f3, -0x6780(%r2)
+	neg %r0, %r0
+	lfs %f1, 0x4e8(%r30)
+	xoris %r0, %r0, 0x8000
+	lfs %f0, -0x67a0(%r2)
+	stw %r0, 0x3c(%r1)
+	lfs %f4, -0x7200(%r13)
+	lfd %f2, 0x38(%r1)
+	fsubs %f2, %f2, %f3
+	fmuls %f1, %f2, %f1
+	fcmpo %cr0, %f1, %f0
+	bge- _18e744
+	fneg  %f4, %f4
+	fcmpo %cr0, %f1, %f4
+	bge- _18e750
+	b _18e754
+_18e744:
+	fcmpo %cr0, %f1, %f4
+	ble- _18e750
+	b _18e754
+_18e750:
+	fmr  %f4, %f1
+_18e754:
+	stfs %f4, 0x20(%r1)
+	lfd %f3, -0x6780(%r2)
+	lha %r0, 0x2e(%r31)
+	lfs %f1, 0x4f0(%r30)
+	neg %r0, %r0
+	lfs %f0, -0x67a0(%r2)
+	xoris %r0, %r0, 0x8000
+	lfs %f4, -0x7200(%r13)
+	stw %r0, 0x34(%r1)
+	lfd %f2, 0x30(%r1)
+	fsubs %f2, %f2, %f3
+	fmuls %f1, %f2, %f1
+	fcmpo %cr0, %f1, %f0
+	bge- _18e79c
+	fneg  %f4, %f4
+	fcmpo %cr0, %f1, %f4
+	bge- _18e7a8
+	b _18e7ac
+_18e79c:
+	fcmpo %cr0, %f1, %f4
+	ble- _18e7a8
+	b _18e7ac
+_18e7a8:
+	fmr  %f4, %f1
+_18e7ac:
+	stfs %f4, 0x24(%r1)
+	lfd %f3, -0x6780(%r2)
+	lha %r0, 0x2c(%r31)
+	lfs %f1, 0x4ec(%r30)
+	xoris %r0, %r0, 0x8000
+	lfs %f0, -0x67a0(%r2)
+	stw %r0, 0x3c(%r1)
+	lfs %f4, -0x7200(%r13)
+	lfd %f2, 0x38(%r1)
+	fsubs %f2, %f2, %f3
+	fmuls %f1, %f2, %f1
+	fcmpo %cr0, %f1, %f0
+	bge- _18e7f0
+	fneg  %f4, %f4
+	fcmpo %cr0, %f1, %f4
+	bge- _18e7fc
+	b _18e800
+_18e7f0:
+	fcmpo %cr0, %f1, %f4
+	ble- _18e7fc
+	b _18e800
+_18e7fc:
+	fmr  %f4, %f1
+_18e800:
+	stfs %f4, 0x28(%r1)
+	lbz %r0, 0x526(%r30)
+	cmpwi %r0, 0x0
+	beq- _18e824
+	addi %r4, %r1, 0x20
+	lis %r3, 0x8034
+	mr %r5, %r4
+	addi %r3, %r3, 0x2940
+	bl sub_1935bc
+_18e824:
+	lwz %r6, 0x68(%r30)
+	mr %r3, %r30
+	lwz %r5, 0x6c(%r30)
+	addi %r4, %r30, 0x68
+	lwz %r0, 0x70(%r30)
+	stw %r6, 0x8(%r1)
+	lfs %f1, 0x20(%r1)
+	stw %r5, 0xc(%r1)
+	stw %r0, 0x10(%r1)
+	bl sub_18e12c
+	lfs %f1, 0x24(%r1)
+	mr %r3, %r30
+	addi %r4, %r30, 0x6c
+	bl sub_18e12c
+	lfs %f1, 0x28(%r1)
+	mr %r3, %r30
+	addi %r4, %r30, 0x70
+	bl sub_18e12c
+	lfs %f1, 0x68(%r30)
+	lfs %f0, 0x6c(%r30)
+	fmuls %f1, %f1, %f1
+	lfs %f2, 0x70(%r30)
+	fmuls %f0, %f0, %f0
+	fmuls %f2, %f2, %f2
+	fadds %f0, %f1, %f0
+	fadds %f1, %f2, %f0
+	bl sub_13dd4
+	lfs %f2, 0x8(%r1)
+	frsp  %f6, %f1
+	lfs %f0, 0x68(%r30)
+	lfs %f1, 0xc(%r1)
+	fsubs %f5, %f2, %f0
+	lfs %f0, 0x6c(%r30)
+	lfs %f2, 0x10(%r1)
+	fsubs %f4, %f1, %f0
+	lfs %f0, 0x70(%r30)
+	fmuls %f1, %f5, %f5
+	fsubs %f3, %f2, %f0
+	stfs %f6, 0x74(%r30)
+	fmuls %f0, %f4, %f4
+	stfs %f5, 0x8(%r1)
+	fmuls %f2, %f3, %f3
+	fadds %f0, %f1, %f0
+	stfs %f4, 0xc(%r1)
+	stfs %f3, 0x10(%r1)
+	fadds %f1, %f2, %f0
+	bl sub_13dd4
+	frsp  %f0, %f1
+	stfs %f0, 0x78(%r30)
+_18e8e8:
+	lwz %r0, 0x54(%r1)
+	lwz %r31, 0x4c(%r1)
+	lwz %r30, 0x48(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x50
+	blr
+
+	.global sub_18e900
+sub_18e900: # 0x80195bc0
+	stwu %r1, -0x80(%r1)
+	mflr %r0
+	stw %r0, 0x84(%r1)
+	stfd %f31, 0x70(%r1)
+	psq_st 31, 0x78, 1, 0, 0
+	stfd %f30, 0x60(%r1)
+	psq_st 30, 0x68, 1, 0, 0
+	stfd %f29, 0x50(%r1)
+	psq_st 29, 0x58, 1, 0, 0
+	stfd %f28, 0x40(%r1)
+	psq_st 28, 0x48, 1, 0, 0
+	stfd %f27, 0x30(%r1)
+	psq_st 27, 0x38, 1, 0, 0
+	addi %r11, %r1, 0x30
+	bl sub_19778
+	lfs %f30, -0x7230(%r13)
+	mr %r25, %r3
+	lfs %f29, -0x67a0(%r2)
+	addi %r29, %r3, 0xc4
+	lfs %f31, -0x6790(%r2)
+	addi %r31, %r3, 0xe8
+_18e954:
+	lbz %r0, 0x8(%r29)
+	extsb. %r0, %r0
+	bne- _18ea54
+	addi %r28, %r29, 0xc
+	addi %r30, %r25, 0xe8
+_18e968:
+	lbz %r0, 0x8(%r28)
+	extsb. %r0, %r0
+	bne- _18ea48
+	lfs %f3, 0x0(%r28)
+	lfs %f2, 0x0(%r29)
+	lfs %f1, 0x4(%r28)
+	lfs %f0, 0x4(%r29)
+	fsubs %f27, %f3, %f2
+	fsubs %f28, %f1, %f0
+	fmuls %f1, %f27, %f27
+	fmuls %f0, %f28, %f28
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f0, %f1
+	lfs %f5, 0xb0(%r25)
+	lfs %f2, 0xb4(%r25)
+	lfs %f1, 0x510(%r25)
+	fdivs %f3, %f31, %f0
+	lfs %f0, 0x514(%r25)
+	fmuls %f27, %f27, %f3
+	fmuls %f28, %f28, %f3
+	fmuls %f6, %f1, %f3
+	fmuls %f4, %f5, %f27
+	fmuls %f3, %f2, %f28
+	fmuls %f2, %f2, %f27
+	fmuls %f1, %f5, %f28
+	fadds %f3, %f4, %f3
+	fcmpo %cr0, %f6, %f0
+	fsubs %f2, %f2, %f1
+	stfs %f3, 0x8(%r1)
+	stfs %f2, 0xc(%r1)
+	cror 2, 0, 2
+	beq- _18ea48
+	lfs %f0, -0x7238(%r13)
+	fcmpo %cr0, %f6, %f0
+	cror 2, 1, 2
+	beq- _18ea48
+	lfs %f1, 0x4b8(%r25)
+	lfs %f0, 0x4bc(%r25)
+	fmuls %f1, %f1, %f3
+	fmuls %f0, %f0, %f2
+	fadds %f0, %f1, %f0
+	fcmpo %cr0, %f0, %f29
+	bge- _18ea34
+	fneg  %f0, %f0
+	fcmpo %cr0, %f0, %f30
+	ble- _18ea48
+	fmr  %f30, %f0
+	mr %r27, %r28
+	mr %r26, %r29
+	b _18ea48
+_18ea34:
+	fcmpo %cr0, %f0, %f30
+	ble- _18ea48
+	fmr  %f30, %f0
+	mr %r27, %r29
+	mr %r26, %r28
+_18ea48:
+	addi %r28, %r28, 0xc
+	cmplw %r28, %r30
+	ble+ _18e968
+_18ea54:
+	addi %r29, %r29, 0xc
+	cmplw %r29, %r31
+	blt+ _18e954
+	lfs %f0, -0x7230(%r13)
+	fcmpu %cr0, %f30, %f0
+	bne- _18ea74
+	li %r3, 0x0
+	b _18eaa8
+_18ea74:
+	lwz %r4, 0x0(%r27)
+	li %r3, 0x2
+	lwz %r0, 0x4(%r27)
+	stw %r4, 0xf4(%r25)
+	stw %r0, 0xf8(%r25)
+	lwz %r0, 0x8(%r27)
+	stw %r0, 0xfc(%r25)
+	lwz %r4, 0x0(%r26)
+	lwz %r0, 0x4(%r26)
+	stw %r4, 0x100(%r25)
+	stw %r0, 0x104(%r25)
+	lwz %r0, 0x8(%r26)
+	stw %r0, 0x108(%r25)
+_18eaa8:
+	psq_l 31, 0x78, 1, 0, 0
+	lfd %f31, 0x70(%r1)
+	psq_l 30, 0x68, 1, 0, 0
+	lfd %f30, 0x60(%r1)
+	psq_l 29, 0x58, 1, 0, 0
+	lfd %f29, 0x50(%r1)
+	psq_l 28, 0x48, 1, 0, 0
+	lfd %f28, 0x40(%r1)
+	psq_l 27, 0x38, 1, 0, 0
+	addi %r11, %r1, 0x30
+	lfd %f27, 0x30(%r1)
+	bl sub_197c4
+	lwz %r0, 0x84(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x80
+	blr
+
+	.global sub_18eae8
+sub_18eae8: # 0x80195da8
+	stwu %r1, -0x80(%r1)
+	mflr %r0
+	stw %r0, 0x84(%r1)
+	stfd %f31, 0x70(%r1)
+	psq_st 31, 0x78, 1, 0, 0
+	stfd %f30, 0x60(%r1)
+	psq_st 30, 0x68, 1, 0, 0
+	stfd %f29, 0x50(%r1)
+	psq_st 29, 0x58, 1, 0, 0
+	stfd %f28, 0x40(%r1)
+	psq_st 28, 0x48, 1, 0, 0
+	stfd %f27, 0x30(%r1)
+	psq_st 27, 0x38, 1, 0, 0
+	addi %r11, %r1, 0x30
+	bl sub_19778
+	lfs %f31, -0x6784(%r2)
+	mr %r31, %r3
+	lfs %f29, -0x67a0(%r2)
+	addi %r28, %r3, 0xc4
+	lfs %f30, -0x6790(%r2)
+	addi %r30, %r3, 0xe8
+_18eb3c:
+	lbz %r0, 0x8(%r28)
+	extsb. %r0, %r0
+	bne- _18ec7c
+	addi %r27, %r28, 0xc
+	addi %r29, %r31, 0xe8
+_18eb50:
+	lbz %r0, 0x8(%r27)
+	extsb. %r0, %r0
+	bne- _18ec70
+	lfs %f3, 0x0(%r27)
+	lfs %f2, 0x0(%r28)
+	lfs %f1, 0x4(%r27)
+	lfs %f0, 0x4(%r28)
+	fsubs %f28, %f3, %f2
+	fsubs %f27, %f1, %f0
+	fmuls %f1, %f28, %f28
+	fmuls %f0, %f27, %f27
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f2, %f1
+	lfs %f1, 0x510(%r31)
+	lfs %f0, 0x514(%r31)
+	fdivs %f4, %f30, %f2
+	fmuls %f3, %f28, %f4
+	fmuls %f2, %f27, %f4
+	fmuls %f4, %f4, %f1
+	stfs %f3, 0x8(%r1)
+	fcmpo %cr0, %f4, %f0
+	stfs %f2, 0xc(%r1)
+	cror 2, 0, 2
+	beq- _18ec70
+	lfs %f0, -0x7238(%r13)
+	fcmpo %cr0, %f4, %f0
+	cror 2, 1, 2
+	beq- _18ec70
+	lfs %f0, 0x49c(%r31)
+	fsubs %f4, %f4, %f0
+	fcmpo %cr0, %f4, %f29
+	bge- _18ebe0
+	lfs %f0, 0x508(%r31)
+	fmuls %f4, %f4, %f0
+	b _18ebe8
+_18ebe0:
+	lfs %f0, 0x504(%r31)
+	fmuls %f4, %f4, %f0
+_18ebe8:
+	fcmpo %cr0, %f4, %f30
+	cror 2, 1, 2
+	beq- _18ec70
+	lfs %f3, 0x494(%r31)
+	lfs %f2, 0x8(%r1)
+	lfs %f1, 0x498(%r31)
+	lfs %f0, 0xc(%r1)
+	fmuls %f2, %f3, %f2
+	fmuls %f0, %f1, %f0
+	fadds %f1, %f2, %f0
+	fcmpo %cr0, %f1, %f29
+	bge- _18ec24
+	fneg  %f1, %f1
+	li %r0, 0x1
+	b _18ec28
+_18ec24:
+	li %r0, 0x0
+_18ec28:
+	lfs %f0, -0x722c(%r13)
+	fcmpo %cr0, %f1, %f0
+	cror 2, 0, 2
+	beq- _18ec70
+	fsubs %f1, %f30, %f1
+	fsubs %f0, %f30, %f0
+	fdivs %f0, %f1, %f0
+	fadds %f4, %f4, %f0
+	fcmpo %cr0, %f4, %f31
+	bge- _18ec70
+	fmr  %f31, %f4
+	cmpwi %r0, 0x0
+	beq- _18ec68
+	mr %r26, %r27
+	mr %r25, %r28
+	b _18ec70
+_18ec68:
+	mr %r26, %r28
+	mr %r25, %r27
+_18ec70:
+	addi %r27, %r27, 0xc
+	cmplw %r27, %r29
+	ble+ _18eb50
+_18ec7c:
+	addi %r28, %r28, 0xc
+	cmplw %r28, %r30
+	blt+ _18eb3c
+	lfs %f0, -0x6784(%r2)
+	fcmpu %cr0, %f0, %f31
+	bne- _18ec9c
+	li %r3, 0x0
+	b _18ecd0
+_18ec9c:
+	lwz %r4, 0x0(%r26)
+	li %r3, 0x2
+	lwz %r0, 0x4(%r26)
+	stw %r4, 0xf4(%r31)
+	stw %r0, 0xf8(%r31)
+	lwz %r0, 0x8(%r26)
+	stw %r0, 0xfc(%r31)
+	lwz %r4, 0x0(%r25)
+	lwz %r0, 0x4(%r25)
+	stw %r4, 0x100(%r31)
+	stw %r0, 0x104(%r31)
+	lwz %r0, 0x8(%r25)
+	stw %r0, 0x108(%r31)
+_18ecd0:
+	psq_l 31, 0x78, 1, 0, 0
+	lfd %f31, 0x70(%r1)
+	psq_l 30, 0x68, 1, 0, 0
+	lfd %f30, 0x60(%r1)
+	psq_l 29, 0x58, 1, 0, 0
+	lfd %f29, 0x50(%r1)
+	psq_l 28, 0x48, 1, 0, 0
+	lfd %f28, 0x40(%r1)
+	psq_l 27, 0x38, 1, 0, 0
+	addi %r11, %r1, 0x30
+	lfd %f27, 0x30(%r1)
+	bl sub_197c4
+	lwz %r0, 0x84(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x80
+	blr
+
+	.global sub_18ed10
+sub_18ed10: # 0x80195fd0
+	stwu %r1, -0x20(%r1)
+	addi %r8, %r3, 0xc4
+	addi %r0, %r3, 0xf4
+	lfs %f5, 0xb0(%r3)
+	lfs %f0, 0x4b8(%r3)
+	lfs %f3, 0xb4(%r3)
+	lfs %f1, 0x4bc(%r3)
+	fmuls %f4, %f5, %f0
+	fmuls %f2, %f3, %f0
+	lfs %f0, 0x4a0(%r3)
+	fmuls %f3, %f3, %f1
+	fmuls %f1, %f5, %f1
+	fadds %f7, %f4, %f3
+	fsubs %f8, %f2, %f1
+	fmuls %f7, %f7, %f0
+	fmuls %f8, %f8, %f0
+_18ed50:
+	lbz %r4, 0x8(%r8)
+	extsb. %r4, %r4
+	bne- _18eeac
+	lfs %f2, 0x0(%r8)
+	lfs %f0, 0x4(%r8)
+	fsubs %f1, %f2, %f7
+	lfs %f3, 0x4f4(%r3)
+	fsubs %f6, %f0, %f8
+	fadds %f5, %f2, %f7
+	fadds %f4, %f0, %f8
+	stfs %f1, 0x10(%r1)
+	fcmpo %cr0, %f1, %f3
+	stfs %f6, 0x14(%r1)
+	stfs %f5, 0x8(%r1)
+	stfs %f4, 0xc(%r1)
+	cror 2, 0, 2
+	beq- _18edc4
+	lfs %f2, 0x4fc(%r3)
+	fcmpo %cr0, %f1, %f2
+	cror 2, 1, 2
+	beq- _18edc4
+	lfs %f1, 0x4f8(%r3)
+	fcmpo %cr0, %f6, %f1
+	cror 2, 0, 2
+	beq- _18edc4
+	lfs %f0, 0x500(%r3)
+	fcmpo %cr0, %f6, %f0
+	cror 2, 1, 2
+	bne- _18ee3c
+_18edc4:
+	lfs %f1, 0x8(%r1)
+	lfs %f0, 0x4f4(%r3)
+	fcmpo %cr0, %f1, %f0
+	ble- _18eeac
+	lfs %f0, 0x4fc(%r3)
+	fcmpo %cr0, %f1, %f0
+	bge- _18eeac
+	lfs %f1, 0xc(%r1)
+	lfs %f0, 0x4f8(%r3)
+	fcmpo %cr0, %f1, %f0
+	ble- _18eeac
+	lfs %f0, 0x500(%r3)
+	fcmpo %cr0, %f1, %f0
+	bge- _18eeac
+	lwz %r5, 0x0(%r8)
+	li %r4, 0x0
+	lwz %r7, 0x4(%r8)
+	li %r0, -0x1
+	lwz %r6, 0x10(%r1)
+	stw %r5, 0x100(%r3)
+	lwz %r5, 0x14(%r1)
+	stw %r7, 0x104(%r3)
+	lwz %r7, 0x8(%r8)
+	stw %r7, 0x108(%r3)
+	stw %r6, 0xf4(%r3)
+	stw %r5, 0xf8(%r3)
+	stb %r4, 0xfc(%r3)
+	stb %r0, 0xfd(%r3)
+	li %r3, -0x1
+	b _18eebc
+_18ee3c:
+	fcmpo %cr0, %f5, %f3
+	cror 2, 0, 2
+	beq- _18ee6c
+	fcmpo %cr0, %f5, %f2
+	cror 2, 1, 2
+	beq- _18ee6c
+	fcmpo %cr0, %f4, %f1
+	cror 2, 0, 2
+	beq- _18ee6c
+	fcmpo %cr0, %f4, %f0
+	cror 2, 1, 2
+	bne- _18eeac
+_18ee6c:
+	lwz %r5, 0x0(%r8)
+	li %r4, 0x0
+	lwz %r7, 0x4(%r8)
+	li %r0, -0x1
+	lwz %r6, 0x8(%r1)
+	stw %r5, 0xf4(%r3)
+	lwz %r5, 0xc(%r1)
+	stw %r7, 0xf8(%r3)
+	lwz %r7, 0x8(%r8)
+	stw %r7, 0xfc(%r3)
+	stw %r6, 0x100(%r3)
+	stw %r5, 0x104(%r3)
+	stb %r4, 0x108(%r3)
+	stb %r0, 0x109(%r3)
+	li %r3, -0x1
+	b _18eebc
+_18eeac:
+	addi %r8, %r8, 0xc
+	cmplw %r8, %r0
+	blt+ _18ed50
+	li %r3, 0x0
+_18eebc:
+	addi %r1, %r1, 0x20
+	blr
+
+	.global sub_18eec4
+sub_18eec4: # 0x80196184
+	lfs %f0, -0x7220(%r13)
+	addi %r6, %r3, 0xf4
+	addi %r0, %r3, 0x10c
+	fmuls %f4, %f0, %f0
+_18eed4:
+	lbz %r4, 0x8(%r6)
+	extsb. %r4, %r4
+	bne- _18ef44
+	lbz %r4, 0x9(%r6)
+	extsb. %r4, %r4
+	bne- _18ef44
+	addi %r7, %r3, 0xc4
+	addi %r4, %r3, 0xf4
+_18eef4:
+	lbz %r5, 0x8(%r7)
+	extsb. %r5, %r5
+	bne- _18ef38
+	lfs %f3, 0x0(%r6)
+	lfs %f2, 0x0(%r7)
+	lfs %f1, 0x4(%r6)
+	lfs %f0, 0x4(%r7)
+	fsubs %f2, %f3, %f2
+	fsubs %f0, %f1, %f0
+	fmuls %f1, %f2, %f2
+	fmuls %f0, %f0, %f0
+	fadds %f0, %f1, %f0
+	fcmpo %cr0, %f0, %f4
+	bge- _18ef38
+	fmr  %f4, %f0
+	mr %r8, %r6
+	mr %r9, %r7
+_18ef38:
+	addi %r7, %r7, 0xc
+	cmplw %r7, %r4
+	blt+ _18eef4
+_18ef44:
+	addi %r6, %r6, 0xc
+	cmplw %r6, %r0
+	blt+ _18eed4
+	lfs %f0, -0x7220(%r13)
+	fmuls %f0, %f0, %f0
+	fcmpu %cr0, %f4, %f0
+	bne- _18ef68
+	li %r3, 0x0
+	blr
+_18ef68:
+	lwz %r5, 0x0(%r9)
+	addi %r0, %r3, 0xf4
+	lwz %r4, 0x4(%r9)
+	cmplw %r8, %r0
+	stw %r5, 0x0(%r8)
+	stw %r4, 0x4(%r8)
+	lwz %r0, 0x8(%r9)
+	stw %r0, 0x8(%r8)
+	lfs %f5, 0xb0(%r3)
+	lfs %f0, 0x4b8(%r3)
+	lfs %f3, 0xb4(%r3)
+	lfs %f1, 0x4bc(%r3)
+	fmuls %f4, %f5, %f0
+	fmuls %f2, %f3, %f0
+	lfs %f0, 0x490(%r3)
+	fmuls %f3, %f3, %f1
+	fmuls %f1, %f5, %f1
+	fadds %f3, %f4, %f3
+	fsubs %f1, %f2, %f1
+	fmuls %f2, %f0, %f3
+	stfs %f3, 0x494(%r3)
+	fmuls %f3, %f0, %f1
+	stfs %f1, 0x498(%r3)
+	bne- _18eff4
+	lfs %f0, 0x0(%r8)
+	li %r4, 0x0
+	li %r0, -0x1
+	fadds %f0, %f0, %f2
+	stfs %f0, 0x100(%r3)
+	lfs %f0, 0x4(%r8)
+	fadds %f0, %f0, %f3
+	stb %r4, 0x108(%r3)
+	stb %r0, 0x109(%r3)
+	stfs %f0, 0x104(%r3)
+	b _18f01c
+_18eff4:
+	lfs %f0, 0x0(%r8)
+	li %r4, 0x0
+	li %r0, -0x1
+	fsubs %f0, %f0, %f2
+	stfs %f0, 0xf4(%r3)
+	lfs %f0, 0x4(%r8)
+	fsubs %f0, %f0, %f3
+	stb %r4, 0xfc(%r3)
+	stb %r0, 0xfd(%r3)
+	stfs %f0, 0xf8(%r3)
+_18f01c:
+	lbz %r0, 0x5e(%r3)
+	extsb. %r0, %r0
+	bge- _18f030
+	li %r3, -0x1
+	blr
+_18f030:
+	li %r3, 0x1
+	blr
+
+	.global sub_18f038
+sub_18f038: # 0x801962f8
+	stwu %r1, -0x20(%r1)
+	mflr %r0
+	stw %r0, 0x24(%r1)
+	extsb. %r0, %r4
+	stw %r31, 0x1c(%r1)
+	mr %r31, %r4
+	stw %r30, 0x18(%r1)
+	mr %r30, %r3
+	bne- _18f068
+	li %r0, 0x0
+	stb %r0, 0x5e(%r3)
+	b _18f5ec
+_18f068:
+	lfs %f4, 0xb0(%r3)
+	lfs %f1, 0x494(%r3)
+	lfs %f2, 0xb4(%r3)
+	fmuls %f3, %f4, %f1
+	lfs %f0, 0x498(%r3)
+	fmuls %f1, %f2, %f1
+	lbz %r0, 0x5e(%r3)
+	fmuls %f2, %f2, %f0
+	fmuls %f0, %f4, %f0
+	extsb. %r0, %r0
+	fadds %f3, %f3, %f2
+	fsubs %f2, %f1, %f0
+	stfs %f3, 0x10(%r1)
+	stfs %f2, 0x14(%r1)
+	bne- _18f0d0
+	lwz %r4, 0x10(%r1)
+	lwz %r0, 0x14(%r1)
+	stw %r4, 0x34(%r3)
+	lfs %f0, -0x67a0(%r2)
+	stw %r0, 0x38(%r3)
+	lwz %r4, -0x63d8(%r13)
+	lwz %r0, -0x63d4(%r13)
+	stw %r4, 0x3c(%r3)
+	stw %r0, 0x40(%r3)
+	stfs %f0, 0x44(%r3)
+	b _18f298
+_18f0d0:
+	lfs %f1, 0x34(%r3)
+	lfs %f0, 0x38(%r3)
+	fsubs %f3, %f3, %f1
+	fsubs %f2, %f2, %f0
+	fmuls %f1, %f3, %f3
+	stfs %f3, 0x8(%r1)
+	fmuls %f0, %f2, %f2
+	stfs %f2, 0xc(%r1)
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	lwz %r0, 0x52c(%r30)
+	frsp  %f2, %f1
+	cmpwi %r0, 0x0
+	bne- _18f1cc
+	lfs %f0, 0x8c(%r30)
+	fcmpo %cr0, %f2, %f0
+	cror 2, 1, 2
+	bne- _18f120
+	lfs %f4, -0x6790(%r2)
+	b _18f12c
+_18f120:
+	fdivs %f4, %f2, %f0
+	fmuls %f4, %f4, %f4
+	fmuls %f4, %f4, %f4
+_18f12c:
+	lfs %f0, 0x90(%r30)
+	lfs %f3, 0x8(%r1)
+	fmuls %f4, %f4, %f0
+	lfs %f1, 0xc(%r1)
+	lfs %f2, 0x34(%r30)
+	lfs %f0, 0x38(%r30)
+	fmuls %f3, %f4, %f3
+	fmuls %f1, %f4, %f1
+	fadds %f3, %f2, %f3
+	fadds %f2, %f0, %f1
+	fmuls %f1, %f3, %f3
+	stfs %f3, 0x8(%r1)
+	fmuls %f0, %f2, %f2
+	stfs %f2, 0xc(%r1)
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f4, %f1
+	lfs %f0, 0x8(%r1)
+	lfs %f2, 0xc(%r1)
+	lfs %f1, 0x34(%r30)
+	fdivs %f3, %f0, %f4
+	lfs %f0, 0x38(%r30)
+	fdivs %f2, %f2, %f4
+	stfs %f3, 0x8(%r1)
+	fsubs %f3, %f3, %f1
+	stfs %f2, 0xc(%r1)
+	fsubs %f2, %f2, %f0
+	fmuls %f1, %f3, %f3
+	stfs %f3, 0x3c(%r30)
+	fmuls %f0, %f2, %f2
+	stfs %f2, 0x40(%r30)
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f0, %f1
+	lwz %r3, 0x8(%r1)
+	lwz %r0, 0xc(%r1)
+	stw %r3, 0x34(%r30)
+	stfs %f0, 0x44(%r30)
+	stw %r0, 0x38(%r30)
+	b _18f298
+_18f1cc:
+	lfs %f0, 0x8c(%r30)
+	fcmpo %cr0, %f2, %f0
+	ble- _18f280
+	fsubs %f0, %f2, %f0
+	lfs %f4, 0x90(%r30)
+	lfs %f3, 0x8(%r1)
+	lfs %f1, 0xc(%r1)
+	fdivs %f5, %f0, %f2
+	lfs %f2, 0x34(%r30)
+	lfs %f0, 0x38(%r30)
+	fmuls %f4, %f4, %f5
+	fmuls %f3, %f3, %f4
+	fmuls %f1, %f1, %f4
+	fadds %f3, %f2, %f3
+	fadds %f2, %f0, %f1
+	fmuls %f1, %f3, %f3
+	stfs %f3, 0x8(%r1)
+	fmuls %f0, %f2, %f2
+	stfs %f2, 0xc(%r1)
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f4, %f1
+	lfs %f0, 0x8(%r1)
+	lfs %f2, 0xc(%r1)
+	lfs %f1, 0x34(%r30)
+	fdivs %f3, %f0, %f4
+	lfs %f0, 0x38(%r30)
+	fdivs %f2, %f2, %f4
+	stfs %f3, 0x8(%r1)
+	fsubs %f3, %f3, %f1
+	stfs %f2, 0xc(%r1)
+	fsubs %f2, %f2, %f0
+	fmuls %f1, %f3, %f3
+	stfs %f3, 0x3c(%r30)
+	fmuls %f0, %f2, %f2
+	stfs %f2, 0x40(%r30)
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f0, %f1
+	lwz %r3, 0x8(%r1)
+	lwz %r0, 0xc(%r1)
+	stw %r3, 0x34(%r30)
+	stfs %f0, 0x44(%r30)
+	stw %r0, 0x38(%r30)
+	b _18f298
+_18f280:
+	lwz %r3, -0x63d8(%r13)
+	lwz %r0, -0x63d4(%r13)
+	lfs %f0, -0x67a0(%r2)
+	stw %r3, 0x3c(%r30)
+	stw %r0, 0x40(%r30)
+	stfs %f0, 0x44(%r30)
+_18f298:
+	lfs %f1, 0x510(%r30)
+	lfs %f0, 0x490(%r30)
+	lbz %r0, 0x5e(%r30)
+	fdivs %f2, %f1, %f0
+	extsb. %r0, %r0
+	bne- _18f2c4
+	lfs %f0, -0x67a0(%r2)
+	stfs %f2, 0x48(%r30)
+	stfs %f0, 0x4c(%r30)
+	stfs %f0, 0x50(%r30)
+	b _18f3b4
+_18f2c4:
+	lfs %f1, 0x48(%r30)
+	lfs %f0, -0x67a0(%r2)
+	fsubs %f4, %f2, %f1
+	fcmpo %cr0, %f4, %f0
+	bge- _18f2e0
+	fneg  %f3, %f4
+	b _18f2e4
+_18f2e0:
+	fmr  %f3, %f4
+_18f2e4:
+	lwz %r0, 0x530(%r30)
+	cmpwi %r0, 0x0
+	bne- _18f354
+	lfs %f0, 0x94(%r30)
+	fcmpo %cr0, %f3, %f0
+	cror 2, 1, 2
+	bne- _18f308
+	lfs %f3, -0x6790(%r2)
+	b _18f314
+_18f308:
+	fdivs %f3, %f3, %f0
+	fmuls %f3, %f3, %f3
+	fmuls %f3, %f3, %f3
+_18f314:
+	lfs %f1, 0x98(%r30)
+	lfs %f0, -0x67a0(%r2)
+	fmuls %f3, %f3, %f1
+	fmuls %f1, %f3, %f4
+	fcmpo %cr0, %f1, %f0
+	stfs %f1, 0x4c(%r30)
+	bge- _18f33c
+	fneg  %f0, %f1
+	stfs %f0, 0x50(%r30)
+	b _18f340
+_18f33c:
+	stfs %f1, 0x50(%r30)
+_18f340:
+	lfs %f1, 0x48(%r30)
+	lfs %f0, 0x4c(%r30)
+	fadds %f0, %f1, %f0
+	stfs %f0, 0x48(%r30)
+	b _18f3b4
+_18f354:
+	lfs %f0, 0x94(%r30)
+	fcmpo %cr0, %f3, %f0
+	ble- _18f3a8
+	fsubs %f2, %f3, %f0
+	lfs %f1, 0x98(%r30)
+	lfs %f0, -0x67a0(%r2)
+	fdivs %f2, %f2, %f3
+	fmuls %f1, %f1, %f2
+	fmuls %f1, %f1, %f4
+	fcmpo %cr0, %f1, %f0
+	stfs %f1, 0x4c(%r30)
+	bge- _18f390
+	fneg  %f0, %f1
+	stfs %f0, 0x50(%r30)
+	b _18f394
+_18f390:
+	stfs %f1, 0x50(%r30)
+_18f394:
+	lfs %f1, 0x48(%r30)
+	lfs %f0, 0x4c(%r30)
+	fadds %f0, %f1, %f0
+	stfs %f0, 0x48(%r30)
+	b _18f3b4
+_18f3a8:
+	lfs %f0, -0x67a0(%r2)
+	stfs %f0, 0x4c(%r30)
+	stfs %f0, 0x50(%r30)
+_18f3b4:
+	lfs %f2, 0x498(%r30)
+	lfs %f0, 0xb4(%r30)
+	fneg  %f1, %f2
+	lbz %r0, 0x5e(%r30)
+	lfs %f5, 0x494(%r30)
+	fmuls %f3, %f2, %f0
+	lfs %f4, 0xb0(%r30)
+	extsb. %r0, %r0
+	fmuls %f0, %f5, %f0
+	lfs %f7, 0xf4(%r30)
+	fmuls %f2, %f1, %f4
+	lfs %f6, 0x100(%r30)
+	fmuls %f5, %f5, %f4
+	lfs %f4, 0xf8(%r30)
+	lfs %f1, 0x104(%r30)
+	fadds %f7, %f7, %f6
+	lfs %f8, -0x679c(%r2)
+	fadds %f3, %f5, %f3
+	fadds %f6, %f4, %f1
+	lfs %f4, 0xac(%r30)
+	fmuls %f7, %f8, %f7
+	fadds %f2, %f2, %f0
+	lfs %f1, 0xa8(%r30)
+	fmuls %f5, %f8, %f6
+	fmuls %f9, %f3, %f7
+	lfs %f6, 0xb8(%r30)
+	fmuls %f7, %f2, %f7
+	fmuls %f0, %f3, %f5
+	lfs %f3, 0xbc(%r30)
+	fmuls %f8, %f2, %f5
+	lfs %f5, 0xc0(%r30)
+	fneg  %f2, %f4
+	fadds %f7, %f7, %f0
+	fsubs %f8, %f9, %f8
+	fneg  %f0, %f1
+	fsubs %f3, %f3, %f7
+	fsubs %f6, %f6, %f8
+	fmuls %f6, %f5, %f6
+	fmuls %f5, %f5, %f3
+	fmuls %f3, %f2, %f6
+	stfs %f6, 0x8(%r1)
+	fmuls %f2, %f1, %f5
+	fmuls %f1, %f0, %f6
+	stfs %f5, 0xc(%r1)
+	fmuls %f0, %f4, %f5
+	fadds %f3, %f3, %f2
+	fsubs %f2, %f1, %f0
+	stfs %f3, 0x10(%r1)
+	stfs %f2, 0x14(%r1)
+	bne- _18f4a8
+	lwz %r3, 0x10(%r1)
+	lwz %r0, 0x14(%r1)
+	stw %r3, 0x20(%r30)
+	lfs %f0, -0x67a0(%r2)
+	stw %r0, 0x24(%r30)
+	lwz %r3, -0x63d8(%r13)
+	lwz %r0, -0x63d4(%r13)
+	stw %r3, 0x28(%r30)
+	stw %r0, 0x2c(%r30)
+	stfs %f0, 0x30(%r30)
+	b _18f5e8
+_18f4a8:
+	lfs %f1, 0x20(%r30)
+	lfs %f0, 0x24(%r30)
+	fsubs %f3, %f3, %f1
+	fsubs %f2, %f2, %f0
+	fmuls %f1, %f3, %f3
+	stfs %f3, 0x8(%r1)
+	fmuls %f0, %f2, %f2
+	stfs %f2, 0xc(%r1)
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	lwz %r0, 0x528(%r30)
+	frsp  %f4, %f1
+	cmpwi %r0, 0x0
+	bne- _18f560
+	lfs %f0, 0x84(%r30)
+	fcmpo %cr0, %f4, %f0
+	cror 2, 1, 2
+	bne- _18f4f8
+	lfs %f2, -0x6790(%r2)
+	b _18f504
+_18f4f8:
+	fdivs %f2, %f4, %f0
+	fmuls %f2, %f2, %f2
+	fmuls %f2, %f2, %f2
+_18f504:
+	lfs %f0, 0x88(%r30)
+	lfs %f1, 0x8(%r1)
+	fmuls %f2, %f2, %f0
+	lfs %f0, 0xc(%r1)
+	fmuls %f3, %f2, %f1
+	fmuls %f2, %f2, %f0
+	fmuls %f1, %f3, %f3
+	stfs %f3, 0x28(%r30)
+	fmuls %f0, %f2, %f2
+	stfs %f2, 0x2c(%r30)
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f4, %f1
+	lfs %f3, 0x20(%r30)
+	lfs %f2, 0x28(%r30)
+	lfs %f1, 0x24(%r30)
+	lfs %f0, 0x2c(%r30)
+	fadds %f2, %f3, %f2
+	stfs %f4, 0x30(%r30)
+	fadds %f0, %f1, %f0
+	stfs %f2, 0x20(%r30)
+	stfs %f0, 0x24(%r30)
+	b _18f5e8
+_18f560:
+	lfs %f0, 0x84(%r30)
+	fcmpo %cr0, %f4, %f0
+	ble- _18f5d0
+	fsubs %f3, %f4, %f0
+	lfs %f2, 0x88(%r30)
+	lfs %f1, 0x8(%r1)
+	lfs %f0, 0xc(%r1)
+	fdivs %f3, %f3, %f4
+	fmuls %f2, %f2, %f3
+	fmuls %f3, %f2, %f1
+	fmuls %f2, %f2, %f0
+	fmuls %f1, %f3, %f3
+	stfs %f3, 0x28(%r30)
+	fmuls %f0, %f2, %f2
+	stfs %f2, 0x2c(%r30)
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f4, %f1
+	lfs %f3, 0x20(%r30)
+	lfs %f2, 0x28(%r30)
+	lfs %f1, 0x24(%r30)
+	lfs %f0, 0x2c(%r30)
+	fadds %f2, %f3, %f2
+	stfs %f4, 0x30(%r30)
+	fadds %f0, %f1, %f0
+	stfs %f2, 0x20(%r30)
+	stfs %f0, 0x24(%r30)
+	b _18f5e8
+_18f5d0:
+	lwz %r3, -0x63d8(%r13)
+	lwz %r0, -0x63d4(%r13)
+	lfs %f0, -0x67a0(%r2)
+	stw %r3, 0x28(%r30)
+	stw %r0, 0x2c(%r30)
+	stfs %f0, 0x30(%r30)
+_18f5e8:
+	stb %r31, 0x5e(%r30)
+_18f5ec:
+	lwz %r0, 0x24(%r1)
+	lwz %r31, 0x1c(%r1)
+	lwz %r30, 0x18(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x20
+	blr
+
+	.global sub_18f604
+sub_18f604: # 0x801968c4
+	stwu %r1, -0x40(%r1)
+	mflr %r0
+	stw %r0, 0x44(%r1)
+	stfd %f31, 0x30(%r1)
+	psq_st 31, 0x38, 1, 0, 0
+	stfd %f30, 0x20(%r1)
+	psq_st 30, 0x28, 1, 0, 0
+	stw %r31, 0x1c(%r1)
+	mr %r31, %r3
+	stw %r30, 0x18(%r1)
+	lbz %r0, 0x36(%r4)
+	cmplwi %r0, 0x2
+	beq- _18f648
+	cmplwi %r0, 0x5
+	beq- _18f648
+	cmplwi %r0, 0x8
+	bne- _18f6e8
+_18f648:
+	lfd %f4, -0x6780(%r2)
+	addi %r8, %r4, 0x20
+	lfs %f3, -0x6778(%r2)
+	addi %r9, %r3, 0xe8
+	lfs %f2, -0x6774(%r2)
+	addi %r0, %r3, 0xc4
+	lfs %f1, -0x6770(%r2)
+	li %r4, -0x1
+	lis %r7, 0x4330
+	li %r5, 0x0
+_18f670:
+	lhz %r6, 0x4(%r8)
+	cmpwi %r6, 0x0
+	beq- _18f6d0
+	lha %r6, 0x0(%r8)
+	stw %r7, 0x8(%r1)
+	xoris %r6, %r6, 0x8000
+	stw %r6, 0xc(%r1)
+	lfd %f0, 0x8(%r1)
+	stw %r7, 0x10(%r1)
+	fsubs %f0, %f0, %f4
+	fmuls %f0, %f3, %f0
+	fsubs %f0, %f0, %f2
+	stfs %f0, 0x0(%r9)
+	lha %r6, 0x2(%r8)
+	xoris %r6, %r6, 0x8000
+	stw %r6, 0x14(%r1)
+	lfd %f0, 0x10(%r1)
+	fsubs %f0, %f0, %f4
+	fmuls %f0, %f3, %f0
+	fsubs %f0, %f0, %f1
+	stfs %f0, 0x4(%r9)
+	stb %r5, 0x8(%r9)
+	stb %r5, 0x9(%r9)
+	b _18f6d4
+_18f6d0:
+	stb %r4, 0x8(%r9)
+_18f6d4:
+	subi %r9, %r9, 0xc
+	subi %r8, %r8, 0x8
+	cmplw %r9, %r0
+	bge+ _18f670
+	b _18f704
+_18f6e8:
+	addi %r5, %r3, 0xe8
+	addi %r0, %r3, 0xc4
+	li %r4, -0x1
+_18f6f4:
+	stb %r4, 0x8(%r5)
+	subi %r5, %r5, 0xc
+	cmplw %r5, %r0
+	bge+ _18f6f4
+_18f704:
+	addi %r7, %r3, 0xe8
+	addi %r6, %r3, 0xc4
+	mr %r4, %r7
+_18f710:
+	lbz %r0, 0x8(%r4)
+	extsb. %r0, %r0
+	blt- _18f770
+	lfs %f1, 0x0(%r4)
+	lfs %f0, 0x4f4(%r3)
+	fcmpo %cr0, %f1, %f0
+	cror 2, 0, 2
+	beq- _18f764
+	lfs %f0, 0x4fc(%r3)
+	fcmpo %cr0, %f1, %f0
+	cror 2, 1, 2
+	beq- _18f764
+	lfs %f1, 0x4(%r4)
+	lfs %f0, 0x4f8(%r3)
+	fcmpo %cr0, %f1, %f0
+	cror 2, 0, 2
+	beq- _18f764
+	lfs %f0, 0x500(%r3)
+	fcmpo %cr0, %f1, %f0
+	cror 2, 1, 2
+	bne- _18f770
+_18f764:
+	lbz %r0, 0x8(%r4)
+	ori %r0, %r0, 0x1
+	stb %r0, 0x8(%r4)
+_18f770:
+	subi %r4, %r4, 0xc
+	cmplw %r4, %r6
+	bge+ _18f710
+_18f77c:
+	lbz %r0, 0x8(%r6)
+	extsb. %r0, %r0
+	bne- _18f7cc
+	addi %r5, %r6, 0xc
+_18f78c:
+	lbz %r4, 0x8(%r5)
+	extsb. %r0, %r4
+	bne- _18f7c0
+	lfs %f1, 0x0(%r6)
+	lfs %f0, 0x0(%r5)
+	fcmpu %cr0, %f1, %f0
+	bne- _18f7c0
+	lfs %f1, 0x4(%r6)
+	lfs %f0, 0x4(%r5)
+	fcmpu %cr0, %f1, %f0
+	bne- _18f7c0
+	ori %r0, %r4, 0x2
+	stb %r0, 0x8(%r5)
+_18f7c0:
+	addi %r5, %r5, 0xc
+	cmplw %r5, %r7
+	ble+ _18f78c
+_18f7cc:
+	addi %r6, %r6, 0xc
+	cmplw %r6, %r7
+	blt+ _18f77c
+	li %r0, 0x0
+	addi %r5, %r3, 0xe8
+	sth %r0, 0x10c(%r3)
+	addi %r0, %r3, 0xc4
+_18f7e8:
+	lbz %r4, 0x8(%r5)
+	extsb. %r4, %r4
+	bne- _18f800
+	lha %r4, 0x10c(%r3)
+	addi %r4, %r4, 0x1
+	sth %r4, 0x10c(%r3)
+_18f800:
+	subi %r5, %r5, 0xc
+	cmplw %r5, %r0
+	bge+ _18f7e8
+	lfs %f1, 0x54(%r3)
+	lfs %f0, -0x7224(%r13)
+	fcmpo %cr0, %f1, %f0
+	cror 2, 0, 2
+	beq- _18f910
+	lbz %r0, 0x5e(%r3)
+	extsb %r0, %r0
+	cmpwi %r0, 0x2
+	beq- _18f838
+	cmpwi %r0, -0x2
+	bne- _18f87c
+_18f838:
+	lha %r0, 0x10c(%r3)
+	cmpwi %r0, 0x2
+	blt- _18f858
+	mr %r3, %r31
+	bl sub_18eae8
+	extsb. %r0, %r3
+	mr %r30, %r3
+	bne- _18f914
+_18f858:
+	lha %r0, 0x10c(%r31)
+	cmpwi %r0, 0x1
+	blt- _18f910
+	mr %r3, %r31
+	bl sub_18eec4
+	extsb. %r0, %r3
+	mr %r30, %r3
+	bne- _18f914
+	b _18f910
+_18f87c:
+	cmpwi %r0, 0x1
+	beq- _18f88c
+	cmpwi %r0, -0x1
+	bne- _18f8d0
+_18f88c:
+	lha %r0, 0x10c(%r3)
+	cmpwi %r0, 0x2
+	blt- _18f8ac
+	mr %r3, %r31
+	bl sub_18e900
+	extsb. %r0, %r3
+	mr %r30, %r3
+	bne- _18f914
+_18f8ac:
+	lha %r0, 0x10c(%r31)
+	cmpwi %r0, 0x1
+	blt- _18f910
+	mr %r3, %r31
+	bl sub_18eec4
+	extsb. %r0, %r3
+	mr %r30, %r3
+	bne- _18f914
+	b _18f910
+_18f8d0:
+	lha %r0, 0x10c(%r3)
+	cmpwi %r0, 0x2
+	blt- _18f8f0
+	mr %r3, %r31
+	bl sub_18e900
+	extsb. %r0, %r3
+	mr %r30, %r3
+	bne- _18f914
+_18f8f0:
+	lha %r0, 0x10c(%r31)
+	cmpwi %r0, 0x1
+	bne- _18f910
+	mr %r3, %r31
+	bl sub_18ed10
+	extsb. %r0, %r3
+	mr %r30, %r3
+	bne- _18f914
+_18f910:
+	li %r30, 0x0
+_18f914:
+	extsb. %r0, %r30
+	beq- _18fa20
+	lfs %f3, 0x100(%r31)
+	lfs %f2, 0xf4(%r31)
+	lfs %f1, 0x104(%r31)
+	lfs %f0, 0xf8(%r31)
+	fsubs %f30, %f3, %f2
+	fsubs %f31, %f1, %f0
+	fmuls %f1, %f30, %f30
+	fmuls %f0, %f31, %f31
+	fadds %f1, %f1, %f0
+	bl sub_13dd4
+	frsp  %f3, %f1
+	lfs %f0, -0x6790(%r2)
+	lhz %r0, 0x4c8(%r31)
+	lfs %f4, 0xb0(%r31)
+	fdivs %f2, %f0, %f3
+	lfs %f1, 0x510(%r31)
+	lfs %f0, 0xb4(%r31)
+	cmpwi %r0, 0x0
+	stfs %f3, 0x490(%r31)
+	fmuls %f30, %f30, %f2
+	fmuls %f31, %f31, %f2
+	fmuls %f5, %f1, %f2
+	fmuls %f3, %f4, %f30
+	stfs %f30, 0x494(%r31)
+	fmuls %f2, %f0, %f31
+	fmuls %f1, %f0, %f30
+	stfs %f5, 0x49c(%r31)
+	fmuls %f0, %f4, %f31
+	fadds %f2, %f3, %f2
+	stfs %f31, 0x498(%r31)
+	fsubs %f3, %f1, %f0
+	stfs %f2, 0x4b0(%r31)
+	stfs %f3, 0x4b4(%r31)
+	bne- _18f9d8
+	lfs %f0, 0x4b8(%r31)
+	lfs %f1, 0x4bc(%r31)
+	fmuls %f2, %f2, %f0
+	lfs %f0, -0x7228(%r13)
+	fmuls %f1, %f3, %f1
+	fadds %f1, %f2, %f1
+	fcmpo %cr0, %f1, %f0
+	cror 2, 0, 2
+	bne- _18f9d8
+	li %r0, 0x1
+	li %r30, 0x0
+	stb %r0, 0x108(%r31)
+	stb %r0, 0xfc(%r31)
+_18f9d8:
+	lbz %r0, 0x5e(%r31)
+	cmpwi %r0, 0x2
+	bne- _18fa14
+	extsb %r0, %r30
+	cmpwi %r0, 0x2
+	bne- _18fa14
+	lbz %r3, 0x4ca(%r31)
+	cmplwi %r3, 0xc8
+	bne- _18fa08
+	lfs %f0, 0x490(%r31)
+	stfs %f0, 0x4a0(%r31)
+	b _18fa28
+_18fa08:
+	addi %r0, %r3, 0x1
+	stb %r0, 0x4ca(%r31)
+	b _18fa28
+_18fa14:
+	li %r0, 0x0
+	stb %r0, 0x4ca(%r31)
+	b _18fa28
+_18fa20:
+	li %r0, 0x0
+	stb %r0, 0x4ca(%r31)
+_18fa28:
+	mr %r3, %r31
+	extsb %r4, %r30
+	bl sub_18f038
+	psq_l 31, 0x38, 1, 0, 0
+	lfd %f31, 0x30(%r1)
+	psq_l 30, 0x28, 1, 0, 0
+	lfd %f30, 0x20(%r1)
+	lwz %r31, 0x1c(%r1)
+	lwz %r0, 0x44(%r1)
+	lwz %r30, 0x18(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x40
+	blr
+
+	.global t1_18fa5c
+t1_18fa5c:
+	.incbin "basemain.dol", 0x191fbc, 0x34c
+
+	.global sub_18fda8
+sub_18fda8: # 0x80197068
+	stwu %r1, -0x30(%r1)
+	mflr %r0
+	lis %r5, 0x4330
+	stw %r0, 0x34(%r1)
+	stw %r31, 0x2c(%r1)
+	lis %r31, 0x8019
+	addi %r31, %r31, 0x6e44
+	stw %r30, 0x28(%r1)
+	addi %r30, %r3, 0x60
+	stw %r29, 0x24(%r1)
+	mr %r29, %r4
+	lwz %r0, -0x63e0(%r13)
+	stw %r5, 0x8(%r1)
+	cmpwi %r0, 0x0
+	stw %r5, 0x10(%r1)
+	beq- _18fdf0
+	lis %r31, 0x8019
+	addi %r31, %r31, 0x6d1c
+_18fdf0:
+	lbz %r6, 0x28(%r4)
+	cmplwi %r6, 0x1
+	bne- _18fe80
+	lbz %r5, 0x36(%r4)
+	addi %r0, %r5, 0xfd
+	clrlwi  %r0, %r0, 24
+	cmplwi %r0, 0x2
+	bgt- _18fe80
+	lbz %r0, 0x51e(%r3)
+	cmpwi %r0, 0x0
+	beq- _18fe54
+	li %r0, 0x0
+	lfs %f2, -0x67a0(%r2)
+	stb %r0, 0x51e(%r3)
+	lfs %f1, -0x6794(%r2)
+	lwz %r3, -0x63d8(%r13)
+	lwz %r0, -0x63d4(%r13)
+	lfs %f0, -0x6790(%r2)
+	stw %r3, 0x0(%r30)
+	stw %r0, 0x4(%r30)
+	stfs %f2, 0x10(%r30)
+	stfs %f2, 0x8(%r30)
+	stfs %f1, 0xc(%r30)
+	stfs %f0, 0x14(%r30)
+	stfs %f2, 0x18(%r30)
+_18fe54:
+	lbz %r4, 0x30(%r4)
+	mr %r12, %r31
+	lbz %r5, 0x31(%r29)
+	mr %r3, %r30
+	extsb %r4, %r4
+	lwz %r6, -0x721c(%r13)
+	extsb %r5, %r5
+	lwz %r7, -0x7218(%r13)
+	mtctr %r12
+	bctrl 
+	b _190004
+_18fe80:
+	cmplwi %r6, 0x2
+	bne- _190004
+	lbz %r5, 0x36(%r4)
+	addi %r0, %r5, 0xfa
+	clrlwi  %r0, %r0, 24
+	cmplwi %r0, 0x2
+	bgt- _190004
+	lbz %r0, 0x51e(%r3)
+	cmpwi %r0, 0x0
+	beq- _18fef4
+	li %r7, 0x0
+	lfs %f0, -0x67a0(%r2)
+	stb %r7, 0x51e(%r3)
+	lhz %r0, 0x4d0(%r3)
+	lwz %r6, -0x63d8(%r13)
+	lwz %r5, -0x63d4(%r13)
+	stw %r6, 0xc(%r30)
+	stw %r5, 0x10(%r30)
+	lwz %r6, -0x63d8(%r13)
+	lwz %r5, -0x63d4(%r13)
+	stw %r6, 0x14(%r30)
+	stw %r5, 0x18(%r30)
+	stfs %f0, 0x20(%r30)
+	stfs %f0, 0x1c(%r30)
+	stw %r7, 0x8(%r30)
+	stw %r7, 0x4(%r30)
+	stw %r7, 0x0(%r30)
+	sth %r7, 0x4d4(%r3)
+	sth %r0, 0x4d6(%r3)
+_18fef4:
+	mr %r12, %r31
+	addi %r3, %r30, 0xc
+	lha %r4, 0x2c(%r4)
+	lha %r5, 0x2e(%r29)
+	lwz %r6, -0x7214(%r13)
+	lwz %r7, -0x7210(%r13)
+	mtctr %r12
+	bctrl 
+	mr %r12, %r31
+	addi %r3, %r30, 0x14
+	lha %r4, 0x30(%r29)
+	lha %r5, 0x32(%r29)
+	lwz %r6, -0x7214(%r13)
+	lwz %r7, -0x7210(%r13)
+	mtctr %r12
+	bctrl 
+	lwz %r5, -0x720c(%r13)
+	lbz %r0, 0x34(%r29)
+	lwz %r4, -0x7208(%r13)
+	cmpw %r0, %r5
+	bgt- _18ff54
+	lfs %f0, -0x67a0(%r2)
+	stfs %f0, 0x1c(%r30)
+	b _18ff9c
+_18ff54:
+	cmpw %r0, %r4
+	blt- _18ff68
+	lfs %f0, -0x6790(%r2)
+	stfs %f0, 0x1c(%r30)
+	b _18ff9c
+_18ff68:
+	subf %r3, %r5, %r0
+	subf %r0, %r5, %r4
+	xoris %r3, %r3, 0x8000
+	lfd %f2, -0x6780(%r2)
+	xoris %r0, %r0, 0x8000
+	stw %r3, 0xc(%r1)
+	stw %r0, 0x14(%r1)
+	lfd %f1, 0x8(%r1)
+	lfd %f0, 0x10(%r1)
+	fsubs %f1, %f1, %f2
+	fsubs %f0, %f0, %f2
+	fdivs %f0, %f1, %f0
+	stfs %f0, 0x1c(%r30)
+_18ff9c:
+	lwz %r5, -0x720c(%r13)
+	lbz %r0, 0x35(%r29)
+	lwz %r4, -0x7208(%r13)
+	cmpw %r0, %r5
+	bgt- _18ffbc
+	lfs %f0, -0x67a0(%r2)
+	stfs %f0, 0x20(%r30)
+	b _190004
+_18ffbc:
+	cmpw %r0, %r4
+	blt- _18ffd0
+	lfs %f0, -0x6790(%r2)
+	stfs %f0, 0x20(%r30)
+	b _190004
+_18ffd0:
+	subf %r3, %r5, %r0
+	subf %r0, %r5, %r4
+	xoris %r3, %r3, 0x8000
+	lfd %f2, -0x6780(%r2)
+	xoris %r0, %r0, 0x8000
+	stw %r3, 0xc(%r1)
+	stw %r0, 0x14(%r1)
+	lfd %f1, 0x8(%r1)
+	lfd %f0, 0x10(%r1)
+	fsubs %f1, %f1, %f2
+	fsubs %f0, %f0, %f2
+	fdivs %f0, %f1, %f0
+	stfs %f0, 0x20(%r30)
+_190004:
+	lwz %r0, 0x34(%r1)
+	lwz %r31, 0x2c(%r1)
+	lwz %r30, 0x28(%r1)
+	lwz %r29, 0x24(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x30
+	blr
+
+	.global sub_190020
+sub_190020: # 0x801972e0
+	stwu %r1, -0xc0(%r1)
+	mflr %r0
+	stw %r0, 0xc4(%r1)
+	addi %r11, %r1, 0xc0
+	bl sub_1974c
+	mulli %r0, %r3, 0x538
+	lis %r7, 0x4330
+	lis %r6, 0x8034
+	stw %r7, 0x50(%r1)
+	mr %r27, %r3
+	addi %r6, %r6, 0x1460
+	stw %r7, 0x58(%r1)
+	mr %r28, %r4
+	mr %r14, %r5
+	add %r31, %r6, %r0
+	li %r30, 0x0
+	bl sub_1b82ec
+	cmpwi %r3, 0x3
+	beq- _190074
+	li %r3, 0x0
+	b _190734
+_190074:
+	bl sub_19f24c
+	lbz %r0, 0x51c(%r31)
+	mr %r17, %r3
+	cmpwi %r0, 0x0
+	beq- _190094
+	bl sub_19f274
+	li %r3, 0x0
+	b _190734
+_190094:
+	li %r16, 0x1
+	mr %r3, %r27
+	stb %r16, 0x51c(%r31)
+	li %r4, 0x0
+	bl sub_1b9630
+	cmpwi %r3, -0x1
+	mr %r15, %r3
+	bne- _190108
+	lwz %r0, 0x4d8(%r31)
+	cmpwi %cr1, %r0, 0x0
+	beq- cr1, _190108
+	lbz %r0, 0x522(%r31)
+	cmpwi %r0, 0x0
+	beq- _190108
+	lbz %r0, 0x523(%r31)
+	cmpwi %r0, 0x0
+	bne- _190108
+	beq- cr1, _190100
+	bne- _190100
+	stb %r16, 0x523(%r31)
+	mr %r3, %r27
+	li %r4, 0x1
+	lwz %r12, 0x4d8(%r31)
+	mtctr %r12
+	bctrl 
+	li %r0, 0x0
+	stb %r0, 0x522(%r31)
+_190100:
+	li %r0, 0x0
+	stb %r0, 0x51f(%r31)
+_190108:
+	mr %r3, %r17
+	bl sub_19f274
+	lbz %r0, 0x51d(%r31)
+	cmpwi %r0, 0x0
+	beq- _190128
+	stb %r15, 0x5d(%r31)
+	mr %r3, %r31
+	bl sub_18ddc4
+_190128:
+	lis %r4, 0x8019
+	mr %r3, %r27
+	addi %r4, %r4, 0x7d38
+	bl sub_1b96bc
+	lbz %r0, 0x10f(%r31)
+	cmpwi %r0, 0x0
+	beq- _190728
+	cmpwi %r28, 0x0
+	beq- _190728
+	cmpwi %r14, 0x0
+	beq- _190728
+	bl sub_19f24c
+	lbz %r29, 0x10f(%r31)
+	cmplw %r29, %r14
+	mr %r30, %r29
+	ble- _19016c
+	mr %r30, %r14
+_19016c:
+	li %r4, 0x0
+	mr %r0, %r30
+	stb %r4, 0x10f(%r31)
+	mulli %r5, %r30, 0x84
+	lbz %r4, 0x10e(%r31)
+	add %r5, %r28, %r5
+	subf. %r6, %r30, %r4
+	bge- _190190
+	addi %r6, %r6, 0x10
+_190190:
+	subi %r5, %r5, 0x84
+	b _190294
+_190198:
+	mulli %r4, %r6, 0x38
+	addi %r6, %r6, 0x1
+	cmpwi %r6, 0x10
+	add %r4, %r31, %r4
+	lhz %r8, 0x110(%r4)
+	lhz %r7, 0x112(%r4)
+	sth %r8, -0x84(%r5)
+	sth %r7, -0x82(%r5)
+	lhz %r8, 0x114(%r4)
+	lhz %r7, 0x116(%r4)
+	sth %r8, -0x80(%r5)
+	sth %r7, -0x7e(%r5)
+	lhz %r8, 0x118(%r4)
+	lhz %r7, 0x11a(%r4)
+	sth %r8, -0x7c(%r5)
+	sth %r7, -0x7a(%r5)
+	lhz %r8, 0x11c(%r4)
+	lhz %r7, 0x11e(%r4)
+	sth %r8, -0x78(%r5)
+	sth %r7, -0x76(%r5)
+	lhz %r8, 0x120(%r4)
+	lhz %r7, 0x122(%r4)
+	sth %r8, -0x74(%r5)
+	sth %r7, -0x72(%r5)
+	lhz %r8, 0x124(%r4)
+	lhz %r7, 0x126(%r4)
+	sth %r8, -0x70(%r5)
+	sth %r7, -0x6e(%r5)
+	lhz %r8, 0x128(%r4)
+	lhz %r7, 0x12a(%r4)
+	sth %r8, -0x6c(%r5)
+	sth %r7, -0x6a(%r5)
+	lhz %r8, 0x12c(%r4)
+	lhz %r7, 0x12e(%r4)
+	sth %r8, -0x68(%r5)
+	sth %r7, -0x66(%r5)
+	lhz %r8, 0x130(%r4)
+	lhz %r7, 0x132(%r4)
+	sth %r8, -0x64(%r5)
+	sth %r7, -0x62(%r5)
+	lhz %r8, 0x134(%r4)
+	lhz %r7, 0x136(%r4)
+	sth %r8, -0x60(%r5)
+	sth %r7, -0x5e(%r5)
+	lhz %r8, 0x138(%r4)
+	lhz %r7, 0x13a(%r4)
+	sth %r8, -0x5c(%r5)
+	sth %r7, -0x5a(%r5)
+	lhz %r8, 0x13c(%r4)
+	lhz %r7, 0x13e(%r4)
+	sth %r8, -0x58(%r5)
+	sth %r7, -0x56(%r5)
+	lhz %r8, 0x140(%r4)
+	lhz %r7, 0x142(%r4)
+	sth %r8, -0x54(%r5)
+	sth %r7, -0x52(%r5)
+	lhz %r7, 0x144(%r4)
+	lhz %r4, 0x146(%r4)
+	sth %r7, -0x50(%r5)
+	sth %r4, -0x4e(%r5)
+	subi %r5, %r5, 0x84
+	blt- _190294
+	li %r6, 0x0
+_190294:
+	subic. %r0, %r0, 0x1
+	bne+ _190198
+	mulli %r0, %r6, 0x38
+	add %r16, %r31, %r0
+	lhz %r15, 0x13a(%r16)
+	lhz %r0, 0x136(%r16)
+	stw %r15, 0x74(%r1)
+	lhz %r15, 0x13c(%r16)
+	sth %r0, 0x3e(%r1)
+	lwz %r0, 0x74(%r1)
+	stw %r15, 0x60(%r1)
+	lhz %r15, 0x13e(%r16)
+	sth %r0, 0x42(%r1)
+	lwz %r0, 0x60(%r1)
+	stw %r15, 0x64(%r1)
+	lhz %r15, 0x140(%r16)
+	sth %r0, 0x44(%r1)
+	lwz %r0, 0x64(%r1)
+	stw %r15, 0x68(%r1)
+	lhz %r15, 0x142(%r16)
+	sth %r0, 0x46(%r1)
+	lwz %r0, 0x68(%r1)
+	stw %r15, 0x6c(%r1)
+	lhz %r15, 0x144(%r16)
+	sth %r0, 0x48(%r1)
+	lwz %r0, 0x6c(%r1)
+	stw %r15, 0x70(%r1)
+	lhz %r17, 0x110(%r16)
+	lhz %r18, 0x112(%r16)
+	lhz %r19, 0x114(%r16)
+	lhz %r20, 0x116(%r16)
+	lhz %r21, 0x118(%r16)
+	lhz %r22, 0x11a(%r16)
+	lhz %r23, 0x11c(%r16)
+	lhz %r24, 0x11e(%r16)
+	lhz %r25, 0x120(%r16)
+	lhz %r26, 0x122(%r16)
+	lhz %r12, 0x124(%r16)
+	lhz %r11, 0x126(%r16)
+	lhz %r10, 0x128(%r16)
+	lhz %r9, 0x12a(%r16)
+	lhz %r8, 0x12c(%r16)
+	lhz %r7, 0x12e(%r16)
+	lhz %r6, 0x130(%r16)
+	lhz %r5, 0x132(%r16)
+	lhz %r4, 0x134(%r16)
+	lhz %r14, 0x138(%r16)
+	lhz %r15, 0x146(%r16)
+	sth %r0, 0x4a(%r1)
+	lwz %r0, 0x70(%r1)
+	sth %r17, 0x18(%r1)
+	sth %r18, 0x1a(%r1)
+	sth %r19, 0x1c(%r1)
+	sth %r20, 0x1e(%r1)
+	sth %r21, 0x20(%r1)
+	sth %r22, 0x22(%r1)
+	sth %r23, 0x24(%r1)
+	sth %r24, 0x26(%r1)
+	sth %r25, 0x28(%r1)
+	sth %r26, 0x2a(%r1)
+	sth %r12, 0x2c(%r1)
+	sth %r11, 0x2e(%r1)
+	sth %r10, 0x30(%r1)
+	sth %r9, 0x32(%r1)
+	sth %r8, 0x34(%r1)
+	sth %r7, 0x36(%r1)
+	sth %r6, 0x38(%r1)
+	sth %r5, 0x3a(%r1)
+	sth %r4, 0x3c(%r1)
+	sth %r14, 0x40(%r1)
+	sth %r0, 0x4c(%r1)
+	sth %r15, 0x4e(%r1)
+	bl sub_19f274
+	lhz %r10, -0x676c(%r2)
+	mr %r3, %r27
+	lhz %r9, -0x676a(%r2)
+	addi %r5, %r1, 0x10
+	lhz %r8, -0x6768(%r2)
+	li %r4, 0x0
+	lhz %r7, -0x6764(%r2)
+	lhz %r6, -0x6762(%r2)
+	lhz %r0, -0x6760(%r2)
+	sth %r10, 0x10(%r1)
+	sth %r9, 0x12(%r1)
+	sth %r8, 0x14(%r1)
+	sth %r7, 0x8(%r1)
+	sth %r6, 0xa(%r1)
+	sth %r0, 0xc(%r1)
+	bl sub_1b9470
+	lha %r5, 0x10(%r1)
+	lha %r4, 0x14(%r1)
+	lha %r3, 0x12(%r1)
+	mullw %r0, %r4, %r5
+	mullw. %r0, %r0, %r3
+	beq- _190464
+	xoris %r0, %r5, 0x8000
+	xoris %r3, %r3, 0x8000
+	stw %r0, 0x54(%r1)
+	xoris %r0, %r4, 0x8000
+	lfd %f4, -0x6780(%r2)
+	lfd %f0, 0x50(%r1)
+	stw %r3, 0x5c(%r1)
+	fsubs %f2, %f0, %f4
+	lfs %f3, -0x6790(%r2)
+	stw %r0, 0x54(%r1)
+	lfd %f1, 0x58(%r1)
+	lfd %f0, 0x50(%r1)
+	fdivs %f2, %f3, %f2
+	fsubs %f1, %f1, %f4
+	stfs %f2, 0x4dc(%r31)
+	fsubs %f0, %f0, %f4
+	fdivs %f1, %f3, %f1
+	fdivs %f0, %f3, %f0
+	stfs %f1, 0x4e0(%r31)
+	stfs %f0, 0x4e4(%r31)
+	b _190474
+_190464:
+	lfs %f0, -0x675c(%r2)
+	stfs %f0, 0x4dc(%r31)
+	stfs %f0, 0x4e0(%r31)
+	stfs %f0, 0x4e4(%r31)
+_190474:
+	mr %r3, %r27
+	addi %r5, %r1, 0x8
+	li %r4, 0x1
+	bl sub_1b9470
+	lha %r5, 0x8(%r1)
+	lha %r4, 0xc(%r1)
+	lha %r3, 0xa(%r1)
+	mullw %r0, %r4, %r5
+	mullw. %r0, %r0, %r3
+	beq- _1904f0
+	xoris %r0, %r5, 0x8000
+	xoris %r3, %r3, 0x8000
+	stw %r0, 0x5c(%r1)
+	xoris %r0, %r4, 0x8000
+	lfd %f4, -0x6780(%r2)
+	lfd %f0, 0x58(%r1)
+	stw %r3, 0x54(%r1)
+	fsubs %f2, %f0, %f4
+	lfs %f3, -0x6790(%r2)
+	stw %r0, 0x5c(%r1)
+	lfd %f1, 0x50(%r1)
+	lfd %f0, 0x58(%r1)
+	fdivs %f2, %f3, %f2
+	fsubs %f1, %f1, %f4
+	stfs %f2, 0x4e8(%r31)
+	fsubs %f0, %f0, %f4
+	fdivs %f1, %f3, %f1
+	fdivs %f0, %f3, %f0
+	stfs %f1, 0x4ec(%r31)
+	stfs %f0, 0x4f0(%r31)
+	b _190500
+_1904f0:
+	lfs %f0, -0x6758(%r2)
+	stfs %f0, 0x4e8(%r31)
+	stfs %f0, 0x4ec(%r31)
+	stfs %f0, 0x4f0(%r31)
+_190500:
+	mulli %r0, %r30, 0x84
+	lis %r3, 0x1
+	mr %r6, %r30
+	subi %r9, %r3, 0x1
+	add %r14, %r28, %r0
+	li %r4, 0xfd
+	mr %r8, %r9
+	mr %r7, %r9
+	subi %r5, %r14, 0x84
+_190524:
+	cmplwi %r6, 0x1
+	subi %r5, %r5, 0x84
+	ble- _190538
+	mr %r3, %r5
+	b _19053c
+_190538:
+	addi %r3, %r1, 0x18
+_19053c:
+	lbz %r0, 0x29(%r3)
+	extsb %r0, %r0
+	cmpwi %r0, -0x2
+	beq- _19059c
+	bge- _19055c
+	cmpwi %r0, -0x7
+	beq- _19059c
+	b _1905a0
+_19055c:
+	cmpwi %r0, 0x0
+	beq- _190568
+	b _1905a0
+_190568:
+	lbz %r4, 0x28(%r3)
+	cmplwi %r4, 0x1
+	bne- _190580
+	lhz %r8, 0x0(%r3)
+	li %r9, 0x0
+	b _19059c
+_190580:
+	cmplwi %r4, 0x2
+	bne- _190594
+	lhz %r9, 0x2a(%r3)
+	li %r8, 0x0
+	b _19059c
+_190594:
+	li %r9, 0x0
+	li %r8, 0x0
+_19059c:
+	lhz %r7, 0x0(%r3)
+_1905a0:
+	subic. %r6, %r6, 0x1
+	bne+ _190524
+	cmplwi %r7, 0xffff
+	bne- _1905d0
+_1905b0:
+	mr %r3, %r28
+	mr %r4, %r31
+	li %r5, 0x84
+	bl memcpy
+	subic. %r30, %r30, 0x1
+	addi %r28, %r28, 0x84
+	bne+ _1905b0
+	b _190728
+_1905d0:
+	cmplwi %r8, 0xffff
+	bne- _1905dc
+	lwz %r8, 0x0(%r31)
+_1905dc:
+	cmplwi %r9, 0xffff
+	bne- _1905e8
+	lwz %r9, 0x60(%r31)
+_1905e8:
+	andi. %r0, %r7, 0x9fff
+	lwz %r3, 0x0(%r31)
+	rlwimi  %r0, %r8, 0, 17, 18
+	cmplwi %r4, 0x2
+	clrlwi  %r5, %r3, 16
+	xor %r3, %r0, %r5
+	stw %r0, 0x0(%r31)
+	and %r0, %r3, %r0
+	stw %r0, 0x4(%r31)
+	and %r0, %r3, %r5
+	stw %r0, 0x8(%r31)
+	bne- _19063c
+	lwz %r3, 0x60(%r31)
+	clrlwi  %r0, %r9, 16
+	clrlwi  %r5, %r3, 16
+	stw %r0, 0x60(%r31)
+	xor %r3, %r0, %r5
+	and %r0, %r3, %r0
+	stw %r0, 0x64(%r31)
+	and %r0, %r3, %r5
+	stw %r0, 0x68(%r31)
+_19063c:
+	mr %r3, %r31
+	mr %r5, %r29
+	bl sub_18df98
+	mr %r15, %r30
+	subi %r14, %r14, 0x84
+	li %r18, 0x1
+	li %r17, 0x0
+	li %r16, 0x10
+_19065c:
+	cmplwi %r15, 0x1
+	subi %r14, %r14, 0x84
+	ble- _190670
+	mr %r19, %r14
+	b _190674
+_190670:
+	addi %r19, %r1, 0x18
+_190674:
+	lbz %r0, 0x29(%r19)
+	stb %r0, 0x5d(%r31)
+	lbz %r4, 0x28(%r19)
+	lbz %r0, 0x5c(%r31)
+	cmplw %r0, %r4
+	beq- _1906a8
+	lbz %r3, 0x29(%r19)
+	addi %r0, %r3, 0x2
+	clrlwi  %r0, %r0, 24
+	cmplwi %r0, 0x2
+	bgt- _1906a8
+	stb %r4, 0x5c(%r31)
+	stb %r18, 0x51e(%r31)
+_1906a8:
+	lbz %r0, 0x36(%r19)
+	stb %r0, 0x5f(%r31)
+	lbz %r0, 0x29(%r19)
+	extsb. %r0, %r0
+	beq- _1906cc
+	bge- _1906f4
+	cmpwi %r0, -0x7
+	beq- _1906d8
+	b _1906f4
+_1906cc:
+	mr %r3, %r31
+	mr %r4, %r19
+	bl sub_18fda8
+_1906d8:
+	mr %r3, %r31
+	mr %r4, %r19
+	bl sub_18e498
+	mr %r3, %r31
+	mr %r4, %r19
+	bl sub_18f604
+	b _1906f8
+_1906f4:
+	stb %r17, 0x5e(%r31)
+_1906f8:
+	addi %r5, %r14, 0x80
+	subi %r4, %r31, 0x4
+	mtctr %r16
+_190704:
+	lwz %r3, 0x4(%r4)
+	lwzu %r0, 0x8(%r4)
+	stw %r3, 0x4(%r5)
+	stwu %r0, 0x8(%r5)
+	bdnz+ _190704
+	lwz %r0, 0x4(%r4)
+	subic. %r15, %r15, 0x1
+	stw %r0, 0x4(%r5)
+	bne+ _19065c
+_190728:
+	li %r0, 0x0
+	mr %r3, %r30
+	stb %r0, 0x51c(%r31)
+_190734:
+	addi %r11, %r1, 0xc0
+	bl sub_19798
+	lwz %r0, 0xc4(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0xc0
+	blr
+
+	.global t1_19074c
+t1_19074c:
+	.incbin "basemain.dol", 0x192cac, 0x740
 
 	.global sub_190e8c
 sub_190e8c: # 0x8019814c
@@ -16540,7 +19271,44 @@ sub_1929a4: # 0x80199c64
 
 	.global t1_1929d0
 t1_1929d0:
-	.incbin "basemain.dol", 0x194f30, 0xe1c
+	.incbin "basemain.dol", 0x194f30, 0xbec
+	
+	.global sub_1935bc
+sub_1935bc: # 0x8019a87c
+	psq_l 0, 0x0, 4, 0, 0
+	psq_l 2, 0x0, 3, 0, 0
+	psq_l 1, 0x8, 4, 1, 0
+	#ps_mul f4, f2, f0
+	.4byte 0x10820032
+	psq_l 3, 0x8, 3, 0, 0
+	#ps_madd f5, f3, f1, f4
+	.4byte 0x10a3207a
+	psq_l 8, 0x10, 3, 0, 0
+	#ps_sum0 %f6, %f5, %f6, %f5
+	.4byte 0x10c52994
+	psq_l 9, 0x18, 3, 0, 0
+	#ps_mul f10, f8, f0
+	.4byte 0x11480032
+	psq_st 6, 0x0, 5, 1, 0
+	#ps_madd f11, f9, f1, f10
+	.4byte 0x1169507a
+	psq_l 2, 0x20, 3, 0, 0
+	#ps_sum0 %f12, %f11, %f12, %f11
+	.4byte 0x118b5b14
+	psq_l 3, 0x28, 3, 0, 0
+	#ps_mul f4, f2, f0
+	.4byte 0x10820032
+	psq_st 12, 0x4, 5, 1, 0
+	#ps_madd f5, f3, f1, f4
+	.4byte 0x10a3207a
+	#ps_sum0 %f6, %f5, %f6, %f5
+	.4byte 0x10c52994
+	psq_st 6, 0x8, 5, 1, 0
+	blr
+
+	.global t1_193610
+t1_193610:
+	.incbin "basemain.dol", 0x195b70, 0x1dc
 
 	.global sub_1937ec
 sub_1937ec: # 0x8019aaac
@@ -22374,7 +25142,206 @@ t1_1a16f0:
 	
 	.global t1_1a1720
 t1_1a1720:
-	.incbin "basemain.dol", 0x1a3c80, 0x634
+	.incbin "basemain.dol", 0x1a3c80, 0x354
+	
+	.global sub_1a1a74
+sub_1a1a74: # 0x801a8d34
+	stwu %r1, -0x20(%r1)
+	mflr %r0
+	cmpwi %r3, 0x0
+	stw %r0, 0x24(%r1)
+	stw %r31, 0x1c(%r1)
+	stw %r30, 0x18(%r1)
+	stw %r29, 0x14(%r1)
+	beq- _1a1d1c
+	cmpwi %r4, 0x0
+	bne- _1a1bc8
+	lis %r8, 0x8034
+	addi %r8, %r8, 0x30c0
+	lbz %r3, 0x13(%r8)
+	clrlwi  %r0, %r3, 30
+	cmplwi %r0, 0x2
+	ble- _1a1abc
+	rlwinm  %r0, %r3, 0, 24, 29
+	stb %r0, 0x13(%r8)
+_1a1abc:
+	lis %r3, 0x8034
+	li %r0, 0x0
+	addi %r3, %r3, 0x30c0
+	addi %r7, %r8, 0xc
+	addi %r5, %r3, 0x14
+	sth %r0, 0x2(%r8)
+	addi %r3, %r5, 0x1
+	subf %r3, %r7, %r3
+	cmplw %r7, %r5
+	sth %r0, 0x0(%r8)
+	srwi  %r3, %r3, 1
+	bge- _1a1bc8
+	srwi. %r0, %r3, 2
+	mtctr %r0
+	beq- _1a1b98
+_1a1af8:
+	lhz %r6, 0x0(%r8)
+	lhz %r0, 0x0(%r7)
+	lhz %r5, 0x2(%r8)
+	add %r0, %r6, %r0
+	sth %r0, 0x0(%r8)
+	clrlwi  %r6, %r0, 16
+	lhz %r0, 0x0(%r7)
+	not %r0, %r0
+	add %r0, %r5, %r0
+	sth %r0, 0x2(%r8)
+	clrlwi  %r5, %r0, 16
+	lhz %r0, 0x2(%r7)
+	add %r0, %r6, %r0
+	sth %r0, 0x0(%r8)
+	clrlwi  %r6, %r0, 16
+	lhz %r0, 0x2(%r7)
+	not %r0, %r0
+	add %r0, %r5, %r0
+	sth %r0, 0x2(%r8)
+	clrlwi  %r5, %r0, 16
+	lhz %r0, 0x4(%r7)
+	add %r0, %r6, %r0
+	sth %r0, 0x0(%r8)
+	clrlwi  %r6, %r0, 16
+	lhz %r0, 0x4(%r7)
+	not %r0, %r0
+	add %r0, %r5, %r0
+	sth %r0, 0x2(%r8)
+	clrlwi  %r5, %r0, 16
+	lhz %r0, 0x6(%r7)
+	add %r0, %r6, %r0
+	sth %r0, 0x0(%r8)
+	lhz %r0, 0x6(%r7)
+	addi %r7, %r7, 0x8
+	not %r0, %r0
+	add %r0, %r5, %r0
+	sth %r0, 0x2(%r8)
+	bdnz+ _1a1af8
+	andi. %r3, %r3, 0x3
+	beq- _1a1bc8
+_1a1b98:
+	mtctr %r3
+_1a1b9c:
+	lhz %r6, 0x0(%r8)
+	lhz %r0, 0x0(%r7)
+	lhz %r5, 0x2(%r8)
+	add %r0, %r6, %r0
+	sth %r0, 0x0(%r8)
+	lhz %r0, 0x0(%r7)
+	addi %r7, %r7, 0x2
+	not %r0, %r0
+	add %r0, %r5, %r0
+	sth %r0, 0x2(%r8)
+	bdnz+ _1a1b9c
+_1a1bc8:
+	lis %r3, 0x8034
+	addi %r3, %r3, 0x30c0
+	lwz %r0, 0x40(%r3)
+	cmplw %r4, %r0
+	bge- _1a1be0
+	stw %r4, 0x40(%r3)
+_1a1be0:
+	lis %r4, 0x8034
+	addi %r4, %r4, 0x30c0
+	lwz %r0, 0x40(%r4)
+	cmplwi %r0, 0x14
+	bgt- _1a1c18
+	lhz %r3, 0x3c(%r4)
+	rlwinm  %r0, %r3, 0, 17, 21
+	cmplwi %r0, 0x5000
+	beq- _1a1c10
+	rlwinm  %r0, %r3, 0, 24, 25
+	cmplwi %r0, 0xc0
+	bne- _1a1c18
+_1a1c10:
+	li %r0, 0x0
+	sth %r0, 0x3c(%r4)
+_1a1c18:
+	lis %r6, 0x8034
+	lis %r5, 0x801b
+	addi %r6, %r6, 0x30c0
+	li %r3, 0x0
+	lwz %r31, 0x40(%r6)
+	subi %r5, %r5, 0x7604
+	li %r4, 0x1
+	subfic %r29, %r31, 0x40
+	add %r30, %r6, %r31
+	bl sub_161e04
+	cmpwi %r3, 0x0
+	bne- _1a1c50
+	li %r0, 0x0
+	b _1a1d00
+_1a1c50:
+	li %r3, 0x0
+	li %r4, 0x1
+	li %r5, 0x3
+	bl sub_161670
+	cmpwi %r3, 0x0
+	bne- _1a1c78
+	li %r3, 0x0
+	bl sub_161f00
+	li %r0, 0x0
+	b _1a1d00
+_1a1c78:
+	slwi  %r3, %r31, 6
+	addi %r4, %r1, 0x8
+	addi %r0, %r3, 0x100
+	li %r5, 0x4
+	oris %r0, %r0, 0xa000
+	li %r3, 0x0
+	stw %r0, 0x8(%r1)
+	li %r6, 0x1
+	li %r7, 0x0
+	bl sub_160c08
+	cntlzw %r0, %r3
+	li %r3, 0x0
+	srwi  %r31, %r0, 5
+	bl sub_161020
+	cntlzw %r0, %r3
+	mr %r4, %r30
+	srwi  %r0, %r0, 5
+	mr %r5, %r29
+	or %r29, %r31, %r0
+	li %r3, 0x0
+	li %r6, 0x1
+	bl sub_160e84
+	cntlzw %r0, %r3
+	li %r3, 0x0
+	srwi  %r0, %r0, 5
+	or %r29, %r29, %r0
+	bl sub_1617a0
+	cntlzw %r0, %r3
+	li %r3, 0x0
+	srwi  %r0, %r0, 5
+	or %r29, %r29, %r0
+	bl sub_161f00
+	cntlzw %r0, %r29
+	srwi  %r0, %r0, 5
+_1a1d00:
+	lis %r3, 0x8034
+	cmpwi %r0, 0x0
+	addi %r3, %r3, 0x30c0
+	stw %r0, 0x4c(%r3)
+	beq- _1a1d1c
+	li %r0, 0x40
+	stw %r0, 0x40(%r3)
+_1a1d1c:
+	lis %r31, 0x8034
+	li %r0, 0x0
+	addi %r31, %r31, 0x30c0
+	stw %r0, 0x48(%r31)
+	lwz %r3, 0x44(%r31)
+	bl sub_19f274
+	lwz %r3, 0x4c(%r31)
+	lwz %r31, 0x1c(%r1)
+	lwz %r30, 0x18(%r1)
+	lwz %r29, 0x14(%r1)
+	lwz %r0, 0x24(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x20
+	blr
 
 	.global sub_1a1d54
 sub_1a1d54: # 0x801a9014
@@ -22385,7 +25352,53 @@ sub_1a1d54: # 0x801a9014
 
 	.global t1_1a1d64
 t1_1a1d64:
-	.incbin "basemain.dol", 0x1a42c4, 0x238
+	.incbin "basemain.dol", 0x1a42c4, 0x19c
+	
+	.global sub_1a1f00
+sub_1a1f00: # 0x801a91c0
+	stwu %r1, -0x10(%r1)
+	mflr %r0
+	stw %r0, 0x14(%r1)
+	stw %r31, 0xc(%r1)
+	mr %r31, %r4
+	stw %r30, 0x8(%r1)
+	mr %r30, %r3
+	bl sub_19f24c
+	lis %r4, 0x8034
+	addi %r4, %r4, 0x30c0
+	lwz %r0, 0x48(%r4)
+	cmpwi %r0, 0x0
+	beq- _1a1f40
+	bl sub_19f274
+	li %r3, 0x0
+	b _1a1f50
+_1a1f40:
+	li %r0, 0x1
+	stw %r3, 0x44(%r4)
+	addi %r3, %r4, 0x14
+	stw %r0, 0x48(%r4)
+_1a1f50:
+	slwi  %r0, %r30, 1
+	add %r3, %r3, %r0
+	lhz %r0, 0x1c(%r3)
+	cmplw %r31, %r0
+	beq- _1a1f78
+	sth %r31, 0x1c(%r3)
+	li %r3, 0x1
+	li %r4, 0x14
+	bl sub_1a1a74
+	b _1a1f84
+_1a1f78:
+	li %r3, 0x0
+	li %r4, 0x14
+	bl sub_1a1a74
+_1a1f84:
+	lwz %r0, 0x14(%r1)
+	lwz %r31, 0xc(%r1)
+	lwz %r30, 0x8(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x10
+	blr
 
 	.global sub_1a1f9c
 sub_1a1f9c: # 0x801a925c
@@ -24857,7 +27870,405 @@ t1_1a71c4:
 
 	.global t1_1a722c
 t1_1a722c:
-	.incbin "basemain.dol", 0x1a978c, 0x137c
+	.incbin "basemain.dol", 0x1a978c, 0xb50
+	
+	.global sub_1a7d7c
+sub_1a7d7c: # 0x801af03c
+	stwu %r1, -0x10(%r1)
+	mflr %r0
+	stw %r0, 0x14(%r1)
+	stw %r31, 0xc(%r1)
+	stw %r30, 0x8(%r1)
+	mr %r30, %r3
+	bl sub_19f24c
+	lwz %r0, -0x6258(%r13)
+	mr %r31, %r3
+	lwz %r4, -0x6250(%r13)
+	li %r7, 0x0
+	lwz %r3, -0x6254(%r13)
+	or %r30, %r30, %r0
+	lwz %r0, -0x70e8(%r13)
+	or %r4, %r4, %r3
+	lwz %r3, -0x6248(%r13)
+	andc %r30, %r30, %r4
+	lwz %r5, -0x6244(%r13)
+	or %r6, %r3, %r30
+	lwz %r3, -0x625c(%r13)
+	not %r8, %r30
+	cmplwi %r0, 0x4
+	and %r0, %r3, %r8
+	stw %r7, -0x6258(%r13)
+	and %r4, %r5, %r8
+	and %r3, %r6, %r5
+	stw %r6, -0x6248(%r13)
+	stw %r4, -0x6244(%r13)
+	stw %r0, -0x625c(%r13)
+	bne- _1a7e00
+	lwz %r0, -0x624c(%r13)
+	or %r0, %r0, %r30
+	stw %r0, -0x624c(%r13)
+_1a7e00:
+	bl sub_1abe70
+	lwz %r0, -0x70f4(%r13)
+	cmpwi %r0, 0x20
+	bne- _1a7e60
+	lwz %r5, -0x6248(%r13)
+	cntlzw %r6, %r5
+	cmpwi %r6, 0x20
+	stw %r6, -0x70f4(%r13)
+	beq- _1a7e60
+	lis %r0, 0x8000
+	lis %r3, 0x8034
+	srw %r0, %r0, %r6
+	li %r4, 0x0
+	andc %r5, %r5, %r0
+	addi %r3, %r3, 0x3e30
+	mulli %r0, %r6, 0xc
+	stw %r5, -0x6248(%r13)
+	li %r5, 0xc
+	add %r3, %r3, %r0
+	bl memset
+	lis %r4, 0x801b
+	lwz %r3, -0x70f4(%r13)
+	subi %r4, %r4, 0x1420
+	bl sub_1ac65c
+_1a7e60:
+	mr %r3, %r31
+	bl sub_19f274
+	lwz %r31, 0xc(%r1)
+	li %r3, 0x1
+	lwz %r30, 0x8(%r1)
+	lwz %r0, 0x14(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x10
+	blr
+
+	.global t1_1a7e84
+t1_1a7e84:
+	.incbin "basemain.dol", 0x1aa3e4, 0x268
+
+	.global sub_1a80ec
+sub_1a80ec: # 0x801af3ac
+	stwu %r1, -0x50(%r1)
+	mflr %r0
+	stw %r0, 0x54(%r1)
+	addi %r11, %r1, 0x50
+	bl sub_19754
+	lis %r17, 0x8034
+	mr %r16, %r3
+	addi %r17, %r17, 0x3e30
+	bl sub_19f24c
+	mr %r19, %r3
+	addi %r23, %r17, 0x30
+	addi %r22, %r17, 0x50
+	addi %r21, %r17, 0x0
+	li %r17, 0x0
+	li %r18, 0x0
+	li %r26, -0x2
+	li %r27, -0x1
+	li %r28, -0x3
+	li %r29, 0x0
+	lis %r30, 0x801b
+	lis %r31, 0x801b
+	lis %r25, 0x8000
+_1a8144:
+	lwz %r0, -0x6258(%r13)
+	srw %r20, %r25, %r18
+	and. %r0, %r0, %r20
+	beq- _1a8174
+	li %r3, 0x0
+	bl sub_1a7d7c
+	stb %r26, 0xa(%r16)
+	mr %r3, %r16
+	li %r4, 0x0
+	li %r5, 0xa
+	bl memset
+	b _1a8568
+_1a8174:
+	lwz %r0, -0x6248(%r13)
+	and. %r0, %r0, %r20
+	bne- _1a818c
+	lwz %r0, -0x70f4(%r13)
+	cmpw %r0, %r18
+	bne- _1a81a4
+_1a818c:
+	stb %r26, 0xa(%r16)
+	mr %r3, %r16
+	li %r4, 0x0
+	li %r5, 0xa
+	bl memset
+	b _1a8568
+_1a81a4:
+	lwz %r0, -0x6244(%r13)
+	and. %r0, %r0, %r20
+	bne- _1a81c8
+	stb %r27, 0xa(%r16)
+	mr %r3, %r16
+	li %r4, 0x0
+	li %r5, 0xa
+	bl memset
+	b _1a8568
+_1a81c8:
+	mr %r3, %r18
+	bl sub_1ab208
+	cmpwi %r3, 0x0
+	beq- _1a81f0
+	stb %r28, 0xa(%r16)
+	mr %r3, %r16
+	li %r4, 0x0
+	li %r5, 0xa
+	bl memset
+	b _1a8568
+_1a81f0:
+	mr %r3, %r18
+	bl sub_1abcf0
+	rlwinm. %r0, %r3, 0, 28, 28
+	beq- _1a82cc
+	mr %r3, %r18
+	addi %r4, %r1, 0x8
+	bl sub_1abedc
+	lwz %r0, -0x6250(%r13)
+	and. %r0, %r0, %r20
+	beq- _1a8250
+	stb %r29, 0xa(%r16)
+	mr %r3, %r16
+	li %r4, 0x0
+	li %r5, 0xa
+	bl memset
+	lwz %r3, -0x6254(%r13)
+	and. %r0, %r3, %r20
+	bne- _1a8568
+	or %r0, %r3, %r20
+	mr %r3, %r18
+	stw %r0, -0x6254(%r13)
+	subi %r4, %r30, 0x1100
+	bl sub_1ac65c
+	b _1a8568
+_1a8250:
+	bl sub_19f24c
+	mr %r24, %r3
+	mr %r3, %r20
+	bl sub_1abe70
+	lwz %r4, -0x6244(%r13)
+	not %r9, %r20
+	lwz %r0, -0x6250(%r13)
+	mr %r3, %r18
+	and %r8, %r4, %r9
+	lwz %r5, -0x6254(%r13)
+	and %r7, %r0, %r9
+	lwz %r0, -0x625c(%r13)
+	and %r6, %r5, %r9
+	lwz %r4, -0x6258(%r13)
+	and %r0, %r0, %r9
+	stw %r8, -0x6244(%r13)
+	and %r5, %r4, %r9
+	li %r4, 0x0
+	stw %r7, -0x6250(%r13)
+	stw %r6, -0x6254(%r13)
+	stw %r5, -0x6258(%r13)
+	stw %r0, -0x625c(%r13)
+	bl sub_1a1f00
+	mr %r3, %r24
+	bl sub_19f274
+	stb %r27, 0xa(%r16)
+	mr %r3, %r16
+	li %r4, 0x0
+	li %r5, 0xa
+	bl memset
+	b _1a8568
+_1a82cc:
+	mr %r3, %r18
+	bl sub_1ac4a8
+	rlwinm. %r0, %r3, 0, 2, 2
+	bne- _1a82e0
+	or %r17, %r17, %r20
+_1a82e0:
+	mr %r3, %r18
+	addi %r4, %r1, 0x8
+	bl sub_1abedc
+	cmpwi %r3, 0x0
+	bne- _1a830c
+	stb %r28, 0xa(%r16)
+	mr %r3, %r16
+	li %r4, 0x0
+	li %r5, 0xa
+	bl memset
+	b _1a8568
+_1a830c:
+	lwz %r0, 0x8(%r1)
+	clrrwi. %r0, %r0, 31
+	beq- _1a8330
+	stb %r28, 0xa(%r16)
+	mr %r3, %r16
+	li %r4, 0x0
+	li %r5, 0xa
+	bl memset
+	b _1a8568
+_1a8330:
+	lwz %r12, -0x70e4(%r13)
+	mr %r3, %r18
+	mr %r4, %r16
+	addi %r5, %r1, 0x8
+	mtctr %r12
+	bctrl 
+	lwz %r0, 0x0(%r23)
+	clrrwi  %r3, %r0, 16
+	addis %r0, %r3, 0xf700
+	cmplwi %r0, 0x0
+	bne- _1a8378
+	lhz %r0, 0x0(%r16)
+	rlwinm  %r0, %r0, 0, 24, 24
+	xori %r0, %r0, 0x80
+	cmpwi %r0, 0x0
+	beq- _1a8378
+	li %r0, 0xa
+	b _1a837c
+_1a8378:
+	li %r0, 0x3
+_1a837c:
+	lbz %r4, 0x2(%r22)
+	lbz %r3, 0x2(%r16)
+	extsb %r5, %r4
+	srawi %r6, %r5, 31
+	extsb %r3, %r3
+	srawi %r4, %r3, 31
+	xor %r5, %r6, %r5
+	xor %r3, %r4, %r3
+	subf %r5, %r6, %r5
+	subf %r3, %r4, %r3
+	subf %r3, %r5, %r3
+	srawi %r4, %r3, 31
+	xor %r3, %r4, %r3
+	subf %r3, %r4, %r3
+	cmpw %r3, %r0
+	bge- _1a84fc
+	lbz %r4, 0x3(%r22)
+	lbz %r3, 0x3(%r16)
+	extsb %r5, %r4
+	srawi %r6, %r5, 31
+	extsb %r3, %r3
+	srawi %r4, %r3, 31
+	xor %r5, %r6, %r5
+	xor %r3, %r4, %r3
+	subf %r5, %r6, %r5
+	subf %r3, %r4, %r3
+	subf %r3, %r5, %r3
+	srawi %r4, %r3, 31
+	xor %r3, %r4, %r3
+	subf %r3, %r4, %r3
+	cmpw %r3, %r0
+	bge- _1a84fc
+	lbz %r4, 0x4(%r22)
+	lbz %r3, 0x4(%r16)
+	extsb %r5, %r4
+	srawi %r6, %r5, 31
+	extsb %r3, %r3
+	srawi %r4, %r3, 31
+	xor %r5, %r6, %r5
+	xor %r3, %r4, %r3
+	subf %r5, %r6, %r5
+	subf %r3, %r4, %r3
+	subf %r3, %r5, %r3
+	srawi %r4, %r3, 31
+	xor %r3, %r4, %r3
+	subf %r3, %r4, %r3
+	cmpw %r3, %r0
+	bge- _1a84fc
+	lbz %r4, 0x5(%r22)
+	lbz %r3, 0x5(%r16)
+	extsb %r5, %r4
+	srawi %r6, %r5, 31
+	extsb %r3, %r3
+	srawi %r4, %r3, 31
+	xor %r5, %r6, %r5
+	xor %r3, %r4, %r3
+	subf %r5, %r6, %r5
+	subf %r3, %r4, %r3
+	subf %r3, %r5, %r3
+	srawi %r4, %r3, 31
+	xor %r3, %r4, %r3
+	subf %r3, %r4, %r3
+	cmpw %r3, %r0
+	bge- _1a84fc
+	lbz %r5, 0x6(%r22)
+	lbz %r3, 0x6(%r16)
+	srawi %r6, %r5, 31
+	srawi %r4, %r3, 31
+	xor %r5, %r6, %r5
+	xor %r3, %r4, %r3
+	subf %r5, %r6, %r5
+	subf %r3, %r4, %r3
+	subf %r3, %r5, %r3
+	srawi %r4, %r3, 31
+	xor %r3, %r4, %r3
+	subf %r3, %r4, %r3
+	cmpw %r3, %r0
+	bge- _1a84fc
+	lbz %r5, 0x7(%r22)
+	lbz %r3, 0x7(%r16)
+	srawi %r6, %r5, 31
+	srawi %r4, %r3, 31
+	xor %r5, %r6, %r5
+	xor %r3, %r4, %r3
+	subf %r5, %r6, %r5
+	subf %r3, %r4, %r3
+	subf %r3, %r5, %r3
+	srawi %r4, %r3, 31
+	xor %r3, %r4, %r3
+	subf %r3, %r4, %r3
+	cmpw %r3, %r0
+	bge- _1a84fc
+	lhz %r3, 0x0(%r16)
+	lhz %r0, 0x0(%r22)
+	cmplw %r3, %r0
+	beq- _1a8500
+_1a84fc:
+	bl sub_1b3d70
+_1a8500:
+	mr %r3, %r22
+	mr %r4, %r16
+	li %r5, 0xc
+	bl memcpy
+	lhz %r0, 0x0(%r16)
+	rlwinm. %r0, %r0, 0, 18, 18
+	beq- _1a8558
+	stb %r28, 0xa(%r16)
+	mr %r3, %r16
+	li %r4, 0x0
+	li %r5, 0xa
+	bl memset
+	mr %r3, %r18
+	mr %r6, %r21
+	subi %r8, %r31, 0x15bc
+	subi %r4, %r13, 0x70e0
+	li %r5, 0x1
+	li %r7, 0xa
+	li %r10, 0x0
+	li %r9, 0x0
+	bl sub_1ac08c
+	b _1a8568
+_1a8558:
+	stb %r29, 0xa(%r16)
+	lhz %r0, 0x0(%r16)
+	rlwinm  %r0, %r0, 0, 25, 23
+	sth %r0, 0x0(%r16)
+_1a8568:
+	addi %r18, %r18, 0x1
+	addi %r22, %r22, 0xc
+	cmpwi %r18, 0x4
+	addi %r21, %r21, 0xc
+	addi %r16, %r16, 0xc
+	addi %r23, %r23, 0x4
+	blt+ _1a8144
+	mr %r3, %r19
+	bl sub_19f274
+	addi %r11, %r1, 0x50
+	mr %r3, %r17
+	bl sub_197a0
+	lwz %r0, 0x54(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x50
+	blr
 
 	.global sub_1a85a8
 sub_1a85a8: # 0x801af868
@@ -25506,7 +28917,30 @@ sub_1aa9a0: # 0x801b1c60
 
 	.global t1_1aa9ac
 t1_1aa9ac:
-	.incbin "basemain.dol", 0x1acf0c, 0x1194
+	.incbin "basemain.dol", 0x1acf0c, 0x85c
+	
+	.global sub_1ab208
+sub_1ab208: # 0x801b24c8
+	lis %r4, 0x8035
+	slwi  %r0, %r3, 5
+	subi %r4, %r4, 0x3f80
+	li %r5, 0x0
+	lwzx %r0, %r4, %r0
+	cmpwi %r0, -0x1
+	bne- _1ab234
+	lis %r4, 0x802a
+	lwz %r0, -0x73f0(%r4)
+	cmpw %r0, %r3
+	bne- _1ab238
+_1ab234:
+	li %r5, 0x1
+_1ab238:
+	mr %r3, %r5
+	blr
+
+	.global t1_1ab240
+t1_1ab240:
+	.incbin "basemain.dol", 0x1ad7a0, 0x900
 
 	.global sub_1abb40
 sub_1abb40: # 0x801b2e00
@@ -25625,9 +29059,39 @@ _1abcd8:
 	addi %r1, %r1, 0x20
 	blr
 
-	.global t1_1abcf0
-t1_1abcf0:
-	.incbin "basemain.dol", 0x1ae250, 0x78
+	.global sub_1abcf0
+sub_1abcf0: # 0x801b2fb0
+	stwu %r1, -0x10(%r1)
+	mflr %r0
+	stw %r0, 0x14(%r1)
+	stw %r31, 0xc(%r1)
+	stw %r30, 0x8(%r1)
+	mr %r30, %r3
+	bl sub_19f24c
+	lis %r4, 0xcd00
+	subfic %r0, %r30, 0x3
+	lwz %r31, 0x6438(%r4)
+	slwi  %r0, %r0, 3
+	srw %r31, %r31, %r0
+	rlwinm. %r0, %r31, 0, 28, 28
+	beq- _1abd48
+	lis %r4, 0x802a
+	slwi  %r5, %r30, 2
+	subi %r4, %r4, 0x73d8
+	lwzx %r0, %r4, %r5
+	rlwinm. %r0, %r0, 0, 24, 24
+	bne- _1abd48
+	li %r0, 0x8
+	stwx %r0, %r4, %r5
+_1abd48:
+	bl sub_19f274
+	mr %r3, %r31
+	lwz %r31, 0xc(%r1)
+	lwz %r30, 0x8(%r1)
+	lwz %r0, 0x14(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x10
+	blr
 
 	.global sub_1abd68
 sub_1abd68: # 0x801b3028
@@ -25646,7 +29110,122 @@ sub_1abd7c: # 0x801b303c
 
 	.global t1_1abd8c
 t1_1abd8c:
-	.incbin "basemain.dol", 0x1ae2ec, 0x300
+	.incbin "basemain.dol", 0x1ae2ec, 0xe4
+	
+	.global sub_1abe70
+sub_1abe70: # 0x801b3130
+	stwu %r1, -0x10(%r1)
+	mflr %r0
+	cmpwi %r3, 0x0
+	stw %r0, 0x14(%r1)
+	stw %r31, 0xc(%r1)
+	mr %r31, %r3
+	bne- _1abe9c
+	lis %r3, 0x802a
+	subi %r3, %r3, 0x73f0
+	lwz %r3, 0x4(%r3)
+	b _1abec8
+_1abe9c:
+	bl sub_19f24c
+	lis %r6, 0x802a
+	rlwinm  %r0, %r31, 8, 24, 27
+	subi %r6, %r6, 0x73f0
+	lis %r4, 0xcd00
+	lwz %r5, 0x4(%r6)
+	andc %r31, %r5, %r0
+	stw %r31, 0x6430(%r4)
+	stw %r31, 0x4(%r6)
+	bl sub_19f274
+	mr %r3, %r31
+_1abec8:
+	lwz %r0, 0x14(%r1)
+	lwz %r31, 0xc(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x10
+	blr
+
+	.global sub_1abedc
+sub_1abedc: # 0x801b319c
+	stwu %r1, -0x20(%r1)
+	mflr %r0
+	stw %r0, 0x24(%r1)
+	stw %r31, 0x1c(%r1)
+	stw %r30, 0x18(%r1)
+	mr %r30, %r4
+	stw %r29, 0x14(%r1)
+	mr %r29, %r3
+	stw %r28, 0x10(%r1)
+	bl sub_19f24c
+	mr %r31, %r3
+	bl sub_19f24c
+	lis %r4, 0xcd00
+	subfic %r0, %r29, 0x3
+	lwz %r28, 0x6438(%r4)
+	slwi  %r0, %r0, 3
+	srw %r28, %r28, %r0
+	rlwinm. %r0, %r28, 0, 28, 28
+	beq- _1abf48
+	lis %r4, 0x802a
+	slwi  %r5, %r29, 2
+	subi %r4, %r4, 0x73d8
+	lwzx %r0, %r4, %r5
+	rlwinm. %r0, %r0, 0, 24, 24
+	bne- _1abf48
+	li %r0, 0x8
+	stwx %r0, %r4, %r5
+_1abf48:
+	bl sub_19f274
+	rlwinm. %r0, %r28, 0, 26, 26
+	beq- _1abf94
+	mulli %r5, %r29, 0xc
+	lis %r0, 0xcd00
+	lis %r4, 0x8035
+	lis %r3, 0x8035
+	add %r7, %r0, %r5
+	slwi  %r8, %r29, 3
+	lwz %r6, 0x6404(%r7)
+	subi %r4, %r4, 0x3e00
+	add %r5, %r4, %r8
+	slwi  %r0, %r29, 2
+	stwx %r6, %r4, %r8
+	subi %r3, %r3, 0x3de0
+	li %r4, 0x1
+	lwz %r6, 0x6408(%r7)
+	stw %r6, 0x4(%r5)
+	stwx %r4, %r3, %r0
+_1abf94:
+	lis %r3, 0x8035
+	slwi  %r4, %r29, 2
+	subi %r3, %r3, 0x3de0
+	li %r0, 0x0
+	lwzx %r28, %r3, %r4
+	cmpwi %r28, 0x0
+	stwx %r0, %r3, %r4
+	beq- _1abfd4
+	lis %r3, 0x8035
+	slwi  %r4, %r29, 3
+	subi %r3, %r3, 0x3e00
+	lwzx %r0, %r3, %r4
+	add %r3, %r3, %r4
+	stw %r0, 0x0(%r30)
+	lwz %r0, 0x4(%r3)
+	stw %r0, 0x4(%r30)
+_1abfd4:
+	mr %r3, %r31
+	bl sub_19f274
+	lwz %r31, 0x1c(%r1)
+	mr %r3, %r28
+	lwz %r30, 0x18(%r1)
+	lwz %r29, 0x14(%r1)
+	lwz %r28, 0x10(%r1)
+	lwz %r0, 0x24(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x20
+	blr
+
+	.global t1_1ac000
+t1_1ac000:
+	.incbin "basemain.dol", 0x1ae560, 0x8c
 
 	.global sub_1ac08c
 sub_1ac08c: # 0x801b334c
@@ -25871,9 +29450,91 @@ _1ac644:
 	addi %r1, %r1, 0x20
 	blr
 
-	.global t1_1ac65c
-t1_1ac65c:
-	.incbin "basemain.dol", 0x1aebbc, 0x5738
+	.global sub_1ac65c
+sub_1ac65c: # 0x801b391c
+	stwu %r1, -0x20(%r1)
+	mflr %r0
+	stw %r0, 0x24(%r1)
+	stw %r31, 0x1c(%r1)
+	stw %r30, 0x18(%r1)
+	stw %r29, 0x14(%r1)
+	mr %r29, %r4
+	stw %r28, 0x10(%r1)
+	mr %r28, %r3
+	bl sub_19f24c
+	mr %r31, %r3
+	mr %r3, %r28
+	bl sub_1ac4a8
+	lis %r4, 0x802a
+	slwi  %r0, %r28, 2
+	subi %r4, %r4, 0x73d8
+	mr %r30, %r3
+	lwzx %r0, %r4, %r0
+	rlwinm. %r0, %r0, 0, 24, 24
+	beq- _1ac72c
+	lis %r3, 0x8035
+	slwi  %r0, %r28, 4
+	subi %r3, %r3, 0x3da0
+
+	.global t1_1ac6b8
+t1_1ac6b8:
+	.incbin "basemain.dol", 0x1aec18, 0x4
+	cmplw %r0, %r29
+	beq- _1ac740
+	cmpwi %r0, 0x0
+	bne- _1ac6d4
+	stw %r29, 0x0(%r3)
+	b _1ac740
+_1ac6d4:
+	lwz %r0, 0x4(%r3)
+	cmplw %r0, %r29
+	beq- _1ac740
+	cmpwi %r0, 0x0
+	bne- _1ac6f0
+	stw %r29, 0x4(%r3)
+	b _1ac740
+_1ac6f0:
+	lwz %r0, 0x8(%r3)
+	cmplw %r0, %r29
+	beq- _1ac740
+	cmpwi %r0, 0x0
+	bne- _1ac70c
+	stw %r29, 0x8(%r3)
+	b _1ac740
+_1ac70c:
+	lwz %r0, 0xc(%r3)
+	cmplw %r0, %r29
+	beq- _1ac740
+	cmpwi %r0, 0x0
+	bne- _1ac740
+	stw %r29, 0xc(%r3)
+	b _1ac740
+
+	.global t1_1ac728
+t1_1ac728:
+	.incbin "basemain.dol", 0x1aec88, 0x4
+_1ac72c:
+	mr %r12, %r29
+	mr %r3, %r28
+	mr %r4, %r30
+	mtctr %r12
+	bctrl 
+_1ac740:
+	mr %r3, %r31
+	bl sub_19f274
+	mr %r3, %r30
+	lwz %r31, 0x1c(%r1)
+	lwz %r30, 0x18(%r1)
+	lwz %r29, 0x14(%r1)
+	lwz %r28, 0x10(%r1)
+	lwz %r0, 0x24(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x20
+	blr
+
+	.global t1_1ac76c
+t1_1ac76c:
+	.incbin "basemain.dol", 0x1aeccc, 0x5628
 
 	.global sub_1b1d94
 sub_1b1d94: # 0x801b9054
@@ -26986,7 +30647,14 @@ _1b39bc:
 
 	.global t1_1b39d8
 t1_1b39d8:
-	.incbin "basemain.dol", 0x1b5f38, 0x3a8
+	.incbin "basemain.dol", 0x1b5f38, 0x398
+	
+	.global sub_1b3d70
+sub_1b3d70: # 0x801bb030
+	li %r0, 0x0
+	li %r3, 0x1
+	stw %r0, -0x6038(%r13)
+	blr
 
 	.global sub_1b3d80
 sub_1b3d80: # 0x801bb040
@@ -27715,7 +31383,153 @@ sub_1b59ec: # 0x801bccac
 
 	.global t1_1b5a34
 t1_1b5a34:
-	.incbin "basemain.dol", 0x1b7f94, 0x4130
+	.incbin "basemain.dol", 0x1b7f94, 0x28b8
+	
+	.global sub_1b82ec
+sub_1b82ec: # 0x801bf5ac
+	b _1c6824
+
+	.global t1_1b82f0
+t1_1b82f0:
+	.incbin "basemain.dol", 0x1ba850, 0x1180
+
+	.global sub_1b9470
+sub_1b9470: # 0x801c0730
+	stwu %r1, -0x20(%r1)
+	mflr %r0
+	lis %r6, 0x8035
+	stw %r0, 0x24(%r1)
+	slwi  %r0, %r3, 2
+	subi %r6, %r6, 0x3a50
+	stw %r31, 0x1c(%r1)
+	mr %r31, %r5
+	stw %r30, 0x18(%r1)
+	stw %r29, 0x14(%r1)
+	mr %r29, %r4
+	lwzx %r30, %r6, %r0
+	bl sub_19f24c
+	cmpwi %r31, 0x0
+	beq- _1b9528
+	cmpwi %r29, 0x1
+	beq- _1b94f8
+	bge- _1b9528
+	cmpwi %r29, 0x0
+	bge- _1b94c4
+	b _1b9528
+_1b94c4:
+	lha %r4, 0x874(%r30)
+	lha %r0, 0x87a(%r30)
+	subf %r0, %r4, %r0
+	sth %r0, 0x0(%r31)
+	lha %r4, 0x876(%r30)
+	lha %r0, 0x87c(%r30)
+	subf %r0, %r4, %r0
+	sth %r0, 0x2(%r31)
+	lha %r4, 0x878(%r30)
+	lha %r0, 0x87e(%r30)
+	subf %r0, %r4, %r0
+	sth %r0, 0x4(%r31)
+	b _1b9528
+_1b94f8:
+	lha %r4, 0x88e(%r30)
+	lha %r0, 0x894(%r30)
+	subf %r0, %r4, %r0
+	sth %r0, 0x0(%r31)
+	lha %r4, 0x890(%r30)
+	lha %r0, 0x896(%r30)
+	subf %r0, %r4, %r0
+	sth %r0, 0x2(%r31)
+	lha %r4, 0x892(%r30)
+	lha %r0, 0x898(%r30)
+	subf %r0, %r4, %r0
+	sth %r0, 0x4(%r31)
+_1b9528:
+	bl sub_19f274
+	lwz %r0, 0x24(%r1)
+	lwz %r31, 0x1c(%r1)
+	lwz %r30, 0x18(%r1)
+	lwz %r29, 0x14(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x20
+	blr
+
+	.global t1_1b9548
+t1_1b9548:
+	.incbin "basemain.dol", 0x1bbaa8, 0xe8
+	
+	.global sub_1b9630
+sub_1b9630: # 0x801c08f0
+	stwu %r1, -0x10(%r1)
+	mflr %r0
+	lis %r5, 0x8035
+	stw %r0, 0x14(%r1)
+	slwi  %r0, %r3, 2
+	subi %r5, %r5, 0x3a50
+	stw %r31, 0xc(%r1)
+	stw %r30, 0x8(%r1)
+	mr %r30, %r4
+	lwzx %r31, %r5, %r0
+	bl sub_19f24c
+	cmpwi %r30, 0x0
+	beq- _1b966c
+	lbz %r0, 0x8c1(%r31)
+	stw %r0, 0x0(%r30)
+_1b966c:
+	lwz %r30, 0x8bc(%r31)
+	cmpwi %r30, -0x1
+	beq- _1b969c
+	lbz %r0, 0x8c1(%r31)
+	cmplwi %r0, 0xfd
+	bne- _1b968c
+	li %r30, -0x1
+	b _1b969c
+_1b968c:
+	lwz %r0, 0x8dc(%r31)
+	cmpwi %r0, 0x0
+	bne- _1b969c
+	li %r30, -0x2
+_1b969c:
+	bl sub_19f274
+	mr %r3, %r30
+	lwz %r31, 0xc(%r1)
+	lwz %r30, 0x8(%r1)
+	lwz %r0, 0x14(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x10
+	blr
+
+	.global sub_1b96bc
+sub_1b96bc: # 0x801c097c
+	stwu %r1, -0x10(%r1)
+	mflr %r0
+	lis %r5, 0x802a
+	stw %r0, 0x14(%r1)
+	stw %r31, 0xc(%r1)
+	mr %r31, %r3
+	subi %r3, %r5, 0x5e9c
+	stw %r30, 0x8(%r1)
+	mr %r30, %r4
+	crxor 6, 6, 6
+	bl sub_1c4628
+	bl sub_19f24c
+	lis %r4, 0x8035
+	slwi  %r0, %r31, 2
+	subi %r4, %r4, 0x3a50
+	lwzx %r4, %r4, %r0
+	lwz %r31, 0x8a8(%r4)
+	stw %r30, 0x8a8(%r4)
+	bl sub_19f274
+	mr %r3, %r31
+	lwz %r31, 0xc(%r1)
+	lwz %r30, 0x8(%r1)
+	lwz %r0, 0x14(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x10
+	blr
+
+	.global t1_1b9724
+t1_1b9724:
+	.incbin "basemain.dol", 0x1bbc84, 0x440
 
 	.global sub_1b9b64
 sub_1b9b64: # 0x801c0e24
@@ -27780,7 +31594,56 @@ _1b9c18:
 
 	.global t1_1b9c30
 t1_1b9c30:
-	.incbin "basemain.dol", 0x1bc190, 0x1bfc4
+	.incbin "basemain.dol", 0x1bc190, 0xa9f8
+	
+	.global sub_1c4628
+sub_1c4628: # 0x801cb8e8
+	stwu %r1, -0x70(%r1)
+	bne- cr1, _1c4650
+	stfd %f1, 0x28(%r1)
+	stfd %f2, 0x30(%r1)
+	stfd %f3, 0x38(%r1)
+	stfd %f4, 0x40(%r1)
+	stfd %f5, 0x48(%r1)
+	stfd %f6, 0x50(%r1)
+	stfd %f7, 0x58(%r1)
+	stfd %f8, 0x60(%r1)
+_1c4650:
+	stw %r3, 0x8(%r1)
+	stw %r4, 0xc(%r1)
+	stw %r5, 0x10(%r1)
+	stw %r6, 0x14(%r1)
+	stw %r7, 0x18(%r1)
+	stw %r8, 0x1c(%r1)
+	stw %r9, 0x20(%r1)
+	stw %r10, 0x24(%r1)
+	addi %r1, %r1, 0x70
+	blr
+
+	.global t1_1c4678
+t1_1c4678:
+	.incbin "basemain.dol", 0x1c6bd8, 0x21ac
+
+_1c6824:
+	stwu %r1, -0x10(%r1)
+	mflr %r0
+	stw %r0, 0x14(%r1)
+	stw %r31, 0xc(%r1)
+	bl sub_19f24c
+	lis %r4, 0x8035
+	subi %r4, %r4, 0x2a0
+	lbz %r31, 0x708(%r4)
+	bl sub_19f274
+	extsb %r3, %r31
+	lwz %r31, 0xc(%r1)
+	lwz %r0, 0x14(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x10
+	blr
+	
+	.global t1_1c6860
+t1_1c6860:
+	.incbin "basemain.dol", 0x1c8dc0, 0xf394
 
 	.global sub_1d5bf4
 sub_1d5bf4: # 0x801dceb4

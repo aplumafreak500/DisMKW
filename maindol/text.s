@@ -359,10 +359,158 @@ _4e8:
 	addi %r1, %r1, 0x40
 	blr
 
-	.global t1_508
-t1_508:
-	.incbin "basemain.dol", 0x2a68, 0x8ec
-	
+	.global sub_508
+sub_508: # 0x800077c8
+	stwu %r1, -0x890(%r1)
+	mflr %r0
+	stw %r0, 0x894(%r1)
+	stw %r31, 0x88c(%r1)
+	li %r31, 0x0
+	stw %r30, 0x888(%r1)
+	mr %r30, %r3
+	stw %r29, 0x884(%r1)
+	li %r29, 0x0
+	b _5a4
+_530:
+	mr %r3, %r29
+	addi %r4, %r1, 0x8
+	bl sub_1b9630
+	cmpwi %r3, 0x0
+	bne- _5a0
+	lwz %r0, 0x8(%r1)
+	cmplwi %r0, 0xfd
+	beq- _5a0
+	mr %r3, %r29
+	addi %r4, %r1, 0x40
+	li %r5, 0x10
+	bl sub_190020
+	cmpwi %r3, 0x0
+	ble- _5a0
+	lbz %r0, 0x9d(%r1)
+	extsb. %r0, %r0
+	bne- _5a0
+	lwz %r0, 0x44(%r1)
+	rlwinm. %r0, %r0, 0, 17, 15
+	beq- _584
+	li %r31, 0x1
+_584:
+	lbz %r0, 0x9c(%r1)
+	cmplwi %r0, 0x2
+	bne- _5a0
+	lwz %r0, 0xa4(%r1)
+	rlwinm. %r0, %r0, 0, 21, 19
+	beq- _5a0
+	li %r31, 0x1
+_5a0:
+	addi %r29, %r29, 0x1
+_5a4:
+	cmpwi %r29, 0x4
+	bge- _5b4
+	cmpwi %r31, 0x0
+	beq+ _530
+_5b4:
+	cmpwi %r31, 0x0
+	bne- _6f0
+	addi %r3, %r1, 0x10
+	bl sub_1a80ec
+	lis %r6, 0x8024
+	li %r0, 0x2
+	addi %r6, %r6, 0x4f50
+	li %r3, 0x0
+	li %r8, 0x0
+	li %r5, 0xff
+	mtctr %r0
+_5e0:
+	clrlwi  %r0, %r8, 24
+	addi %r4, %r1, 0x10
+	mulli %r0, %r0, 0xc
+	add %r4, %r4, %r0
+	lbz %r0, 0xa(%r4)
+	extsb %r0, %r0
+	cmpwi %r0, -0x1
+	beq- _60c
+	cmpwi %r0, 0x0
+	beq- _628
+	b _650
+_60c:
+	clrlslwi  %r0, %r8, 24, 1
+	clrlslwi  %r7, %r8, 24, 2
+	add %r4, %r30, %r0
+	lwzx %r0, %r6, %r7
+	sth %r5, 0xcce(%r4)
+	or %r3, %r3, %r0
+	b _65c
+_628:
+	clrlslwi  %r0, %r8, 24, 1
+	lhz %r4, 0x0(%r4)
+	add %r7, %r30, %r0
+	lhz %r0, 0xcce(%r7)
+	andc %r0, %r4, %r0
+	sth %r4, 0xcce(%r7)
+	clrlwi. %r0, %r0, 16
+	beq- _65c
+	li %r31, 0x1
+	b _65c
+_650:
+	clrlslwi  %r0, %r8, 24, 1
+	add %r4, %r30, %r0
+	sth %r5, 0xcce(%r4)
+_65c:
+	addi %r8, %r8, 0x1
+	addi %r4, %r1, 0x10
+	clrlwi  %r0, %r8, 24
+	mulli %r0, %r0, 0xc
+	add %r4, %r4, %r0
+	lbz %r0, 0xa(%r4)
+	extsb %r0, %r0
+	cmpwi %r0, -0x1
+	beq- _68c
+	cmpwi %r0, 0x0
+	beq- _6a8
+	b _6d0
+_68c:
+	clrlslwi  %r0, %r8, 24, 1
+	clrlslwi  %r7, %r8, 24, 2
+	add %r4, %r30, %r0
+	lwzx %r0, %r6, %r7
+	sth %r5, 0xcce(%r4)
+	or %r3, %r3, %r0
+	b _6dc
+_6a8:
+	clrlslwi  %r0, %r8, 24, 1
+	lhz %r4, 0x0(%r4)
+	add %r7, %r30, %r0
+	lhz %r0, 0xcce(%r7)
+	andc %r0, %r4, %r0
+	sth %r4, 0xcce(%r7)
+	clrlwi. %r0, %r0, 16
+	beq- _6dc
+	li %r31, 0x1
+	b _6dc
+_6d0:
+	clrlslwi  %r0, %r8, 24, 1
+	add %r4, %r30, %r0
+	sth %r5, 0xcce(%r4)
+_6dc:
+	addi %r8, %r8, 0x1
+	bdnz+ _5e0
+	cmpwi %r3, 0x0
+	beq- _6f0
+	bl sub_1a7d7c
+_6f0:
+	mr %r3, %r31
+	lwz %r31, 0x88c(%r1)
+	lwz %r30, 0x888(%r1)
+	lwz %r29, 0x884(%r1)
+	lwz %r0, 0x894(%r1)
+	mtlr %r0
+	addi %r1, %r1, 0x890
+	blr
+
+	.global t1_710
+t1_710:
+	.incbin "basemain.dol", 0x2c70, 0x6e4
+
 	.global sub_df4
 sub_df4: # 0x800080b4
 	blr
@@ -3465,7 +3613,192 @@ _fb80:
 	
 	.global t1_fb94
 t1_fb94:
-	.incbin "basemain.dol", 0x120f4, 0x4a30
+	.incbin "basemain.dol", 0x120f4, 0x1b0c
+	
+	.global _116a0
+_116a0:
+	stwu %r1, -0x20(%r1)
+	stfd %f1, 0x8(%r1)
+	lwz %r6, 0x8(%r1)
+	lwz %r0, 0xc(%r1)
+	rlwinm  %r3, %r6, 0, 1, 11
+	addis %r3, %r3, 0x8010
+	cmplwi %r3, 0x0
+	bne- _116d4
+	fmul  %f0, %f1, %f1
+	li %r0, 0x21
+	stw %r0, -0x6be8(%r13)
+	fadd  %f1, %f1, %f0
+	b _118e0
+_116d4:
+	cmpwi %cr1, %r6, 0x0
+	bgt- cr1, _11704
+	clrlwi  %r3, %r6, 1
+	or. %r3, %r0, %r3
+	bne- _116ec
+	b _118e0
+_116ec:
+	bge- cr1, _11704
+	lis %r3, 0x8038
+	li %r0, 0x21
+	stw %r0, -0x6be8(%r13)
+	lfs %f1, 0x898(%r3)
+	b _118e0
+_11704:
+	srawi. %r3, %r6, 20
+	bne- _11758
+	b _11720
+_11710:
+	srwi  %r4, %r0, 11
+	slwi  %r0, %r0, 21
+	or %r6, %r6, %r4
+	subi %r3, %r3, 0x15
+_11720:
+	cmpwi %r6, 0x0
+	beq+ _11710
+	li %r7, 0x0
+	b _11738
+_11730:
+	slwi  %r6, %r6, 1
+	addi %r7, %r7, 0x1
+_11738:
+	rlwinm. %r4, %r6, 0, 11, 11
+	beq+ _11730
+	subfic %r4, %r7, 0x20
+	subi %r5, %r7, 0x1
+	srw %r4, %r0, %r4
+	slw %r0, %r0, %r7
+	subf %r3, %r5, %r3
+	or %r6, %r6, %r4
+_11758:
+	subi %r4, %r3, 0x3ff
+	clrlwi  %r5, %r6, 12
+	clrlwi. %r4, %r4, 31
+	oris %r6, %r5, 0x10
+	beq- _1177c
+	srwi  %r5, %r0, 31
+	add %r4, %r6, %r6
+	add %r6, %r5, %r4
+	add %r0, %r0, %r0
+_1177c:
+	srwi  %r5, %r0, 31
+	add %r4, %r6, %r6
+	add %r6, %r5, %r4
+	add %r0, %r0, %r0
+	li %r9, 0x0
+	li %r11, 0x0
+	li %r10, 0x0
+	li %r12, 0x0
+	lis %r7, 0x20
+	b _117d0
+_117a4:
+	add %r4, %r11, %r7
+	cmpw %r4, %r6
+	bgt- _117bc
+	add %r11, %r4, %r7
+	subf %r6, %r4, %r6
+	add %r12, %r12, %r7
+_117bc:
+	srwi  %r5, %r0, 31
+	add %r4, %r6, %r6
+	add %r6, %r5, %r4
+	add %r0, %r0, %r0
+	srwi  %r7, %r7, 1
+_117d0:
+	cmpwi %r7, 0x0
+	bne+ _117a4
+	lis %r7, 0x8000
+	b _11848
+_117e0:
+	cmpw %r11, %r6
+	mr %r5, %r11
+	add %r8, %r9, %r7
+	blt- _117fc
+	bne- _11834
+	cmplw %r8, %r0
+	bgt- _11834
+_117fc:
+	clrrwi  %r4, %r8, 31
+	add %r9, %r8, %r7
+	addis %r4, %r4, 0x8000
+	cmplwi %r4, 0x0
+	bne- _1181c
+	clrrwi. %r4, %r9, 31
+	bne- _1181c
+	addi %r11, %r11, 0x1
+_1181c:
+	cmplw %r0, %r8
+	subf %r6, %r5, %r6
+	bge- _1182c
+	subi %r6, %r6, 0x1
+_1182c:
+	subf %r0, %r8, %r0
+	add %r10, %r10, %r7
+_11834:
+	srwi  %r5, %r0, 31
+	add %r4, %r6, %r6
+	add %r6, %r5, %r4
+	add %r0, %r0, %r0
+	srwi  %r7, %r7, 1
+_11848:
+	cmpwi %r7, 0x0
+	bne+ _117e0
+	or. %r0, %r6, %r0
+	beq- _118ac
+	lfd %f0, -0x7b68(%r2)
+	stfd %f0, 0x10(%r1)
+	fcmpo %cr0, %f0, %f0
+	cror 2, 1, 2
+	bne- _118ac
+	addis %r0, %r10, 0x1
+	stfd %f0, 0x10(%r1)
+	cmplwi %r0, 0xffff
+	bne- _11888
+	li %r10, 0x0
+	addi %r12, %r12, 0x1
+	b _118ac
+_11888:
+	fcmpo %cr0, %f0, %f0
+	ble- _118a4
+	cmplwi %r0, 0xfffe
+	bne- _1189c
+	addi %r12, %r12, 0x1
+_1189c:
+	addi %r10, %r10, 0x2
+	b _118ac
+_118a4:
+	clrlwi  %r0, %r10, 31
+	add %r10, %r10, %r0
+_118ac:
+	clrlwi  %r0, %r12, 31
+	srawi %r4, %r12, 1
+	cmpwi %r0, 0x1
+	srwi  %r5, %r10, 1
+	addis %r4, %r4, 0x3fe0
+	bne- _118c8
+	oris %r5, %r5, 0x8000
+_118c8:
+	subi %r0, %r3, 0x3ff
+	stw %r5, 0x14(%r1)
+	extlwi  %r0, %r0, 12, 19
+	add %r4, %r4, %r0
+	stw %r4, 0x10(%r1)
+	lfd %f1, 0x10(%r1)
+_118e0:
+	addi %r1, %r1, 0x20
+	blr
+
+	.global t1_118e8
+t1_118e8:
+	.incbin "basemain.dol", 0x13e48, 0x24ec
+
+	.global sub_13dd4
+sub_13dd4: # 0x8001b094
+	b _116a0
+
+	.global t1_13dd8
+t1_13dd8:
+	.incbin "basemain.dol", 0x16338, 0x7ec
 
 	.global t1_145c4
 t1_145c4:
@@ -3680,6 +4013,9 @@ t1_196b4:
 sub_1974c: # 0x80020a0c
 	stw %r14, -0x48(%r11)
 	stw %r15, -0x44(%r11)
+
+	.global sub_19754
+sub_19754: # 0x80020a14
 	stw %r16, -0x40(%r11)
 	stw %r17, -0x3c(%r11)
 	stw %r18, -0x38(%r11)
@@ -3726,6 +4062,9 @@ sub_19780: # 0x80020a40
 sub_19798: # 0x80020a58
 	lwz %r14, -0x48(%r11)
 	lwz %r15, -0x44(%r11)
+
+	.global sub_197a0
+sub_197a0: # 0x80020a60
 	lwz %r16, -0x40(%r11)
 	lwz %r17, -0x3c(%r11)
 	lwz %r18, -0x38(%r11)
