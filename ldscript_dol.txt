@@ -1,5 +1,5 @@
 OUTPUT_ARCH(powerpc)
-/* ENTRY(dol_entrypoint) */
+ENTRY(dol_entrypoint)
 init_size = init_end - init_start;
 extab_size = extab_end - extab_start;
 extab_index_size = extab_index_end - extab_index_start;
@@ -45,6 +45,7 @@ SECTIONS {
 		../global/gecko_codehandler.o(.text);
 		codehandler_end = .;
 	}
+	/* TODO: Conditionally move to end of apploader */
 	.gctdata :
 	AT(gct_offset)
 	ALIGN(4) {
@@ -212,6 +213,7 @@ SECTIONS {
 		sbss2.o(.bss);
 		sbss2_end = .;
 	} = 0
+	/* TODO: StaticR.rel relocation table */
 	/* Discard everything not specifically mentioned above. */
 	/DISCARD/ : {
 		*(*);
