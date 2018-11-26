@@ -1283,8 +1283,8 @@ t1_12732c:
 t1_155fb4:
 	.incbin "basemain.dol", 0x158514, 0xc08
 
-	.global sub_156bbc
-sub_156bbc: # 0x8015de7c
+	.global __DVDFSInit
+__DVDFSInit: # 0x8015de7c
 	lis %r3, 0x8000
 	stw %r3, -0x65bc(%r13)
 	lwz %r4, 0x38(%r3)
@@ -1298,8 +1298,8 @@ sub_156bbc: # 0x8015de7c
 	stw %r0, -0x65c4(%r13)
 	blr
 
-	.global sub_156bec
-sub_156bec: # 0x8015deac
+	.global DVDConvertPathToEntrynum
+DVDConvertPathToEntrynum: # 0x8015deac
 	stwu %r1, -0x30(%r1)
 	mflr %r0
 	stw %r0, 0x34(%r1)
@@ -1535,12 +1535,12 @@ _156edc:
 	addi %r1, %r1, 0x30
 	blr
 
-	.global t1_156ef4
-t1_156ef4:
+	.global DVDFastOpen
+DVDFastOpen:
 	.incbin "basemain.dol", 0x159454, 0x68
 	
-	.global sub_156f5c
-sub_156f5c: # 0x8015e21c
+	.global DVDOpen
+DVDOpen: # 0x8015e21c
 	stwu %r1, -0xa0(%r1)
 	mflr %r0
 	stw %r0, 0xa4(%r1)
@@ -1548,7 +1548,7 @@ sub_156f5c: # 0x8015e21c
 	bl sub_19780
 	mr %r28, %r3
 	mr %r27, %r4
-	bl sub_156bec
+	bl DVDConvertPathToEntrynum
 	cmpwi %r3, 0x0
 	bge- _1571a0
 	lwz %r29, -0x65d8(%r13)
@@ -1587,7 +1587,7 @@ _156fec:
 	lwzx %r3, %r6, %r3
 	clrlwi  %r0, %r0, 8
 	add %r27, %r7, %r0
-	bl sub_15722c
+	bl entryToPath
 	cmplwi %r3, 0x80
 	mr %r4, %r3
 	bne- _15701c
@@ -1738,8 +1738,8 @@ _1571f0:
 	addi %r1, %r1, 0xa0
 	blr
 
-	.global sub_157208
-sub_157208: # 0x8015e4c8
+	.global DVDClose
+DVDClose: # 0x8015e4c8
 	stwu %r1, -0x10(%r1)
 	mflr %r0
 	stw %r0, 0x14(%r1)
@@ -1750,8 +1750,8 @@ sub_157208: # 0x8015e4c8
 	addi %r1, %r1, 0x10
 	blr
 
-	.global sub_15722c
-sub_15722c: # 0x8015e4ec
+	.global entryToPath
+entryToPath: # 0x8015e4ec
 	stwu %r1, -0x20(%r1)
 	mflr %r0
 	stw %r0, 0x24(%r1)
@@ -1792,7 +1792,7 @@ _1572ac:
 	lwzx %r3, %r6, %r3
 	clrlwi  %r0, %r0, 8
 	add %r27, %r7, %r0
-	bl sub_15722c
+	bl entryToPath
 	cmplw %r3, %r29
 	mr %r4, %r3
 	bne- _1572d4
@@ -1883,9 +1883,13 @@ _1573d4:
 	addi %r1, %r1, 0x20
 	blr
 	
-	.global t1_1573ec
-t1_1573ec:
-	.incbin "basemain.dol", 0x15994c, 0xe8
+	.global DVDReadAsyncPrio
+DVDReadAsyncPrio:
+	.incbin "basemain.dol", 0x15994c, 0xd0
+	
+	.global cbForReadAsync
+cbForReadAsync:
+	.incbin "basemain.dol", 0x159a1c, 0x18
 	
 	.global sub_1574d4
 sub_1574d4: # 0x8015e794
@@ -2024,7 +2028,7 @@ _15773c:
 _157754:
 	bl sub_15fec4
 _157758:
-	bl sub_156bbc
+	bl __DVDFSInit
 	bl sub_15c260
 	lis %r0, 0x8000
 	li %r3, 0x0

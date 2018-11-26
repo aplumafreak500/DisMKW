@@ -1335,7 +1335,7 @@ sub_2e88: # 0x8000a148
 	li %r31, 0x0
 	li %r26, 0x0
 	mr %r3, %r25
-	bl sub_156f5c
+	bl DVDOpen
 	cmpwi %r3, 0x0
 	beq- _2f54
 	lwz %r27, 0x3c(%r1)
@@ -1357,7 +1357,7 @@ sub_2e88: # 0x8000a148
 	bl sub_1574d4
 	mr %r29, %r3
 	addi %r3, %r1, 0x8
-	bl sub_157208
+	bl DVDClose
 	cmplw %r29, %r27
 	bge- _2f50
 	lwz %r12, 0x0(%r24)
