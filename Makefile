@@ -130,7 +130,7 @@ $(shell mkdir -p $(SUBDIRS))
 # Get rid of the idiotic built-in rules
 .SUFFIXES:
 
-.PHONY: all clean compare main dol dol0 dol1 dol2 staticr rel appldr appldr0 appldr1 appldr2 upd mkw chan mkc
+.PHONY: all clean compare main dol dol0 dol1 dol2 staticr rel appldr appldr0 appldr1 appldr2 upd mkw chan mkc apploader-mkc-installer.img
 
 all: $(DOL1) $(REL)
 
@@ -142,8 +142,10 @@ clean:
 	
 #### Recipes ####
 
+#TODO: $<, $@
+
 $(APL0_LDSCRIPT): ldscript_appl.txt
-	cp ldscript_appl.txt $(BUILD_DIR)/apploader-update/ld_script.ld
+	cp $< $@
 	
 $(APL0): $(APL0_ELF)
 	$(OBJCOPY) -O binary $< $@
@@ -152,7 +154,7 @@ $(APL0_ELF): $(APL0_LDSCRIPT) $(GLBL_OFILES) $(APL0_OFILES)
 	cd $(BUILD_DIR)/apploader-update && $(LD) -T ld_script.ld -Map ../../$(APL0_MAP) -o ../../$@
 	
 $(DOL0_LDSCRIPT): ldscript_dol_upd.txt
-	cp ldscript_dol_upd.txt $(BUILD_DIR)/maindol-update/ld_script.ld
+	cp $< $@
 	
 $(DOL0_ELF): $(DOL0_LDSCRIPT) $(GLBL_OFILES) $(DOL0_OFILES)
 	cd $(BUILD_DIR)/maindol-update && $(LD) -T ld_script.ld -Map ../../$(DOL0_MAP) -o ../../$@
@@ -161,7 +163,7 @@ $(DOL0): $(DOL0_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
 $(APL1_LDSCRIPT): ldscript_appl.txt
-	cp ldscript_appl.txt $(BUILD_DIR)/apploader/ld_script.ld
+	cp $< $@
 	
 $(APL1_ELF): $(APL1_LDSCRIPT) $(GLBL_OFILES) $(APL1_OFILES)
 	cd $(BUILD_DIR)/apploader && $(LD) -T ld_script.ld -Map ../../$(APL1_MAP) -o ../../$@
@@ -170,8 +172,9 @@ $(APL1): $(APL1_ELF)
 	$(OBJCOPY) -O binary $< $@
 
 $(DOL1_LDSCRIPT): ldscript_dol.txt
-	cp ldscript_dol.txt $(BUILD_DIR)/maindol/ld_script.ld
+	cp $< $@
 
+#TODO: StaticR.rel relocation table
 $(DOL1_ELF): $(DOL1_LDSCRIPT) $(GLBL_OFILES) $(DOL1_OFILES)
 	cd $(BUILD_DIR)/maindol && $(LD) -T ld_script.ld -Map ../../$(DOL1_MAP) -o ../../$@
 
@@ -179,7 +182,7 @@ $(DOL1): $(DOL1_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
 $(REL_LDSCRIPT): ldscript_rel.txt
-	cp ldscript_rel.txt $(BUILD_DIR)/staticr/ld_script.ld
+	cp $< $@
 	
 $(REL_ELF): $(REL_LDSCRIPT) $(GLBL_OFILES) $(REL_OFILES)
 	cd $(BUILD_DIR)/staticr && $(LD) -T ld_script.ld -Map ../../$(REL_MAP) -o ../../$@
@@ -188,7 +191,7 @@ $(REL): $(REL_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
 $(DOL2_LDSCRIPT): ldscript_dol_mkc_installer.txt
-	cp ldscript_dol_mkc_installer.txt $(BUILD_DIR)/maindol-mkc-installer/ld_script.ld
+	cp $< $@
 
 $(DOL2_ELF): $(DOL2_LDSCRIPT) $(GLBL_OFILES) $(DOL2_OFILES)
 	cd $(BUILD_DIR)/maindol-mkc-installer && $(LD) -T ld_script.ld -Map ../../$(DOL2_MAP) -o ../../$@
@@ -197,7 +200,7 @@ $(DOL2): $(DOL2_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
 $(APLC_LDSCRIPT): ldscript_mkc_nandloader.txt
-	cp ldscript_mkc_nandloader.txt $(BUILD_DIR)/mkc-nandloader/ld_script.ld
+	cp $< $@
 	
 $(APLC_ELF): $(APLC_LDSCRIPT) $(GLBL_OFILES) $(APLC_OFILES)
 	cd $(BUILD_DIR)/mkc-nandloader && $(LD) -T ld_script.ld -Map ../../$(APLC_MAP) -o ../../$@
@@ -206,7 +209,7 @@ $(APLC): $(APLC_ELF)
 	$(OBJCOPY) -O binary $< $@
 	
 $(DOLC_LDSCRIPT): ldscript_dol_mkc.txt
-	cp ldscript_dol_mkc.txt $(BUILD_DIR)/maindol-mkc/ld_script.ld
+	cp $< $@
 
 $(DOLC_ELF): $(DOLC_LDSCRIPT) $(GLBL_OFILES) $(DOLC_OFILES)
 	cd $(BUILD_DIR)/maindol-mkc && $(LD) -T ld_script.ld -Map ../../$(DOLC_MAP) -o ../../$@
